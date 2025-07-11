@@ -1,0 +1,10 @@
+{% load i18n %}
+{% load static %}
+
+
+{% if application.call.payment_required and not application.payment_receipt %}
+<div class="alert alert-danger my-3" role="alert">
+    <p class="h5 alert-heading">{% trans "Warning" %}</p>
+    {% trans "E' necessario caricare la ricevuta di pagamento per inviare la domanda" %}
+</div>
+{% endif %}

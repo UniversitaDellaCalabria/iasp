@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'generics:home' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'applications:applications' %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
+    </svg> {% trans "My applications" %}
+</a>
+<a href="{% url 'applications:application' application_pk=application.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-note"></use>
+    </svg> {% trans "Back to application" %}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+{% get_current_language as LANGUAGE_CODE %}
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Request for credits recognition of required teachings" %}
+    </p>
+</div>
+<p>
+    {% if LANGUAGE_CODE == 'it' %}
+        {{ application.call.title_it }}
+    {% else %}
+        {{ application.call.title_en }}
+    {% endif %}
+</p>
+
+{% include "include/credits_alert.html" %}
+{% include "include/payment_alert.html" %}
+
+{% if LANGUAGE_CODE == 'it' %}
+    {% with application.call.course_json_it as course %}
+    {% with application.call.course_studyplans_json_it as plans %}
+        {% include "include/application_required_teachings.html" %}
+    {% endwith %}
+    {% endwith %}
+{% else %}
+    {% with application.call.course_json_en as course %}
+    {% with application.call.course_studyplans_json_en as plans %}
+        {% include "include/application_required_teachings.html" %}
+    {% endwith %}
+    {% endwith %}
+{% endif %}
+{% endblock clean_content %}

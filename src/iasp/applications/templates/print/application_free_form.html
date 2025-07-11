@@ -1,0 +1,20 @@
+{% extends "base_print.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block clean_content %}
+<style>
+input[type=date], input[type=datetime-local], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], textarea {
+    border: none;
+}
+</style>
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Request for recognition of free credits of" %} {{ free_credits_rule.course_year }}° {% trans "year" %}
+    </p>
+</div>
+{% include "form_template.html" with form=form disabled=1 %}
+{% endblock clean_content %}

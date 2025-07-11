@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'generics:home' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'applications:applications' %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "My applications" %}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Application for enrollment in years following the first" %}
+    </p>
+    <p class="h5">
+        {% if LANGUAGE_CODE == 'it' %}
+            {{ call.title_it }}
+        {% else %}
+            {{ call.title_en }}
+        {% endif %}
+        <br>
+        {% trans "Year" %}: {{ call.course_year }}
+    </p>
+</div>
+
+{% if requirements %}
+<div class="alert alert-warning mb-4" role="alert">
+    <h4 class="alert-heading">{% trans "Requirements to be accepted" %}</h4>
+    <p>{% trans "By continuing, you declare that you accept the following conditions" %}:</p>
+    <hr>
+    <p class="mb-0">
+        <ul>
+            {% for requirement in requirements %}
+            <li>
+                <b>
+                    {% if LANGUAGE_CODE == 'it' %}
+                        {{ requirement.title_it }}
+                    {% else %}
+                        {{ requirement.title_en }}
+                    {% endif %}
+                </b>
+                <p>
+                    {% if LANGUAGE_CODE == 'it' %}
+                        {{ requirement.content_it }}
+                    {% else %}
+                        {{ requirement.content_en }}
+                    {% endif %}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </p>
+</div>
+{% endif %}
+
+{% include "form_template.html" with form=form %}
+{% endblock clean_content %}
+
+{% block extra_scripts %}
+<!-- prevent submit form by press "enter" on field -->
+<script>
+document.querySelector ('form input').addEventListener ('keypress', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+document.querySelector ('form input').addEventListener ('keyup', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+{% endblock extra_scripts %}

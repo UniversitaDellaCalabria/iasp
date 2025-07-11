@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'generics:home' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'calls:calls' %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-list"></use>
+    </svg> {% trans "Back to calls" %}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+{% get_current_language as LANGUAGE_CODE %}
+<div class="mb-4">
+    <p class="h3">
+        {% if LANGUAGE_CODE == 'it' %}
+            {{ call.title_it }}
+        {% else %}
+            {{ call.title_en }}
+        {% endif %}
+    </p>
+    {% if LANGUAGE_CODE == 'it' %}
+        {% if call.notes_it %}
+        <p>{{ call.notes_it }}</p>
+        {% endif %}
+    {% else %}
+        {% if call.notes_en %}
+        <p>{{ call.notes_en }}</p>
+        {% endif %}
+    {% endif %}
+</div>
+<hr>
+<p class="h4 mb-3">{% trans "Call details" %}</p>
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <tbody>
+          <tr>
+            <td><b>{% trans "Places available" %}</b></td>
+            <td>{{ call.places_available }}</td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Credits threshold" %}</b></td>
+            <td>{{ call.credits_threshold }}</td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Active from" %}</b></td>
+            <td>{{ call.start }}</td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Active until" %}</b></td>
+            <td>{{ call.end }}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+<p class="h4 my-3">{% trans "Degree course details" %}</p>
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <tbody>
+          <tr>
+            <td><b>{% trans "Code" %}</b></td>
+            <td>{{ call.course_json_it.CdSCod }}</td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Year" %}</b></td>
+            <td>{{ call.course_json_it.AcademicYear }}/{{ call.course_json_it.AcademicYear|add:1 }}</td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Typology" %}</b></td>
+            <td>
+                {% if LANGUAGE_CODE == 'it' %}
+                    {{ call.course_json_it.CourseTypeDescription }}
+                {% else %}
+                    {{ call.course_json_en.CourseTypeDescription }}
+                {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Area" %}</b></td>
+            <td>
+                {% if LANGUAGE_CODE == 'it' %}
+                    {{ call.course_json_it.AreaCds }}
+                {% else %}
+                    {{ call.course_json_en.AreaCds }}
+                {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Department" %}</b></td>
+            <td>
+                {% if LANGUAGE_CODE == 'it' %}
+                    {{ call.course_json_it.DepartmentName }}
+                {% else %}
+                    {{ call.course_json_en.DepartmentName }}
+                {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Class" %}</b></td>
+            <td>
+                {% if LANGUAGE_CODE == 'it' %}
+                    {{ call.course_json_it.CourseClassCod }} - {{ call.course_json_it.CourseClassName }}
+                {% else %}
+                    {{ call.course_json_en.CourseClassCod }} - {{ call.course_json_en.CourseClassName }}
+                {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Website" %}</b></td>
+            <td>
+                <a href="https://www.unical.it/cds/{{ call.course_cod }}/redirect/" target="_blank">
+                    {% trans "Click here" %}
+                </a>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-grid gap-2">
+    <a href="{% url 'applications:application_new' call_pk=call.pk %}" class="btn btn-success">
+        <svg class="icon icon-sm icon-white">
+            <use xlink:href="{% static 'svg/sprites.svg' %}#it-check"></use>
+        </svg> {% trans "Participate" %}
+    </a>
+</div>
+{% endblock clean_content %}

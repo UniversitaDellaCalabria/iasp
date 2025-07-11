@@ -1,0 +1,31 @@
+{% extends "base_print.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block clean_content %}
+<style>
+input[type=date], input[type=datetime-local], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], textarea {
+    border: none;
+}
+</style>
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Validation request for" %} {{ target_teaching.name }}
+    </p>
+</div>
+
+<div class="alert alert-info" role="alert">
+    <p>{% trans "Teaching data for which credits recognition is requested" %}</p>
+    <ul>
+        <li><b>{% trans "Name" %}:</b> {{ target_teaching.name }}</li>
+        <li><b>{% trans "Code" %}:</b> {{ target_teaching.cod }}</li>
+        <li><b>{% trans "Credits" %}:</b> {{ target_teaching.credits|floatformat:1 }}</li>
+        <li><b>{% trans "SSD" %}:</b> {{ target_teaching.ssd }}</li>
+    </ul>
+</div>
+
+{% include "form_template.html" with form=form disabled=1 %}
+{% endblock clean_content %}

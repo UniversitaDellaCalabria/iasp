@@ -1,0 +1,75 @@
+{% extends 'base-setup.html' %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block page_title %}{% trans "Enrollment in years after the first" %}{% endblock page_title %}
+
+{% block extra_head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/iasp.css' %}">
+{% endblock extra_head %}
+
+{% block header_center_search %}
+{% endblock header_center_search %}
+
+{% block menu_links %}
+<li class="nav-item">
+    <a class="nav-link ps-lg-0" href="{% url 'generics:home' %}">
+        <span>{% trans "Home" %}</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'calls:calls' %}">
+        <span>{% trans "Active calls" %}</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'applications:applications' %}">
+        <span>{% trans "My applications" %}</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'accounts:account' %}">
+        <span>{% trans "Account" %}</span>
+    </a>
+</li>
+{% endblock menu_links %}
+
+{% block header_slim_buttons %}
+{% settings_value "LOGOUT_URL" as logout_url %}
+<a href="{{ logout_url }}">
+    <button class="btn btn-primary btn-sm btn-icon" type="button">
+        <svg class="icon icon-light icon-xs">
+          <use xlink:href="{% static 'svg/sprites.svg' %}#it-close-circle"></use>
+        </svg> <span>{% trans "Logout" %}</span>
+    </button>
+</a>
+{% endblock header_slim_buttons %}
+
+{% block header_slim_sub_menu %}
+{% endblock header_slim_sub_menu %}
+
+
+{% block footer_menu_section %}
+{% endblock footer_menu_section %}
+
+{% block centered_container %}
+    {% block top_content %}
+    {% endblock top_content %}
+
+    {% block top_buttons_surround %}
+    <div class="mt-4 mt-lg-0 mb-4">
+        <div class="d-md-flex">
+            {% block top_buttons %}
+            {% endblock top_buttons %}
+        </div>
+    </div>
+    {% endblock top_buttons_surround %}
+
+    {% block over_content %}{% endblock over_content %}
+
+    {% block clean_content %}{% endblock clean_content %}
+{% endblock centered_container %}

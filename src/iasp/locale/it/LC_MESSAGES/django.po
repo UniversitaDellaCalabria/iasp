@@ -1,0 +1,1041 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-11 12:14+0200\n"
+"PO-Revision-Date: 2025-07-11 12:17+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: accounts/admin.py:20
+msgid "Angrafica"
+msgstr ""
+
+#: accounts/admin.py:33
+msgid "Permissions"
+msgstr ""
+
+#: accounts/admin.py:38
+msgid "Date accessi sistema"
+msgstr ""
+
+#: accounts/middlewares.py:23
+msgid "Completa il tuo profilo per poter utilizzare il sistema"
+msgstr ""
+
+#: accounts/models.py:10
+msgid "Maschio"
+msgstr ""
+
+#: accounts/models.py:11
+msgid "Femmina"
+msgstr ""
+
+#: accounts/models.py:12
+msgid "Altro"
+msgstr ""
+
+#: accounts/models.py:15
+msgid "attivo"
+msgstr ""
+
+#: accounts/models.py:18
+msgid "Identificativo Dipendente"
+msgstr ""
+
+#: accounts/models.py:21
+msgid "employee unique id"
+msgstr ""
+
+#: accounts/models.py:24
+msgid "Identificativo utente"
+msgstr ""
+
+#: accounts/models.py:27
+msgid "eg: tax payer's identification number"
+msgstr ""
+
+#: accounts/models.py:29
+msgid "Nome"
+msgstr ""
+
+#: accounts/models.py:31
+msgid "Cognome"
+msgstr ""
+
+#: accounts/models.py:33
+msgid "TaxPayer ID - codice fiscale"
+msgstr "Codice fiscale"
+
+#: accounts/models.py:36 accounts/templates/account.html:36
+msgid "Phone number"
+msgstr "Numero di telefono"
+
+#: accounts/models.py:42
+msgid "Genere"
+msgstr ""
+
+#: accounts/models.py:44
+msgid "Ultimo aggiornamento manuale dei dati"
+msgstr ""
+
+#: accounts/models.py:48
+msgid "Utenti"
+msgstr ""
+
+#: accounts/templates/account.html:13
+#: accounts/templates/change_user_data.html:11
+#: applications/templates/application.html:13
+#: applications/templates/application_edit.html:12
+#: applications/templates/application_free.html:13
+#: applications/templates/application_free_form.html:12
+#: applications/templates/application_new.html:12
+#: applications/templates/application_required.html:13
+#: applications/templates/application_required_form.html:12
+#: applications/templates/application_required_list.html:13
+#: applications/templates/applications.html:12 calls/templates/call.html:12
+#: calls/templates/calls.html:12 generics/templates/base.html:21
+msgid "Home"
+msgstr "Pagina iniziale"
+
+#: accounts/templates/account.html:19
+#: accounts/templates/change_user_data.html:16 generics/templates/base.html:36
+msgid "Account"
+msgstr ""
+
+#: accounts/templates/account.html:24
+msgid "First name"
+msgstr "Nome"
+
+#: accounts/templates/account.html:28
+msgid "Last name"
+msgstr "Cognome"
+
+#: accounts/templates/account.html:32
+msgid "Email"
+msgstr ""
+
+#: accounts/templates/account.html:40
+msgid "Taxpayer ID"
+msgstr "Codice fiscale"
+
+#: accounts/templates/account.html:49
+msgid "Edit"
+msgstr "Modifica"
+
+#: accounts/templates/change_user_data.html:22
+msgid "Edit user data"
+msgstr "Modifica dati utente"
+
+#: accounts/validators.py:9
+msgid "Invalid phone number"
+msgstr "Numero di telefono non valido"
+
+#: accounts/validators.py:11
+msgid "Invalid or poorly formatted phone number"
+msgstr "Numero di telefono non valido o formattato in modo errato"
+
+#: accounts/views.py:50
+msgid "Data saved successfully"
+msgstr "Dati salvati con successo"
+
+#: accounts/views.py:60
+msgid "Confirm your email by clicking here {}"
+msgstr "Conferma la tua email cliccando qui {}"
+
+#: accounts/views.py:62
+msgid "Email confirmation"
+msgstr "Conferma email"
+
+#: accounts/views.py:69
+msgid ""
+"An email has been sent to the address you indicated. Click on the link in "
+"the message to confirm the new data"
+msgstr ""
+"E' stata inviata una email all'indirizzo di posta indicato. Clicca sul link "
+"nel messaggio per confermare i nuovi dati"
+
+#: accounts/views.py:74
+msgid "Wrong data"
+msgstr "Dati errati"
+
+#: accounts/views.py:78
+msgid "Edit personal data"
+msgstr "Modifica dati personali"
+
+#: accounts/views.py:88
+msgid "Missing token"
+msgstr "Token mancante"
+
+#: accounts/views.py:97
+msgid "Invalid token"
+msgstr "Token non valido"
+
+#: accounts/views.py:114
+msgid "Expired token"
+msgstr "Token scaduto"
+
+#: accounts/views.py:122
+msgid "Email updated successfully"
+msgstr "Email aggiornata con successo"
+
+#: applications/decorators.py:31 applications/views.py:513
+#: applications/views.py:707
+msgid "Unable to edit application"
+msgstr "Impossibile modificare la domanda"
+
+#: applications/decorators.py:54
+msgid ""
+"The activity is divided into modules. Request validation for each of them"
+msgstr ""
+"Questa attività è divisa in moduli. Richiedi la validazione per ognuno di "
+"essi"
+
+#: applications/decorators.py:70
+msgid "It is not possible to request validation of credits for this activity"
+msgstr ""
+"Non è possibile richiedere la validazione dei crediti per questa attività"
+
+#: applications/forms.py:11
+msgid "I agree with what is stated in the call"
+msgstr "Accetto quanto specificato nel bando"
+
+#: applications/forms.py:58 applications/templates/application.html:117
+#: applications/templates/print/application.html:67
+msgid "Nationality"
+msgstr "Nazionalità"
+
+#: applications/forms.py:59 applications/templates/application.html:118
+#: applications/templates/print/application.html:68
+msgid "Home University"
+msgstr "Università di provenienza"
+
+#: applications/forms.py:60 applications/templates/application.html:119
+#: applications/templates/print/application.html:69
+msgid "Home University country"
+msgstr "Nazione Università di provenienza"
+
+#: applications/forms.py:61 applications/templates/application.html:120
+#: applications/templates/print/application.html:70
+msgid "Home University city"
+msgstr "Città Università di provenienza"
+
+#: applications/forms.py:62 applications/templates/application.html:121
+#: applications/templates/print/application.html:71
+msgid "Home University course"
+msgstr "Corso Università di provenienza"
+
+#: applications/forms.py:63 applications/templates/application.html:122
+msgid "Signed self-certification of taken exams"
+msgstr "Autocertificazione firmata degli esami sostenuti"
+
+#: applications/forms.py:64 applications/templates/application.html:123
+msgid "Origin course study plan"
+msgstr "Piano didattico del corso di provenienza"
+
+#: applications/forms.py:65 applications/templates/application.html:124
+msgid "Official votes conversion table"
+msgstr "Tabella ufficiale di conversione dei voti"
+
+#: applications/forms.py:66 applications/templates/application.html:125
+msgid "Certification of knowledge of Italian language (at least B2)"
+msgstr "Certificazione conoscenza lingua italiana (almeno B2)"
+
+#: applications/forms.py:67 applications/templates/application.html:126
+msgid "Declaration of value"
+msgstr "Dichiarazione di valore"
+
+#: applications/forms.py:82
+msgid "Mandatory for non-Italian users"
+msgstr "Obbligatorio per utenti non italiani"
+
+#: applications/forms.py:88 applications/forms.py:92
+msgid "Mandatory if coming from a non-Italian university"
+msgstr "Obbligatorio se proveniente da un'università non italiana"
+
+#: applications/forms.py:120
+msgid "Degree course"
+msgstr "Corso di laurea"
+
+#: applications/forms.py:121 applications/templates/application_free.html:58
+#: applications/templates/application_required.html:59
+#: applications/templates/application_required_form.html:44
+#: applications/templates/include/application_required_teachings.html:15
+#: applications/templates/print/application_required_form.html:23
+#: calls/templates/calls.html:29
+msgid "Name"
+msgstr "Denominazione"
+
+#: applications/forms.py:122 applications/templates/application_free.html:57
+#: applications/templates/application_required.html:58
+#: applications/templates/application_required_form.html:45
+#: applications/templates/include/application_required_teachings.html:14
+#: applications/templates/print/application_required_form.html:24
+#: calls/templates/call.html:70
+msgid "Code"
+msgstr "Codice"
+
+#: applications/forms.py:123 applications/templates/application_free.html:60
+#: applications/templates/application_required.html:41
+#: applications/templates/application_required.html:61
+#: applications/templates/application_required_form.html:46
+#: applications/templates/print/application_required_form.html:25
+#: calls/templates/calls.html:33
+msgid "Credits"
+msgstr "Crediti"
+
+#: applications/forms.py:124 applications/templates/application_free.html:59
+#: applications/templates/application_required.html:60
+#: applications/templates/application_required_form.html:47
+#: applications/templates/include/application_required_teachings.html:16
+#: applications/templates/print/application_required_form.html:26
+msgid "SSD"
+msgstr ""
+
+#: applications/forms.py:125 applications/templates/application_free.html:61
+#: applications/templates/application_required.html:62
+#: applications/templates/include/application_required_teachings.html:17
+msgid "Teaching program"
+msgstr "Scheda insegnamento"
+
+#: applications/forms.py:126
+msgid "Webpage URL"
+msgstr "URL pagina web"
+
+#: applications/forms.py:127
+msgid "Vote/outcome"
+msgstr "Voto/esito"
+
+#: applications/forms.py:128
+msgid "Notes"
+msgstr "Note"
+
+#: applications/forms.py:131
+msgid ""
+"The field is pre-filled with what was entered during the application "
+"creation phase but can be modified if the course was taken in another degree "
+"course"
+msgstr ""
+"Il campo è precompilato con quanto inserito in fase di creazione della "
+"domanda ma può essere modificato se l'insegnamento è stato sostenuto in un "
+"altro corso di laurea"
+
+#: applications/forms.py:132 applications/forms.py:141
+msgid "Mandatory if coming from an Italian university"
+msgstr "Obbligatorio se proveniente da un'università italiana"
+
+#: applications/forms.py:170 applications/forms.py:199
+msgid "You have already entered this teaching!"
+msgstr "Hai già inserito questo insegnamento!"
+
+#: applications/forms.py:218
+msgid "Payment receipt"
+msgstr "Ricevuta del pagamento"
+
+#: applications/settings.py:10
+#, python-brace-format
+msgid ""
+"Dear {first_name} {last_name},\n"
+"your application to participate in\n"
+"\n"
+"{call}\n"
+"\n"
+"has been successfully sent.\n"
+"\n"
+"This is an automatic message.\n"
+"Please do not reply to this email.\n"
+msgstr ""
+"Gentile {first_name} {last_name},\n"
+"la tua domanda di partecipazione a\n"
+"\n"
+"{call}\n"
+"\n"
+"è stata correttamente inviata.\n"
+"\n"
+"Questo è un messaggio automatico.\n"
+"Si prega di non rispondere a questa email.\n"
+
+#: applications/templates/application.html:18
+#: applications/templates/application_edit.html:17
+#: applications/templates/application_free.html:18
+#: applications/templates/application_free_form.html:17
+#: applications/templates/application_new.html:17
+#: applications/templates/application_required.html:18
+#: applications/templates/application_required_form.html:17
+#: applications/templates/application_required_list.html:18
+#: applications/templates/applications.html:18 generics/templates/base.html:31
+#: generics/templates/base_page.html:37
+msgid "My applications"
+msgstr "Le mie domande"
+
+#: applications/templates/application.html:37
+msgid "Are you sure you want to delete the application?"
+msgstr "Sei sicuro di voler eliminare la domanda?"
+
+#: applications/templates/application.html:44
+#: applications/templates/application.html:229
+#: applications/templates/application_free.html:111
+#: applications/templates/application_required.html:112
+#: generics/templates/form_template.html:55
+msgid "Yes, proceed"
+msgstr "Si, procedi"
+
+#: applications/templates/application.html:58
+#: applications/templates/application_new.html:26
+#: applications/templates/print/application.html:12
+msgid "Application for enrollment in years following the first"
+msgstr "Domanda per iscrizione agli anni successivi al primo"
+
+#: applications/templates/application.html:76
+#: applications/templates/print/application.html:26
+#: calls/templates/call.html:42
+msgid "Call details"
+msgstr "Dettagli del bando"
+
+#: applications/templates/application.html:82
+#: applications/templates/print/application.html:32
+#: calls/templates/call.html:47 calls/templates/calls.html:32
+msgid "Places available"
+msgstr "Posti disponibili"
+
+#: applications/templates/application.html:83
+#: applications/templates/print/application.html:33
+#: calls/templates/call.html:51
+msgid "Credits threshold"
+msgstr "Soglia crediti"
+
+#: applications/templates/application.html:84
+#: applications/templates/print/application.html:34
+#: calls/templates/call.html:55
+msgid "Active from"
+msgstr "Attivo dal"
+
+#: applications/templates/application.html:85
+#: applications/templates/print/application.html:35
+#: calls/templates/call.html:59
+msgid "Active until"
+msgstr "Attivo fino al"
+
+#: applications/templates/application.html:93
+#: applications/templates/print/application.html:43
+msgid "Application details"
+msgstr "Dettagli della domanda"
+
+#: applications/templates/application.html:99
+#: applications/templates/applications.html:28
+#: applications/templates/print/application.html:49
+msgid "Created"
+msgstr "Creata"
+
+#: applications/templates/application.html:100
+#: applications/templates/applications.html:29
+#: applications/templates/print/application.html:50
+msgid "Last modification"
+msgstr "Ultima modifica"
+
+#: applications/templates/application.html:102
+#: applications/templates/print/application.html:52
+msgid "Submission date"
+msgstr "Data di invio"
+
+#: applications/templates/application.html:111
+#: applications/templates/print/application.html:61
+msgid "Personal informations"
+msgstr "Informazioni personali"
+
+#: applications/templates/application.html:122
+#: applications/templates/application.html:123
+#: applications/templates/application.html:124
+#: applications/templates/application.html:125
+#: applications/templates/application.html:126
+#: applications/templates/application_free.html:74
+#: applications/templates/application_required.html:75
+msgid "Download"
+msgstr "Scarica"
+
+#: applications/templates/application.html:142
+#: applications/templates/print/application.html:80
+msgid "Payment details"
+msgstr "Dettagli del pagamento"
+
+#: applications/templates/application.html:156
+#: applications/templates/print/application.html:94
+msgid "Link to payment"
+msgstr "Link al pagamento"
+
+#: applications/templates/application.html:174
+#: applications/templates/application_required.html:28
+#: applications/templates/application_required_form.html:27
+msgid "Required teachings"
+msgstr "Insegnamenti obbligatori"
+
+#: applications/templates/application.html:175
+#: applications/templates/application.html:185
+msgid "insertions"
+msgstr "inserimenti"
+
+#: applications/templates/application.html:178
+#: applications/templates/application.html:188
+#: generics/templates/base_page.html:40
+msgid "Manage"
+msgstr "Gestisci"
+
+#: applications/templates/application.html:184
+#: applications/templates/application_free_form.html:27
+msgid "Free credits"
+msgstr "Crediti a scelta"
+
+#: applications/templates/application.html:184
+#: applications/templates/application_free.html:31
+#: applications/templates/application_free_form.html:27
+#: applications/templates/application_free_form.html:34
+#: applications/templates/include/application_required_teachings.html:8
+#: applications/templates/print/application_free_form.html:16
+msgid "year"
+msgstr "anno"
+
+#: applications/templates/application.html:203
+msgid "Submit"
+msgstr "Invia"
+
+#: applications/templates/application.html:211
+#: applications/templates/application_free.html:98
+#: applications/templates/application_required.html:99
+#: generics/templates/form_template.html:35
+#: generics/templates/form_template.html:43
+msgid "Confirm"
+msgstr "Conferma"
+
+#: applications/templates/application.html:218
+msgid "Are you sure you want to submit the application?"
+msgstr "Sei sicuro di voler inviare la domanda?"
+
+#: applications/templates/application.html:221
+msgid "The operation will not be reversible."
+msgstr "L'operazione non sarà reversibile."
+
+#: applications/templates/application_edit.html:22
+#: applications/templates/application_free.html:23
+#: applications/templates/application_free_form.html:22
+#: applications/templates/application_required.html:23
+#: applications/templates/application_required_form.html:22
+#: applications/templates/application_required_list.html:23
+msgid "Back to application"
+msgstr "Torna alla domanda"
+
+#: applications/templates/application_edit.html:30
+msgid "Edit application for"
+msgstr "Modifica domanda per"
+
+#: applications/templates/application_free.html:31
+msgid "Requests for recognition of free credits of"
+msgstr "Richiesta di riconoscimento crediti a scelta di"
+
+#: applications/templates/application_free.html:43
+msgid ""
+"The number of credits for elective courses in the selected year ranges from "
+"a minimum of"
+msgstr ""
+"Il numero di crediti per gli insegnamenti a scelta dell'anno selezionato va "
+"da un minimo di"
+
+#: applications/templates/application_free.html:45
+msgid "to a maximum of"
+msgstr "a un massimo di"
+
+#: applications/templates/application_free.html:104
+#: applications/templates/application_required.html:105
+msgid "Are you sure you want to delete the request?"
+msgstr "Sei sicuro di voler eliminare la richiesta?"
+
+#: applications/templates/application_free.html:127
+#: applications/templates/application_required.html:129
+#: applications/templates/applications.html:59
+msgid "No items here"
+msgstr "Nessun inserimento"
+
+#: applications/templates/application_free.html:135
+#: applications/templates/application_required.html:136
+msgid "Add new recognition request"
+msgstr "Aggiungi nuova richiesta di riconoscimento"
+
+#: applications/templates/application_free_form.html:34
+#: applications/templates/print/application_free_form.html:16
+msgid "Request for recognition of free credits of"
+msgstr "Richiesta di riconoscimento crediti a scelta di"
+
+#: applications/templates/application_free_form.html:40
+#: applications/templates/application_required_form.html:53
+#: applications/templates/include/credits_alert.html:13
+#: applications/templates/include/payment_alert.html:7 applications/views.py:94
+#: applications/views.py:170 applications/views.py:235
+#: applications/views.py:476 applications/views.py:551
+#: applications/views.py:663 applications/views.py:739
+msgid "Warning"
+msgstr "Attenzione"
+
+#: applications/templates/application_free_form.html:41
+msgid ""
+"Fill out the form by entering the data of the taken teaching that you want "
+"to use to request recognition"
+msgstr ""
+"Compila il form inserendo i dati dell'insegnamento sostenuto che vuoi "
+"utilizzare per richiedere il riconoscimento"
+
+#: applications/templates/application_new.html:35 calls/templates/call.html:74
+#: calls/templates/calls.html:31
+msgid "Year"
+msgstr "Anno"
+
+#: applications/templates/application_new.html:41
+msgid "Requirements to be accepted"
+msgstr "Condizioni da accettare"
+
+#: applications/templates/application_new.html:42
+msgid "By continuing, you declare that you accept the following conditions"
+msgstr "Proseguendo dichiari di accettare le seguenti condizioni"
+
+#: applications/templates/application_required.html:36
+msgid "Credits recognition requests"
+msgstr "Richieste di riconoscimento crediti"
+
+#: applications/templates/application_required.html:74
+#: calls/templates/call.html:121
+msgid "Click here"
+msgstr "Clicca qui"
+
+#: applications/templates/application_required_form.html:37
+msgid "Request for credits recognition of"
+msgstr "Richiesta di riconoscimento crediti di"
+
+#: applications/templates/application_required_form.html:42
+#: applications/templates/print/application_required_form.html:21
+msgid "Teaching data for which credits recognition is requested"
+msgstr ""
+"Dati insegnamento per cui si sta chiedendo il riconoscimento dei crediti"
+
+#: applications/templates/application_required_form.html:54
+msgid ""
+"Fill out the form by entering the data of the taken teaching that you want "
+"to use to request credits recognition"
+msgstr ""
+"Compila il form inserendo i dati dell'insegnamento sostenuto che vuoi "
+"utilizzare per richiedere il riconoscimento dei crediti"
+
+#: applications/templates/application_required_list.html:31
+msgid "Request for credits recognition of required teachings"
+msgstr "Richiesta di riconoscimento crediti per insegnamenti obbligatori"
+
+#: applications/templates/applications.html:26
+msgid "Call"
+msgstr "Bando"
+
+#: applications/templates/applications.html:27 calls/templates/calls.html:34
+msgid "Expiration"
+msgstr "Scadenza"
+
+#: applications/templates/applications.html:30
+msgid "Status"
+msgstr "Stato"
+
+#: applications/templates/applications.html:43
+msgid "Submitted"
+msgstr "Inviata"
+
+#: applications/templates/applications.html:45
+msgid "Draft"
+msgstr "Bozza"
+
+#: applications/templates/applications.html:50 calls/templates/calls.html:55
+msgid "Details"
+msgstr "Dettagli"
+
+#: applications/templates/applications.html:66
+msgid "Add new"
+msgstr "Aggiungi nuova"
+
+#: applications/templates/include/application_required_teachings.html:8
+msgid "Teachings"
+msgstr "Insegnamenti"
+
+#: applications/templates/include/application_required_teachings.html:18
+msgid "Teaching credits"
+msgstr "Crediti insegnamento"
+
+#: applications/templates/include/application_required_teachings.html:19
+#: applications/templates/include/credits_alert.html:16
+msgid "Acquired credits"
+msgstr "Crediti acquisiti"
+
+#: applications/templates/include/credits_alert.html:7
+msgid "You have reached the minimum limit of required credits by the call"
+msgstr "Hai raggiunto il limite minimo di crediti richiesti dal bando"
+
+#: applications/templates/include/credits_alert.html:9
+msgid "Declared"
+msgstr "Dichiarati"
+
+#: applications/templates/include/credits_alert.html:14
+#: applications/views.py:258
+msgid ""
+"You have not yet reached the minimum number of required credits by the call"
+msgstr ""
+"Non hai ancora raggiunto il numero minimo di crediti richiesti dal bando"
+
+#: applications/templates/include/credits_alert.html:18
+msgid "Your request cannot be sent."
+msgstr "La tua richiesta non può essere inviata."
+
+#: applications/templates/include/payment_alert.html:8
+msgid "E' necessario caricare la ricevuta di pagamento per inviare la domanda"
+msgstr ""
+
+#: applications/templates/include/requirements_alert.html:8
+msgid "Accepted requirements"
+msgstr "Condizioni accettate"
+
+#: applications/templates/include/requirements_alert.html:9
+msgid "You have already accepted the following conditions"
+msgstr "Hai già accettato le seguenti condizioni"
+
+#: applications/templates/print/application_required_form.html:16
+msgid "Validation request for"
+msgstr "Richiesta di validazione per"
+
+#: applications/titulus.py:91
+msgid "Missing XML configuration for production"
+msgstr ""
+
+#: applications/validators.py:16
+msgid "Invalid file extension: {}. Enter only {}"
+msgstr "Estensione del file non valida: {}. Utilizza esclusivamente {}"
+
+#: applications/validators.py:26
+msgid "Excessive file size: {} bytes. Max {} bytes"
+msgstr "Dimensione del file eccessiva: {} bytes. Max {} bytes"
+
+#: applications/views.py:82
+msgid "Receipt uploaded successfully"
+msgstr "Ricevuta caricata con successo"
+
+#: applications/views.py:94 applications/views.py:170 applications/views.py:235
+#: applications/views.py:476 applications/views.py:551
+#: applications/views.py:663 applications/views.py:739
+msgid "There are errors in the form"
+msgstr "Ci sono errori nel form"
+
+#: applications/views.py:120
+msgid "Unable to participate in the selected call"
+msgstr ""
+
+#: applications/views.py:134
+msgid "There is already an application against you for this call"
+msgstr "Esiste già una domanda a tuo carico per questo bando"
+
+#: applications/views.py:225
+msgid "Data modified successfully"
+msgstr "Dati modificati con successo"
+
+#: applications/views.py:266
+msgid "It is necessary to upload the payment receipt to submit the application"
+msgstr "E' necessario caricare la ricevuta di pagamento per inviare la domanda"
+
+#: applications/views.py:273
+msgid "Application successfully submitted"
+msgstr "Domanda inviata con successo"
+
+#: applications/views.py:282 generics/templates/base.html:8
+#: generics/templates/base_page.html:13
+msgid "Enrollment in years after the first"
+msgstr "Iscrizione agli anni successivi al primo"
+
+#: applications/views.py:314
+msgid "Request successfully registered: n. <b>{}/{}</b>"
+msgstr ""
+
+#: applications/views.py:340
+msgid "Protocol error: {}"
+msgstr ""
+
+#: applications/views.py:347
+msgid ""
+"<b>Attention</b>: Your request was created anyway, even though registration "
+"failed. Registration will be performed automatically in the next few hours."
+msgstr ""
+
+#: applications/views.py:368
+msgid "Application successfully deleted"
+msgstr "Domanda eliminata con successo"
+
+#: applications/views.py:538
+msgid "Change successful"
+msgstr "Modifica effettuata con successo"
+
+#: applications/widgets.py:47
+msgid "View currently loaded file"
+msgstr "Vedi il file attualmente caricato"
+
+#: calls/admin.py:85
+msgid "Course studyplan (IT) trunked"
+msgstr "Piano di studio (IT) troncato"
+
+#: calls/admin.py:92
+msgid "Course studyplan (EN) trunked"
+msgstr "Piano di studio (EN) troncato"
+
+#: calls/models.py:61
+msgid "If payment is required you must specify a URL pointing to this"
+msgstr ""
+"Se è richiesto il pagamento è necessario specificare un URL che punti a "
+"questo"
+
+#: calls/models.py:184
+msgid "Nominativo RPA"
+msgstr ""
+
+#: calls/models.py:191
+msgid "Username RPA sul sistema di protocollo"
+msgstr ""
+
+#: calls/models.py:198
+msgid "Matricola RPA sul sistema di protocollo"
+msgstr ""
+
+#: calls/models.py:201
+msgid "Invia e-mail a RPA"
+msgstr ""
+
+#: calls/models.py:210
+msgid "Codice titolario"
+msgstr ""
+
+#: calls/models.py:213
+msgid "Fascicolo numero"
+msgstr ""
+
+#: calls/models.py:216
+msgid "Fascicolo anno"
+msgstr ""
+
+#: calls/models.py:221
+msgid "Configurazione WS Protocollo Categoria"
+msgstr ""
+
+#: calls/models.py:222
+msgid "Configurazioni WS Protocollo Categorie"
+msgstr ""
+
+#: calls/templates/call.html:17
+msgid "Back to calls"
+msgstr "Torna ai bandi"
+
+#: calls/templates/call.html:65
+msgid "Degree course details"
+msgstr "Dettagli del corso di laurea"
+
+#: calls/templates/call.html:78
+msgid "Typology"
+msgstr "Tipilogia"
+
+#: calls/templates/call.html:88
+msgid "Area"
+msgstr "Area"
+
+#: calls/templates/call.html:98
+msgid "Department"
+msgstr "Dipartimento"
+
+#: calls/templates/call.html:108
+msgid "Class"
+msgstr "Classe"
+
+#: calls/templates/call.html:118
+msgid "Website"
+msgstr "Sito web"
+
+#: calls/templates/call.html:133
+msgid "Participate"
+msgstr "Partecipa"
+
+#: calls/templates/calls.html:20 generics/templates/base.html:26
+#: generics/templates/base_page.html:21
+msgid "Active calls"
+msgstr "Bandi attivi"
+
+#: calls/templates/calls.html:20
+msgid "for all degree courses"
+msgstr "per tutti i corsi di laurea"
+
+#: calls/templates/calls.html:30
+msgid "Cohort"
+msgstr "Coorte"
+
+#: calls/templates/calls.html:64
+msgid "No active calls here"
+msgstr "Nessun bando attivo"
+
+#: calls/views.py:24
+msgid "Expired call"
+msgstr "Bando scaduto"
+
+#: generics/templates/base.html:47
+msgid "Logout"
+msgstr "Esci"
+
+#: generics/templates/base_page.html:22
+msgid ""
+"Discover the current calls for proposals and participate in the one that "
+"interests you"
+msgstr ""
+"Scopri i bandi attualmente in corso e partecipa a quello di tuo interesse"
+
+#: generics/templates/base_page.html:24
+msgid "Read more"
+msgstr "Scopri di più"
+
+#: generics/templates/base_page.html:38
+msgid "Manage your applications and monitor the status of each one"
+msgstr ""
+"Gestisci le tue domande di partecipazione e monitora lo stato di ognuna di "
+"esse"
+
+#: generics/templates/base_page.html:53
+msgid "Evaluation commissions"
+msgstr "Commissioni di valutazione"
+
+#: generics/templates/base_page.html:54
+msgid "Work in progress..."
+msgstr ""
+
+#: generics/templates/form_template.html:49
+msgid "Do you want to confirm the entered data?"
+msgstr "Desideri confermare i dati immessi?"
+
+#: generics/templates/loader.html:9
+msgid "Loading"
+msgstr "Caricamento"
+
+#: titulus_ws/models.py:8
+msgid "Denominazione configurazione"
+msgstr ""
+
+#: titulus_ws/models.py:22
+msgid "Configurazione Titulus"
+msgstr ""
+
+#: titulus_ws/models.py:23
+msgid "Configurazioni Titulus"
+msgstr ""
+
+#, fuzzy
+#~| msgid ""
+#~| "Fill out the form by entering the data of the course from your home "
+#~| "university that you want to use to request recognition"
+#~ msgid ""
+#~ "Fill out the form by entering the data of the taken teaching from that "
+#~ "you want to use to request recognition"
+#~ msgstr ""
+#~ "Compila il form inserendo i dati del corso della tua università di "
+#~ "provenienza che vuoi utilizzare per richiedere il riconoscimento"
+
+#~ msgid "Application for participation in"
+#~ msgstr "Domanda di partecipazione a"
+
+#~ msgid "New application for"
+#~ msgstr "Nuova domanda per"
+
+#~ msgid "Calls"
+#~ msgstr "Bandi"
+
+#~ msgid "Home university details"
+#~ msgstr "Dettagli università di provenienza"
+
+#~ msgid "University"
+#~ msgstr "Università"
+
+#~ msgid "Country"
+#~ msgstr "Nazione"
+
+#~ msgid "City"
+#~ msgstr "Città"
+
+#~ msgid "Study course"
+#~ msgstr "Corso di studi"
+
+#~ msgid "Course"
+#~ msgstr "Corso"
+
+#~ msgid "Request for teachings validation"
+#~ msgstr "Richiesta validazione insegnamenti"
+
+#~ msgid "Continue"
+#~ msgstr "Continua"
+
+#~ msgid "Unable to delete application"
+#~ msgstr "Impossibile eliminare la domanda"
+
+#~ msgid "The number of credits entered"
+#~ msgstr "Il numero dei crediti immesso"
+
+#~ msgid "does not reach the minimum threshold imposed by the call"
+#~ msgstr "non raggiunge la soglia minima imposta dal bando"
+
+#~ msgid "These will not be included in the overall count"
+#~ msgstr "Questi non saranno inclusi nel conteggio complessivo"
+
+#~ msgid "exceeds the maximum threshold imposed by the call"
+#~ msgstr "supera la soglia massima imposta dal bando"
+
+#~ msgid "Only this last value will be included in the final count"
+#~ msgstr "Solo quest'ultimo valore verrà incluso nel conteggio finale"
+
+#~ msgid "falls within the limits imposed by the call"
+#~ msgstr "rientra nei limiti imposti dal bando"
+
+#~ msgid "This value will be included in the overall count"
+#~ msgstr "Questo valore sarà incluso nel conteggio complessivo"
+
+#~ msgid "Request validation"
+#~ msgstr "Richiedi validazione"
+
+#~ msgid "Back to announcements"
+#~ msgstr "Torna ai bandi"
+
+#~ msgid "Active announcements"
+#~ msgstr "Bandi attivi"
+
+#~ msgid "Expired announcement"
+#~ msgstr "Bando scaduto"
+
+#~ msgid "Home country"
+#~ msgstr "Nazione di provenienza"
+
+#~ msgid "Home city"
+#~ msgstr "Città di provenienza"
+
+#~ msgid "Home course"
+#~ msgstr "Corso di provenienza"
+
+#~ msgid "Delete"
+#~ msgstr "Elimina"
+
+#~ msgid "Detail"
+#~ msgstr "Dettagli"
+
+#~ msgid "Announcement"
+#~ msgstr "Bando"
+
+#~ msgid "Announcements"
+#~ msgstr "Bandi"

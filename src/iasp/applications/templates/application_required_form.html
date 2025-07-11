@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'generics:home' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'applications:applications' %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
+    </svg> {% trans "My applications" %}
+</a>
+<a href="{% url 'applications:application' application_pk=application.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-note"></use>
+    </svg> {% trans "Back to application" %}
+</a>
+<a href="{% url 'applications:application_required_list' application_pk=application.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-list"></use>
+    </svg> {% trans "Required teachings" %}
+</a>
+<a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=target_teaching.id %}" class="btn btn-outline-secondary ms-md-1">
+    {{ target_teaching.name }}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Request for credits recognition of" %} {{ target_teaching.name }}
+    </p>
+</div>
+
+<div class="alert alert-info" role="alert">
+    <p>{% trans "Teaching data for which credits recognition is requested" %}</p>
+    <ul>
+        <li><b>{% trans "Name" %}:</b> {{ target_teaching.name }}</li>
+        <li><b>{% trans "Code" %}:</b> {{ target_teaching.cod }}</li>
+        <li><b>{% trans "Credits" %}:</b> {{ target_teaching.credits|floatformat:1 }}</li>
+        <li><b>{% trans "SSD" %}:</b> {{ target_teaching.ssd }}</li>
+    </ul>
+</div>
+
+{% if application.is_editable %}
+<div class="alert alert-warning" role="alert">
+    <p class="h5 alert-heading">{% trans "Warning" %}</p>
+    {% trans "Fill out the form by entering the data of the taken teaching that you want to use to request credits recognition" %}
+</div>
+{% include "form_template.html" with form=form %}
+{% else %}
+{% include "form_template.html" with form=form disabled=1 %}
+{% endif %}
+{% endblock clean_content %}
+
+{% block extra_scripts %}
+<!-- prevent submit form by press "enter" on field -->
+<script>
+document.querySelector ('form input').addEventListener ('keypress', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+document.querySelector ('form input').addEventListener ('keyup', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+{% endblock extra_scripts %}

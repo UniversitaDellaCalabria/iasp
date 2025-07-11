@@ -1,0 +1,22 @@
+{% load i18n %}
+
+
+<div class="row my-5">
+    <div class="col-12 text-center">
+        <div class="progress-spinner progress-spinner-double size-lg progress-spinner-active">
+            <div class="progress-spinner-inner"></div>
+            <div class="progress-spinner-inner"></div>
+            <span class="visually-hidden">{% trans "Loading" %}...</span>
+        </div>
+
+        {% comment %}
+        <div class="col-12 text-center">
+            <div class="progress progress-indeterminate">
+                <span class="visually-hidden">{% trans "Processing" %}...</span>
+                <div class="progress-bar bg-primary" role="progressbar"></div>
+            </div>
+        </div>
+        {% endcomment %}
+
+    </div>
+</div>

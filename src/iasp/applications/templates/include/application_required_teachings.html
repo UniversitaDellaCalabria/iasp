@@ -1,0 +1,150 @@
+{% load i18n %}
+{% load static %}
+
+{% load iasp_tags %}
+
+
+{% for i in course.CdSDuration|add:1|to_range %}
+<p class="h4 mt-4">{% trans "Teachings" %} {{ i }}° {% trans "year" %}</p>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">{% trans "Code" %}</th>
+            <th scope="col">{% trans "Name" %}</th>
+            <th scope="col" class="text-end">{% trans "SSD" %}</th>
+            <th scope="col" class="text-end">{% trans "Teaching program" %}</th>
+            <th scope="col" class="text-end">{% trans "Teaching credits" %}</th>
+            <th scope="col" class="text-end">{% trans "Acquired credits" %}</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for plan in plans.0.PlanTabs %}
+            {% if plan.PlanTabCod|upper == application.call.study_plan_cod|upper %}
+                {% for group in plan.AfRequired %}
+                    {% if group.Year == i %}
+                        {% for teaching in group.Required %}
+                            {{ teaching.StudyActivityCod }}
+                            {% if teaching.AfCod not in codes_to_exclude %}
+                                <tr {% if teaching.AfId in insertions %}class="table-primary"{% endif %}>
+                                    <td class="text-nowrap">{{ teaching.AfCod }}</td>
+                                    <td>{{ teaching.AfDescription }}</td>
+                                    <td class="text-end text-nowrap">
+                                        {% if teaching.AfSubModules %}
+                                        -
+                                        {% else %}
+                                        {{ teaching.SettCod }}
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-end">
+                                        <a href="https://www.unical.it/storage/cds/{{ course.RegDidId }}/activities/{{ teaching.AfId }}/" target="_blank" title="Clicca qui">
+                                            <svg class="icon icon-xs">
+                                                <use href="{% static 'svg/sprites.svg' %}#it-link"></use>
+                                            </svg>
+                                        </a>
+                                    </td>
+                                    <td class="text-end">
+                                        {% if teaching.AfSubModules %}
+                                        -
+                                        {% else %}
+                                        {{ teaching.CreditValue|floatformat:1 }}
+                                        {% endif %}
+                                    </td>
+                                    {% with declared_credits|get_item:teaching.AfId as declared %}
+                                    <td class="{% if declared %}table-{% if declared.1 %}success{% else %}danger{% endif %}{% endif %} text-end">
+                                        {{ declared.0|default:'-' }}
+                                    </td>
+                                    {% endwith %}
+                                    <td class="text-end">
+                                        {% if not teaching.AfSubModules %}
+                                            {% if teaching.AfId in insertions %}
+                                                {% if application.is_editable %}
+                                                <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
+                                                    <svg class="icon icon-xs icon-white">
+                                                        <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
+                                                    </svg>
+                                                </a>
+                                                {% else %}
+                                                <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
+                                                    <svg class="icon icon-xs icon-white">
+                                                        <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
+                                                    </svg>
+                                                </a>
+                                                {% endif %}
+                                            {% elif application.is_editable %}
+                                            <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-success btn-xs">
+                                                <svg class="icon icon-xs icon-white">
+                                                    <use xlink:href="{% static 'svg/sprites.svg' %}#it-plus"></use>
+                                                </svg>
+                                            </a>
+                                            {% else %}
+                                            -
+                                            {% endif %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% if teaching.AfSubModules %}
+                                    {% for module in teaching.AfSubModules %}
+                                        {% if module.StudyActivityCod not in codes_to_exclude %}
+                                        <tr {% if module.StudyActivityID in insertions %}class="table-primary"{% endif %}>
+                                            <td class="text-nowrap fst-italic">
+                                                <svg class="icon icon-sm">
+                                                    <use href="{% static 'svg/sprites.svg' %}#it-arrow-right-triangle"></use>
+                                                </svg> {{ module.StudyActivityCod }}
+                                            </td>
+                                            <td class="fst-italic">{{ module.StudyActivityName }}</td>
+                                            <td class="text-end text-nowrap fst-italic">{{ module.StudyActivitySettCod }}</td>
+                                            <td class="text-end fst-italic">
+                                                <a href="https://www.unical.it/storage/cds/{{ course.RegDidId }}/activities/{{ module.StudyActivityID }}/" target="_blank" title="Clicca qui">
+                                                    <svg class="icon icon-xs">
+                                                        <use href="{% static 'svg/sprites.svg' %}#it-link"></use>
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                            <td class="text-end fst-italic">{{ module.StudyActivityCreditValue|floatformat:1 }}</td>
+                                            {% with declared_credits|get_item:module.StudyActivityID as declared %}
+                                            <td class="{% if declared %}table-{% if declared.1 %}success{% else %}danger{% endif %}{% endif %} text-end fst-italic">
+                                                {{ declared.0|default:'-' }}
+                                            </td>
+                                            {% endwith %}
+                                            <td class="text-end">
+                                                {% if module.StudyActivityID in insertions %}
+                                                    {% if application.is_editable %}
+                                                    <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                        <svg class="icon icon-xs icon-white">
+                                                            <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
+                                                        </svg>
+                                                    </a>
+                                                    {% else %}
+                                                    <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                        <svg class="icon icon-xs icon-white">
+                                                            <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
+                                                        </svg>
+                                                    </a>
+                                                    {% endif %}
+                                                {% elif application.is_editable %}
+                                                <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-success btn-xs">
+                                                    <svg class="icon icon-xs icon-white">
+                                                        <use xlink:href="{% static 'svg/sprites.svg' %}#it-plus"></use>
+                                                    </svg>
+                                                </a>
+                                                {% else %}
+                                                -
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endfor %}

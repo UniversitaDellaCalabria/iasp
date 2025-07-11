@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+
+{% block top_buttons %}
+<a href="{% url 'generics:home' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'accounts:account' %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-user"></use>
+    </svg> {% trans "Account" %}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+<div class="mb-4">
+    <p class="h3">{% trans "Edit user data" %}</p>
+</div>
+{% include 'form_template.html' with form=form %}
+{% endblock clean_content %}
+
+{% block extra_scripts %}
+<!-- prevent submit form by press "enter" on field -->
+<script>
+document.querySelector ('form input').addEventListener ('keypress', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+document.querySelector ('form input').addEventListener ('keyup', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+{% endblock extra_scripts %}

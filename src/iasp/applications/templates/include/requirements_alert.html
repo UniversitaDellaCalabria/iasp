@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+
+
+{% with application.call.get_requirements as requirements %}
+{% if requirements %}
+<div class="alert alert-success my-3" role="alert">
+    <p class="h5 alert-heading">{% trans "Accepted requirements" %}</p>
+    <p>{% trans "You have already accepted the following conditions" %}:</p>
+    <hr>
+    <p class="mb-0">
+        <ul>
+            {% for requirement in requirements %}
+            <li>
+                <b>
+                    {% if LANGUAGE_CODE == 'it' %}
+                        {{ requirement.title_it }}
+                    {% else %}
+                        {{ requirement.title_en }}
+                    {% endif %}
+                </b>
+                <p>
+                    {% if LANGUAGE_CODE == 'it' %}
+                        {{ requirement.content_it }}
+                    {% else %}
+                        {{ requirement.content_en }}
+                    {% endif %}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </p>
+</div>
+{% endif %}
+{% endwith %}

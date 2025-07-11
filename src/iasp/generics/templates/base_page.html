@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons_surround %}
+{% endblock top_buttons_surround %}
+
+{% block clean_content %}
+<div class="mb-4">
+    <p class="h3">{% trans "Enrollment in years after the first" %}</p>
+</div>
+<div class="row">
+  <div class="col-12 col-lg-4">
+    <!--start card-->
+    <div class="card-wrapper card-space">
+      <div class="card card-bg no-after">
+        <div class="card-body">
+          <h3 class="card-title h4">{% trans "Active calls" %}</h3>
+          <p class="cart-text">{% trans "Discover the current calls for proposals and participate in the one that interests you" %}</p>
+          <a class="btn btn-success btn-sm" href="{% url 'calls:calls' %}">
+            <span class="text">{% trans "Read more" %}</span>
+            <svg class="icon icon-white icon-sm"><use href="{% static 'svg/sprites.svg' %}#it-arrow-right"></use></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--end card-->
+  </div>
+  <div class="col-12 col-lg-4">
+    <!--start card-->
+    <div class="card-wrapper card-space">
+      <div class="card card-bg no-after">
+        <div class="card-body">
+          <h3 class="card-title h4">{% trans "My applications" %}</h3>
+          <p class="cart-text">{% trans "Manage your applications and monitor the status of each one" %}</p>
+          <a class="btn btn-success btn-sm" href="{% url 'applications:applications' %}">
+            <span class="text">{% trans "Manage" %}</span>
+            <svg class="icon icon-white icon-sm"><use href="{% static 'svg/sprites.svg' %}#it-arrow-right"></use></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--end card-->
+  </div>
+  <div class="col-12 col-lg-4">
+    <!--start card-->
+    <div class="card-wrapper card-space">
+      <div class="card card-bg no-after">
+        <div class="card-body">
+          <h3 class="card-title h4">{% trans "Evaluation commissions" %}</h3>
+          <p class="cart-text">{% trans "Work in progress..." %}</p>
+          {% comment %}
+          <a class="read-more" href="#">
+            <span class="text">Leggi di più</span>
+            <span class="visually-hidden">su Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</span>
+            <svg class="icon"><use href="{% static 'svg/sprites.svg' %}#it-arrow-right"></use></svg>
+          </a>
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+    <!--end card-->
+  </div>
+</div>
+{% endblock clean_content %}

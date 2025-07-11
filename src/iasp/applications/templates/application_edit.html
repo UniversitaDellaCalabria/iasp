@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'generics:home' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'applications:applications' %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
+    </svg> {% trans "My applications" %}
+</a>
+<a href="{% url 'applications:application' application_pk=application.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-note"></use>
+    </svg> {% trans "Back to application" %}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+{% get_current_language as LANGUAGE_CODE %}
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Edit application for" %}
+        {% if LANGUAGE_CODE == 'it' %}
+            {{ application.call.title_it }}
+        {% else %}
+            {{ application.call.title_en }}
+        {% endif %}
+    </p>
+</div>
+
+{% include "include/requirements_alert.html" %}
+
+{% include "form_template.html" with form=form %}
+{% endblock clean_content %}
+
+{% block extra_scripts %}
+<!-- prevent submit form by press "enter" on field -->
+<script>
+document.querySelector ('form input').addEventListener ('keypress', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+document.querySelector ('form input').addEventListener ('keyup', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+{% endblock extra_scripts %}

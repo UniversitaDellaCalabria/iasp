@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'generics:home' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+<div class="mb-4">
+    <p class="h3">{% trans "Account" %}</p>
+</div>
+<table class="table table-striped table-hover table-bordered">
+    <tbody>
+        <tr>
+            <th scope="row">{% trans "First name" %}</th>
+            <td>{{ request.user.first_name|default:'-' }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{% trans "Last name" %}</th>
+            <td>{{ request.user.last_name|default:'-' }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{% trans "Email" %}</th>
+            <td>{{ request.user.email|default:'-' }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{% trans "Phone number" %}</th>
+            <td>{{ request.user.phone_number|default:'-' }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{% trans "Taxpayer ID" %}</th>
+            <td>{{ request.user.taxpayer_id|default:'-' }}</td>
+        </tr>
+    </tbody>
+</table>
+{% settings_value name="EDITABLE_FIELDS" app_name="accounts" as accounts_editable_fields %}
+
+{% if accounts_editable_fields %}
+<a href="{% url 'accounts:change_data' %}" type="button" class="btn btn-success btn-block">
+    {% trans "Edit" %}
+</a>
+{% endif %}
+{% endblock clean_content %}

@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'generics:home' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'applications:applications' %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-list"></use>
+    </svg> {% trans "My applications" %}
+</a>
+{% if not application.submission_date %}
+<button type="button" class="btn btn-outline-danger btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#delete">
+    <svg class="icon icon-xs icon-danger">
+        <use xlink:href="{% static 'svg/sprites.svg' %}#it-delete"></use>
+    </svg>
+</button>
+<div class="it-example-modal">
+   <div class="modal" tabindex="-1" role="dialog" id="delete" aria-labelledby="actionTitle">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h2 class="modal-title h5" id="actionTitle">Conferma</h2>
+               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Chiudi finestra modale">
+                  <svg class="icon"><use href="{% static 'svg/sprites.svg' %}#it-close"></use></svg>
+               </button>
+            </div>
+            <div class="modal-body">
+               <p>{% trans "Are you sure you want to delete the application?" %}</p>
+            </div>
+            <form method="post" action="{% url 'applications:application_delete' application_pk=application.pk %}">
+                <div class="modal-footer">
+                   <input class="btn btn-danger"
+                           type="submit"
+                           id="submitForm"
+                           value="{% trans 'Yes, proceed' %}">
+                </div>
+                {% csrf_token %}
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+{% endif %}
+{% endblock top_buttons %}
+
+{% block clean_content %}
+{% get_current_language as LANGUAGE_CODE %}
+<div class="mb-4">
+    <p class="h3"> {% trans "Application for enrollment in years following the first" %}</p>
+    <p class="h5">
+        {% if LANGUAGE_CODE == 'it' %}
+            {{ application.call.title_it }}
+        {% else %}
+            {{ application.call.title_en }}
+        {% endif %}
+    </p>
+</div>
+
+{% include "include/requirements_alert.html" %}
+{% include "include/credits_alert.html" %}
+{% include "include/payment_alert.html" %}
+
+<div class="accordion accordion-left-icon my-4" id="collapseExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header " id="heading0c">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse0c" aria-expanded="false" aria-controls="collapse0c">
+                {% trans "Call details" %}
+            </button>
+        </h2>
+        <div id="collapse0c" class="accordion-collapse collapse" role="region" aria-labelledby="heading0c">
+            <div class="accordion-body">
+                <ul class="mb-0" style="font-size: 1rem">
+                    <li><b>{% trans "Places available" %}:</b> {{ application.call.places_available }}</li>
+                    <li><b>{% trans "Credits threshold" %}:</b> {{ application.call.credits_threshold }}</li>
+                    <li><b>{% trans "Active from" %}:</b> {{ application.call.start }}</li>
+                    <li><b>{% trans "Active until" %}:</b> {{ application.call.end }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header " id="heading1c">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1c" aria-expanded="false" aria-controls="collapse1c">
+                {% trans "Application details" %}
+            </button>
+        </h2>
+        <div id="collapse1c" class="accordion-collapse collapse" role="region" aria-labelledby="heading1c">
+            <div class="accordion-body">
+                <ul class="mb-0" style="font-size: 1rem">
+                    <li><b>{% trans "Created" %}:</b> {{ application.created }}</li>
+                    <li><b>{% trans "Last modification" %}:</b> {{ application.modified }}</li>
+                    {% if application.submission_date %}
+                    <li><b>{% trans "Submission date" %}:</b> {{ application.submission_date }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header " id="heading2c">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2c" aria-expanded="false" aria-controls="collapse2c">
+                {% trans "Personal informations" %}
+            </button>
+        </h2>
+        <div id="collapse2c" class="accordion-collapse collapse" role="region" aria-labelledby="heading2c">
+            <div class="accordion-body">
+                <ul class="mb-0" style="font-size: 1rem">
+                    <li><b>{% trans "Nationality" %}:</b> {{ application.user_country }}</li>
+                    <li><b>{% trans "Home University" %}:</b> {{ application.home_university }}</li>
+                    <li><b>{% trans "Home University country" %}:</b> {{ application.home_country }}</li>
+                    <li><b>{% trans "Home University city" %}:</b> {{ application.home_city }}</li>
+                    <li><b>{% trans "Home University course" %}:</b> {{ application.home_course }}</li>
+                    <li><b>{% trans "Signed self-certification of taken exams" %}:</b> <a target="_blank" href="{% url 'applications:download_exams_certificate' application_pk=application.pk %}">{% trans "Download" %}</a></li>
+                    <li><b>{% trans "Origin course study plan" %}:</b> <a target="_blank" href="{% url 'applications:download_teaching_plan' application_pk=application.pk %}">{% trans "Download" %}</a></li>
+                    <li><b>{% trans "Official votes conversion table" %}:</b> {% if application.home_votes_conversion %}<a target="_blank" href="{% url 'applications:download_votes_conversion' application_pk=application.pk %}">{% trans "Download" %}</a></li>{% else %}-{% endif %}
+                    <li><b>{% trans "Certification of knowledge of Italian language (at least B2)" %}:</b> {% if application.home_language_certification %}<a target="_blank" href="{% url 'applications:download_language_certification' application_pk=application.pk %}">{% trans "Download" %}</a></li>{% else %}-{% endif %}
+                    <li><b>{% trans "Declaration of value" %}:</b> {% if application.declaration_of_value %}<a target="_blank" href="{% url 'applications:download_declaration_of_value' application_pk=application.pk %}">{% trans "Download" %}</a></li>{% else %}-{% endif %}
+                </ul>
+                {% if application.is_editable %}
+                <a href="{% url 'applications:application_edit' application_pk=application.pk %}" class="btn btn-outline-info btn-xs mt-3">
+                    <svg class="icon icon-xs icon-info">
+                        <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
+                    </svg>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if application.call.payment_required %}
+    <div class="accordion-item">
+        <h2 class="accordion-header " id="heading3c">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3c" aria-expanded="false" aria-controls="collapse3c">
+                {% trans "Payment details" %}
+                {% if application.call.payment_required and not application.payment_receipt %}
+                <svg class="ms-3 icon icon-sm icon-danger">
+                    <use xlink:href="{% static 'svg/sprites.svg' %}#it-warning-circle"></use>
+                </svg>
+                {% elif application.call.payment_required and application.payment_receipt %}
+                <svg class="ms-3 icon icon-sm icon-success">
+                    <use xlink:href="{% static 'svg/sprites.svg' %}#it-check-circle"></use>
+                </svg>
+                {% endif %}
+            </button>
+        </h2>
+        <div id="collapse3c" class="accordion-collapse collapse" role="region" aria-labelledby="heading3c">
+            <div class="accordion-body">
+                {% trans "Link to payment" %}: <a href="{{ application.call.payment_url }}" target="_blank">{{ application.call.payment_url }}</a>
+                <div class="mt-3">
+                    {% if application.is_editable %}
+                    {% include "form_template.html" with form=form %}
+                    {% else %}
+                    {% include "form_template.html" with form=form disabled=1 %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <tbody>
+            <tr>
+                <td><b>{% trans "Required teachings" %}</b></td>
+                <td class="text-end"><b>{{ insertions_required }}</b> {% trans "insertions" %}</td>
+                <td class="text-end">
+                    <a href="{% url 'applications:application_required_list' application_pk=application.pk %}" class="btn btn-primary btn-xs">
+                        {% trans "Manage" %}
+                    </a>
+                </td>
+            </tr>
+            {% for rule in free_credits_rules %}
+            <tr>
+                <td><b>{% trans "Free credits" %} {{ rule.course_year }}° {% trans "year" %}</b></td>
+                <td class="text-end"><b>{{ insertions_free }}</b> {% trans "insertions" %}</td>
+                <td class="text-end">
+                    <a href="{% url 'applications:application_free' application_pk=application.pk year=rule.course_year %}" class="btn btn-primary btn-xs">
+                        {% trans "Manage" %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% if application.is_submittabile %}
+<div class="d-grid gap-2">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#submit">
+        <svg class="icon icon-xs icon-white">
+            <use xlink:href="{% static 'svg/sprites.svg' %}#it-check"></use>
+        </svg> {% trans "Submit" %}
+    </button>
+</div>
+<div class="it-example-modal text-start">
+   <div class="modal" tabindex="-1" role="dialog" id="submit" aria-labelledby="actionTitle">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h2 class="modal-title h5" id="actionTitle">{% trans "Confirm" %}</h2>
+               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Chiudi finestra modale">
+                  <svg class="icon"><use href="{% static 'svg/sprites.svg' %}#it-close"></use></svg>
+               </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                   {% trans "Are you sure you want to submit the application?" %}
+                </p>
+                <p>
+                   {% trans "The operation will not be reversible." %}
+                </p>
+            </div>
+            <form method="post" action="{% url 'applications:application_submit' application_pk=application.pk %}">
+                <div class="modal-footer">
+                   <input class="btn btn-success"
+                           type="submit"
+                           id="submitForm"
+                           value="{% trans 'Yes, proceed' %}">
+                </div>
+                {% csrf_token %}
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+{% endif %}
+
+{% endblock clean_content %}
+
+{% block extra_scripts %}
+<!-- prevent submit form by press "enter" on field -->
+<script>
+document.querySelector ('form input').addEventListener ('keypress', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+document.querySelector ('form input').addEventListener ('keyup', function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+{% endblock extra_scripts %}
