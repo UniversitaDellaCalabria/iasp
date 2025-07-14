@@ -99,7 +99,7 @@ class Command(BaseCommand):
                     logger.error(
                         "[{}] utente {} protocollo domanda {} fallito: {}".format(
                             timezone.localtime(),
-                            request.user,
+                            application.user,
                             application,
                             e
                         )
