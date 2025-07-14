@@ -285,14 +285,19 @@ def application_submit(request, application_pk, application=None):
         )
         # end log
 
-        messages.add_message(request, messages.SUCCESS, _('Application successfully submitted'))
+        if application.protocol_required:
+            messages.add_message(request, messages.SUCCESS, _('Your application has been successfully uploaded and processed. You will soon be able to view the associated protocol number.'))
+        else:
+            messages.add_message(request, messages.SUCCESS, _('Application successfully submitted'))
 
         call_name = application.call.title_it if request.LANGUAGE_CODE == 'it' else application.call.title_en
+
         email_body=EMAIL_BODY.format(
             first_name=request.user.first_name,
             last_name=request.user.last_name,
             call=call_name
         )
+
         result = send_mail(
             subject=_("Enrollment in years after the first"),
             message=email_body,
@@ -300,77 +305,6 @@ def application_submit(request, application_pk, application=None):
             recipient_list=[request.user.email],
             fail_silently=True,
         )
-
-        if application.call.protocol_required:
-            try:
-                generate_application_merged_docs(application)
-                protocol_global_configuration = TitulusConfiguration.objects.filter(is_active=True).first()
-                protocol_call_configuration = CallTitulusConfiguration.objects.filter(
-                    call=application.call,
-                    is_active=True
-                ).first()
-                protocol_response = application_protocol(
-                    application=application,
-                    user=request.user,
-                    subject=application.call.title_it,
-                    global_configuration=protocol_global_configuration,
-                    call_configuration=protocol_call_configuration,
-                    test=False,
-                )
-
-                protocol_number = protocol_response["numero"]
-
-                # set protocol data in application
-                application.protocol_number = protocol_number
-                application.protocol_date = timezone.localtime()
-                application.save(
-                    update_fields=[
-                        "protocol_number",
-                        "protocol_date"
-                    ]
-                )
-
-                messages.add_message(
-                    request,
-                    messages.SUCCESS,
-                    _("Request successfully registered: n. <b>{}/{}</b>").format(
-                        protocol_number,
-                        timezone.localtime().year
-                    ),
-                )
-
-                if protocol_response.get("message"):
-                    messages.add_message(
-                        request, messages.INFO, protocol_response["message"]
-                    )
-            # if protocol fails
-            # raise Exception and do some operations
-            except Exception as e:
-                # log protocol fails
-                logger.error(
-                    "[{}] utente {} protocollo domanda {} fallito: {}".format(
-                        timezone.localtime(),
-                        request.user,
-                        application,
-                        e
-                    )
-                )
-
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    _("Protocol error: {}").format(e),
-                )
-
-                messages.add_message(
-                    request,
-                    messages.INFO,
-                    _(
-                        "Your request was created anyway, even though registration failed. Registration will be performed automatically in the next few hours."
-                    ),
-                )
-
-        # LOG
     return redirect(
         'applications:application',
         application_pk=application_pk

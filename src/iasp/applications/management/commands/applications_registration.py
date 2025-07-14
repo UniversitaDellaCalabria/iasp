@@ -1,0 +1,111 @@
+import logging
+
+from django.core.management.base import BaseCommand
+from django.utils import timezone
+
+from calls.models import CallTitulusConfiguration
+
+from titulus_ws.models import TitulusConfiguration
+
+from ... models import Application
+from ... titulus import application_protocol
+from ... utils import generate_application_merged_docs
+
+
+
+logger = logging.getLogger('__name__')
+
+
+
+def confirm():
+    """
+    Ask user to enter Y or N (case-insensitive).
+    :return: True if the answer is Y.
+    :rtype: bool
+    """
+    answer = ""
+    while answer not in ["Y", "N"]:
+        answer = input("OK to push to continue [Y/N]? ").lower()
+    return answer == "y"
+
+
+class Command(BaseCommand):
+    help = 'IASP - register all submitted applications'
+
+    def add_arguments(self, parser):
+        parser.epilog = 'Example: ./manage.py applications_registration'
+        parser.add_argument('-y', required=False, action="store_true",
+                            help="send all ready messages")
+
+    def handle(self, *args, **options):
+        if options['y'] or confirm():
+            now = timezone.localtime()
+            applications = Application.objects.filter(
+                call__protocol_required=True,
+                submission_date__isnull=False,
+                protocol_date__isnull=True
+            )
+            for application in applications:
+
+                print(f'[{application}] - Registering application {application.pk} - {application.call.title_it}')
+
+                try:
+                    generate_application_merged_docs(application)
+
+                    protocol_global_configuration = TitulusConfiguration.objects.filter(
+                        is_active=True
+                    ).first()
+
+                    protocol_call_configuration = CallTitulusConfiguration.objects.filter(
+                        call=application.call,
+                        is_active=True
+                    ).first()
+
+                    protocol_response = application_protocol(
+                        application=application,
+                        user=application.user,
+                        subject=application.call.title_it,
+                        global_configuration=protocol_global_configuration,
+                        call_configuration=protocol_call_configuration,
+                        test=False,
+                    )
+
+                    protocol_number = protocol_response["numero"]
+
+                    # set protocol data in application
+                    application.protocol_number = protocol_number
+                    application.protocol_date = timezone.localtime()
+                    application.save(
+                        update_fields=[
+                            "protocol_number",
+                            "protocol_date"
+                        ]
+                    )
+
+                    logger.info("Richiesta {} ({}) protocollata con successo: n. <b>{}/{}</b>").format(
+                            application.pk,
+                            application.user,
+                            protocol_number,
+                            timezone.localtime().year
+                        ),
+                    )
+
+                    print(f'[{application}] - Registered application {application.pk} - {application.call.title_it} COMPLETED')
+
+                # if protocol fails
+                # raise Exception and do some operations
+                except Exception as e:
+                    # log protocol fails
+                    logger.error(
+                        "[{}] utente {} protocollo domanda {} fallito: {}".format(
+                            timezone.localtime(),
+                            request.user,
+                            application,
+                            e
+                        )
+                    )
+
+                    print(f'[{application}] - Registered application {application.pk} - {application.call.title_it} FAILED')
+
+                    continue
+

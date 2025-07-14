@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-14 14:24+0200\n"
-"PO-Revision-Date: 2025-07-14 14:24+0200\n"
+"POT-Creation-Date: 2025-07-14 14:44+0200\n"
+"PO-Revision-Date: 2025-07-14 14:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -205,8 +205,8 @@ msgstr "Token scaduto"
 msgid "Email updated successfully"
 msgstr "Email aggiornata con successo"
 
-#: applications/decorators.py:31 applications/views.py:546
-#: applications/views.py:740
+#: applications/decorators.py:31 applications/views.py:480
+#: applications/views.py:674
 msgid "Unable to edit application"
 msgstr "Impossibile modificare la domanda"
 
@@ -613,8 +613,8 @@ msgstr "Richiesta di riconoscimento crediti a scelta di"
 #: applications/templates/include/credits_alert.html:13
 #: applications/templates/include/payment_alert.html:7 applications/views.py:98
 #: applications/views.py:174 applications/views.py:239
-#: applications/views.py:509 applications/views.py:584
-#: applications/views.py:696 applications/views.py:772
+#: applications/views.py:443 applications/views.py:518
+#: applications/views.py:630 applications/views.py:706
 msgid "Warning"
 msgstr "Attenzione"
 
@@ -766,8 +766,8 @@ msgid "Receipt uploaded successfully"
 msgstr "Ricevuta caricata con successo"
 
 #: applications/views.py:98 applications/views.py:174 applications/views.py:239
-#: applications/views.py:509 applications/views.py:584
-#: applications/views.py:696 applications/views.py:772
+#: applications/views.py:443 applications/views.py:518
+#: applications/views.py:630 applications/views.py:706
 msgid "There are errors in the form"
 msgstr "Ci sono errori nel form"
 
@@ -787,37 +787,28 @@ msgstr "Dati modificati con successo"
 msgid "It is necessary to upload the payment receipt to submit the application"
 msgstr "E' necessario caricare la ricevuta di pagamento per inviare la domanda"
 
-#: applications/views.py:288
+#: applications/views.py:289
+msgid ""
+"Your application has been successfully uploaded and processed. You will soon "
+"be able to view the associated protocol number."
+msgstr ""
+"La tua istanza è stata correttamente caricata e presa in carico. A breve "
+"potrai visualizzare il numero di protocollo ad essa associato."
+
+#: applications/views.py:291
 msgid "Application successfully submitted"
 msgstr "Domanda inviata con successo"
 
-#: applications/views.py:297 generics/templates/base.html:8
+#: applications/views.py:302 generics/templates/base.html:8
 #: generics/templates/base_page.html:13
 msgid "Enrollment in years after the first"
 msgstr "Iscrizione agli anni successivi al primo"
 
-#: applications/views.py:336
-msgid "Request successfully registered: n. <b>{}/{}</b>"
-msgstr "Richiesta protocollata con successo: n. <b>{}/{}</b>"
-
-#: applications/views.py:362
-msgid "Protocol error: {}"
-msgstr "Errore protocollo: {}"
-
-#: applications/views.py:369
-msgid ""
-"Your request was created anyway, even though registration failed. "
-"Registration will be performed automatically in the next few hours."
-msgstr ""
-"La tua richiesta è stata creata, nonostante la protocollazione non sia "
-"andata a buon fine. Quest'ultima verrà eseguita automaticamente nelle "
-"prossime ore."
-
-#: applications/views.py:401
+#: applications/views.py:335
 msgid "Application successfully deleted"
 msgstr "Domanda eliminata con successo"
 
-#: applications/views.py:571
+#: applications/views.py:505
 msgid "Change successful"
 msgstr "Modifica effettuata con successo"
 
@@ -976,6 +967,20 @@ msgstr ""
 #: titulus_ws/models.py:23
 msgid "Configurazioni Titulus"
 msgstr ""
+
+#~ msgid "Request successfully registered: n. <b>{}/{}</b>"
+#~ msgstr "Richiesta protocollata con successo: n. <b>{}/{}</b>"
+
+#~ msgid "Protocol error: {}"
+#~ msgstr "Errore protocollo: {}"
+
+#~ msgid ""
+#~ "Your request was created anyway, even though registration failed. "
+#~ "Registration will be performed automatically in the next few hours."
+#~ msgstr ""
+#~ "La tua richiesta è stata creata, nonostante la protocollazione non sia "
+#~ "andata a buon fine. Quest'ultima verrà eseguita automaticamente nelle "
+#~ "prossime ore."
 
 #, fuzzy
 #~| msgid ""
