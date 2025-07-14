@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-14 09:00+0200\n"
-"PO-Revision-Date: 2025-07-14 09:00+0200\n"
+"PO-Revision-Date: 2025-07-14 11:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -771,13 +771,16 @@ msgstr ""
 
 #: applications/views.py:348
 msgid "Protocol error: {}"
-msgstr ""
+msgstr "Errore protocollo: {}"
 
 #: applications/views.py:355
 msgid ""
 "<b>Attention</b>: Your request was created anyway, even though registration "
 "failed. Registration will be performed automatically in the next few hours."
 msgstr ""
+"<b>Attention</b>: la tua richiesta è stata creata, nonostante la "
+"protocollazione non sia andata a buon fine. Quest'ultima verrà eseguita "
+"automaticamente nelle prossime ore."
 
 #: applications/views.py:376
 msgid "Application successfully deleted"
