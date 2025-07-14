@@ -46,6 +46,7 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     protocol_required = models.BooleanField(default=False)
     start = models.DateTimeField()
     end = models.DateTimeField()
+    url = models.URLField(max_length=200, blank=True, default='')
     notes_it = models.TextField(blank=True, default='')
     notes_en = models.TextField(blank=True, default='')
     course_json_it = models.JSONField(blank=True, null=True)

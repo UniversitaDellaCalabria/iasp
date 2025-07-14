@@ -43,6 +43,12 @@
 <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered">
         <tbody>
+          {% if call.url %}
+          <tr>
+            <td><b>{% trans "Year" %}</b></td>
+            <td><a href="{{ call.url }}" target="_blank">{{ call.url }}</a></td>
+          </tr>
+          {% endif %}
           <tr>
             <td><b>{% trans "Year" %}</b></td>
             <td>{{ call.course_year }}</td>
