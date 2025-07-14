@@ -274,6 +274,17 @@ def application_submit(request, application_pk, application=None):
         application.save(
             update_fields=['submission_date']
         )
+
+        # log
+        logger.info(
+            "[{}] utente {} ha inviato la domanda di partecipazione a {}".format(
+                timezone.localtime(),
+                request.user,
+                application.call
+            )
+        )
+        # end log
+
         messages.add_message(request, messages.SUCCESS, _('Application successfully submitted'))
 
         call_name = application.call.title_it if request.LANGUAGE_CODE == 'it' else application.call.title_en
@@ -375,7 +386,18 @@ def application_delete(request, application_pk, application=None):
     if os.path.isdir(folder_path):
         shutil.rmtree(folder_path)
 
+    # log
+    logger.info(
+        "[{}] utente {} ha eliminato la domanda di partecipazione a {}".format(
+            timezone.localtime(),
+            request.user,
+            application.call
+        )
+    )
+    # end log
+
     application.delete()
+
     messages.add_message(request, messages.SUCCESS, _('Application successfully deleted'))
     return redirect('applications:applications')
 

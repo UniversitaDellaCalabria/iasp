@@ -97,6 +97,7 @@
             <div class="accordion-body">
                 <ul class="mb-0" style="font-size: 1rem">
                     <li><b>{% trans "Created" %}:</b> {{ application.created }}</li>
+                    {% if application.protocol_number %}<li><b>{% trans "Registration details" %}:</b> {{ application.protocol_number }}/{{ application.protocol_date }}</li>{% endif %}
                     <li><b>{% trans "Last modification" %}:</b> {{ application.modified }}</li>
                     {% if application.submission_date %}
                     <li><b>{% trans "Submission date" %}:</b> {{ application.submission_date }}</li>
