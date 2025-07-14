@@ -30,11 +30,11 @@
     </p>
     {% if LANGUAGE_CODE == 'it' %}
         {% if call.notes_it %}
-        <p>{{ call.notes_it }}</p>
+        <p style="white-space: break-spaces">{{ call.notes_it }}</p>
         {% endif %}
     {% else %}
         {% if call.notes_en %}
-        <p>{{ call.notes_en }}</p>
+        <p style="white-space: break-spaces">{{ call.notes_en }}</p>
         {% endif %}
     {% endif %}
 </div>
