@@ -52,20 +52,16 @@ class Command(BaseCommand):
                 try:
                     generate_application_merged_docs(application)
 
-                    protocol_global_configuration = TitulusConfiguration.objects.filter(
-                        is_active=True
-                    ).first()
-
                     protocol_call_configuration = CallTitulusConfiguration.objects.filter(
                         call=application.call,
                         is_active=True
-                    ).first()
+                    ).select_related('configuration').first()
 
                     protocol_response = application_protocol(
                         application=application,
                         user=application.user,
                         subject=application.call.title_it,
-                        global_configuration=protocol_global_configuration,
+                        global_configuration=protocol_call_configuration.configuration,
                         call_configuration=protocol_call_configuration,
                         test=False,
                     )
