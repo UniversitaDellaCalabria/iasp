@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-11 12:14+0200\n"
-"PO-Revision-Date: 2025-07-11 12:17+0200\n"
+"POT-Creation-Date: 2025-07-14 09:00+0200\n"
+"PO-Revision-Date: 2025-07-14 09:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -30,6 +30,10 @@ msgstr ""
 #: accounts/admin.py:38
 msgid "Date accessi sistema"
 msgstr ""
+
+#: accounts/forms.py:27
+msgid "Use the international format (e.g. +39 111 999)"
+msgstr "Utilizzare il formato internazionale (es: +39 111 999)"
 
 #: accounts/middlewares.py:23
 msgid "Completa il tuo profilo per poter utilizzare il sistema"
@@ -191,8 +195,8 @@ msgstr "Token scaduto"
 msgid "Email updated successfully"
 msgstr "Email aggiornata con successo"
 
-#: applications/decorators.py:31 applications/views.py:513
-#: applications/views.py:707
+#: applications/decorators.py:31 applications/views.py:521
+#: applications/views.py:715
 msgid "Unable to edit application"
 msgstr "Impossibile modificare la domanda"
 
@@ -579,10 +583,10 @@ msgstr "Richiesta di riconoscimento crediti a scelta di"
 #: applications/templates/application_free_form.html:40
 #: applications/templates/application_required_form.html:53
 #: applications/templates/include/credits_alert.html:13
-#: applications/templates/include/payment_alert.html:7 applications/views.py:94
-#: applications/views.py:170 applications/views.py:235
-#: applications/views.py:476 applications/views.py:551
-#: applications/views.py:663 applications/views.py:739
+#: applications/templates/include/payment_alert.html:7 applications/views.py:96
+#: applications/views.py:172 applications/views.py:237
+#: applications/views.py:484 applications/views.py:559
+#: applications/views.py:671 applications/views.py:747
 msgid "Warning"
 msgstr "Attenzione"
 
@@ -688,7 +692,7 @@ msgid "Declared"
 msgstr "Dichiarati"
 
 #: applications/templates/include/credits_alert.html:14
-#: applications/views.py:258
+#: applications/views.py:260
 msgid ""
 "You have not yet reached the minimum number of required credits by the call"
 msgstr ""
@@ -714,7 +718,7 @@ msgstr "Hai già accettato le seguenti condizioni"
 msgid "Validation request for"
 msgstr "Richiesta di validazione per"
 
-#: applications/titulus.py:91
+#: applications/titulus.py:92
 msgid "Missing XML configuration for production"
 msgstr ""
 
@@ -726,60 +730,60 @@ msgstr "Estensione del file non valida: {}. Utilizza esclusivamente {}"
 msgid "Excessive file size: {} bytes. Max {} bytes"
 msgstr "Dimensione del file eccessiva: {} bytes. Max {} bytes"
 
-#: applications/views.py:82
+#: applications/views.py:84
 msgid "Receipt uploaded successfully"
 msgstr "Ricevuta caricata con successo"
 
-#: applications/views.py:94 applications/views.py:170 applications/views.py:235
-#: applications/views.py:476 applications/views.py:551
-#: applications/views.py:663 applications/views.py:739
+#: applications/views.py:96 applications/views.py:172 applications/views.py:237
+#: applications/views.py:484 applications/views.py:559
+#: applications/views.py:671 applications/views.py:747
 msgid "There are errors in the form"
 msgstr "Ci sono errori nel form"
 
-#: applications/views.py:120
+#: applications/views.py:122
 msgid "Unable to participate in the selected call"
 msgstr ""
 
-#: applications/views.py:134
+#: applications/views.py:136
 msgid "There is already an application against you for this call"
 msgstr "Esiste già una domanda a tuo carico per questo bando"
 
-#: applications/views.py:225
+#: applications/views.py:227
 msgid "Data modified successfully"
 msgstr "Dati modificati con successo"
 
-#: applications/views.py:266
+#: applications/views.py:268
 msgid "It is necessary to upload the payment receipt to submit the application"
 msgstr "E' necessario caricare la ricevuta di pagamento per inviare la domanda"
 
-#: applications/views.py:273
+#: applications/views.py:275
 msgid "Application successfully submitted"
 msgstr "Domanda inviata con successo"
 
-#: applications/views.py:282 generics/templates/base.html:8
+#: applications/views.py:284 generics/templates/base.html:8
 #: generics/templates/base_page.html:13
 msgid "Enrollment in years after the first"
 msgstr "Iscrizione agli anni successivi al primo"
 
-#: applications/views.py:314
+#: applications/views.py:322
 msgid "Request successfully registered: n. <b>{}/{}</b>"
 msgstr ""
 
-#: applications/views.py:340
+#: applications/views.py:348
 msgid "Protocol error: {}"
 msgstr ""
 
-#: applications/views.py:347
+#: applications/views.py:355
 msgid ""
 "<b>Attention</b>: Your request was created anyway, even though registration "
 "failed. Registration will be performed automatically in the next few hours."
 msgstr ""
 
-#: applications/views.py:368
+#: applications/views.py:376
 msgid "Application successfully deleted"
 msgstr "Domanda eliminata con successo"
 
-#: applications/views.py:538
+#: applications/views.py:546
 msgid "Change successful"
 msgstr "Modifica effettuata con successo"
 

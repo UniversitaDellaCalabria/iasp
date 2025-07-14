@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm
+from django.utils.translation import gettext_lazy as _
 
 from . settings import EDITABLE_FIELDS, REQUIRED_FIELDS
 
@@ -23,3 +24,4 @@ class UserDataForm(ModelForm):
         model = get_user_model()
         fields = EDITABLE_FIELDS
         labels = {'email': 'E-mail'}
+        help_texts = {'phone_number': _('Use the international format (e.g. +39 111 999)')}
