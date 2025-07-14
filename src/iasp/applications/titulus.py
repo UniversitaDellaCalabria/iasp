@@ -132,6 +132,8 @@ def application_protocol(
         f'{PDF_TEMP_FOLDER_PATH}/{application.pk}',
         'domanda.pdf'
     )
+    mime = magic.Magic(mime=True)
+    content_type = mime.from_file(principal_file_path)
     principal_file = open(principal_file_path, "rb")
     principal_file_response = HttpResponse(
         principal_file.read(),
@@ -153,7 +155,6 @@ def application_protocol(
 
     # attachments
     for attachment in attachments:
-        mime = magic.Magic(mime=True)
         content_type = mime.from_file(attachment)
         f = open(attachment, "rb")
         attachment_response = HttpResponse(
