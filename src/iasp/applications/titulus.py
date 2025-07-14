@@ -93,7 +93,7 @@ def application_protocol(
         raise Exception(_("Missing XML configuration for production"))
 
     protocol_data = prot_utils.protocol_entrata_dict(
-        oggetto=subject,
+        oggetto=f"Richiesta da valutacfu.unical.it: {subject}",
         autore=settings.SITE_DOMAIN,
         aoo=prot_aoo,
         agd=prot_agd,

@@ -331,7 +331,7 @@ def application_submit(request, application_pk, application=None):
                 )
 
                 messages.add_message(
-                    self.request,
+                    request,
                     messages.SUCCESS,
                     _("Request successfully registered: n. <b>{}/{}</b>").format(
                         protocol_number,
@@ -341,7 +341,7 @@ def application_submit(request, application_pk, application=None):
 
                 if protocol_response.get("message"):
                     messages.add_message(
-                        self.request, messages.INFO, protocol_response["message"]
+                        request, messages.INFO, protocol_response["message"]
                     )
             # if protocol fails
             # raise Exception and do some operations
