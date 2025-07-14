@@ -285,7 +285,7 @@ def application_submit(request, application_pk, application=None):
         )
         # end log
 
-        if application.protocol_required:
+        if application.call.protocol_required:
             messages.add_message(request, messages.SUCCESS, _('Your application has been successfully uploaded and processed. You will soon be able to view the associated protocol number.'))
         else:
             messages.add_message(request, messages.SUCCESS, _('Application successfully submitted'))
