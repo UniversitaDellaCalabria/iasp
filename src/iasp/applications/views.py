@@ -28,6 +28,7 @@ from . forms import *
 from . models import *
 from . settings import *
 from . titulus import application_protocol
+from . utils import generate_application_merged_docs
 
 
 logger = logging.getLogger('__name__')
@@ -291,6 +292,7 @@ def application_submit(request, application_pk, application=None):
 
         if application.call.protocol_required:
             try:
+                generate_application_merged_docs(application)
                 protocol_global_configuration = TitulusConfiguration.objects.filter(is_active=True).first()
                 protocol_call_configuration = CallTitulusConfiguration.objects.filter(
                     call=application.call,
