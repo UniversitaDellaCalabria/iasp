@@ -149,7 +149,7 @@ def application_protocol(
     wsclient.aggiungi_docPrinc(
         fopen=principal_file_bytes,
         nome_doc=principal_file_name,
-        tipo_doc=principal_file_name
+        tipo_doc=principal_file_name,
     )
     # end principal file
 
@@ -169,7 +169,7 @@ def application_protocol(
         attachment_bytes.seek(0)
         wsclient.aggiungi_allegato(
             nome=attachment_name,
-            descrizione=subject,
+            descrizione=os.path.splitext(attachment_name),
             fopen=attachment_bytes,
             test=test
         )
