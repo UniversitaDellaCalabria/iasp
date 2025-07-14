@@ -94,7 +94,7 @@ def application_protocol(
 
     protocol_data = prot_utils.protocol_entrata_dict(
         oggetto=subject,
-        autore="iscrizioneannisuccessivi.unical.it",
+        autore=settings.SITE_DOMAIN,
         aoo=prot_aoo,
         agd=prot_agd,
         destinatario=prot_uo_rpa,
