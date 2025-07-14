@@ -37,14 +37,14 @@ PROTOCOL_NAMESPACES = getattr(settings, "PROTOCOL_NAMESPACES", {
   'xsd': '{http://www.w3.org/2001/XMLSchema}',
   'ns0': '{http://www.kion.it/titulus}',
   'ns1': '{http://schemas.xmlsoap.org/soap/encoding/}',
-  'ns2': f'{PROTOCOL_NAMESPACES_URL}',
+  'ns2': '{' + PROTOCOL_NAMESPACES_URL + '}',
 })
 
 PROTOCOL_NAMESPACES_DEBUG = getattr(settings, "PROTOCOL_NAMESPACES_DEBUG", {
   'xsd': '{http://www.w3.org/2001/XMLSchema}',
   'ns0': '{http://www.kion.it/titulus}',
   'ns1': '{http://schemas.xmlsoap.org/soap/encoding/}',
-  'ns2': f'{PROTOCOL_NAMESPACES_TEST_URL}',
+  'ns2': '{' + PROTOCOL_NAMESPACES_TEST_URL + '}',
 })
 
 PROTOCOL_SEND_MAIL_DEBUG = getattr(settings, "PROTOCOL_SEND_MAIL_DEBUG", True)
