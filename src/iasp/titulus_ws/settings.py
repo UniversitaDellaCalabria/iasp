@@ -13,7 +13,7 @@ PROTOCOL_CLASS = getattr(settings, "PROTOCOL_CLASS", f'{PROTOCOL_PACKAGE}.protoc
 PROTOCOL_UTILS = getattr(settings, "PROTOCOL_UTILS", f'{PROTOCOL_PACKAGE}.utils')
 
 # DEFAULT EMAIL
-PROTOCOL_EMAIL_DEFAULT = 'default@example.pec.it'
+PROTOCOL_EMAIL_DEFAULT = getattr(settings, "PROTOCOL_EMAIL_DEFAULT", 'default@example.pec.it')
 
 # TEST PARAMS
 PROTOCOL_TEST_AOO = 'test_aoo_value'
@@ -25,8 +25,8 @@ PROTOCOL_TEST_UO_RPA = 'test_uo_rpa_value'
 PROTOCOL_TEST_TITOLARIO = 'test_titolario_value'
 
 # ENDPOINTS (TEST AND PRODUCTION)
-PROTOCOL_TEST_URL = 'URL_TEST' # test
-PROTOCOL_URL = 'URL_PROD' # production
+PROTOCOL_TEST_URL = getattr(settings, "PROTOCOL_TEST_URL", '')
+PROTOCOL_URL = getattr(settings, "PROTOCOL_URL", '')
 
 PROT_DOC_ENCODING = getattr(settings, "PROT_DOC_ENCODING", "utf-8")
 
