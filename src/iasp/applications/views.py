@@ -344,13 +344,13 @@ def application_submit(request, application_pk, application=None):
                 )
 
                 messages.add_message(
-                    self.request,
+                    request,
                     messages.ERROR,
                     _("Protocol error: {}").format(e),
                 )
 
                 messages.add_message(
-                    self.request,
+                    request,
                     messages.INFO,
                     _(
                         "<b>Attention</b>: Your request was created anyway, even though registration failed. Registration will be performed automatically in the next few hours."
