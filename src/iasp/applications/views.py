@@ -26,6 +26,7 @@ from weasyprint import HTML
 from . decorators import *
 from . forms import *
 from . models import *
+from . settings import *
 from . titulus import application_protocol
 
 
@@ -275,14 +276,14 @@ def application_submit(request, application_pk, application=None):
         messages.add_message(request, messages.SUCCESS, _('Application successfully submitted'))
 
         call_name = application.call.title_it if request.LANGUAGE_CODE == 'it' else application.call.title_en
-        email_body=settings.EMAIL_BODY.format(
+        email_body=EMAIL_BODY.format(
             first_name=request.user.first_name,
             last_name=request.user.last_name,
             call=call_name
         )
         result = send_mail(
             subject=_("Enrollment in years after the first"),
-            message=body,
+            message=email_body,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[request.user.email],
             fail_silently=True,
