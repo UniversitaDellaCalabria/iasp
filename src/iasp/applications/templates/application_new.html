@@ -52,13 +52,7 @@
                         {{ requirement.title_en }}
                     {% endif %}
                 </b>
-                <p>
-                    {% if LANGUAGE_CODE == 'it' %}
-                        {{ requirement.content_it }}
-                    {% else %}
-                        {{ requirement.content_en }}
-                    {% endif %}
-                </p>
+                <p style="white-space: break-spaces">{% if LANGUAGE_CODE == 'it' %}{{ requirement.content_it }}{% else %}{{ requirement.content_en }}{% endif %}</p>
             </li>
             {% endfor %}
         </ul>
