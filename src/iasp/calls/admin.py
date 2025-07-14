@@ -60,9 +60,10 @@ class CallAdmin(admin.ModelAdmin):
         'course_cod',
         'course_cohort',
         'course_year',
-        'is_active'
+        'ordering',
+        'is_active',
     )
-    list_editable = ('is_active',)
+    list_editable = ('is_active', 'ordering')
     readonly_fields = (
         'course_json_it',
         'course_json_en',

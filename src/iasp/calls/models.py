@@ -52,6 +52,10 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     course_json_en = models.JSONField(blank=True, null=True)
     course_studyplans_json_it = models.JSONField(blank=True, null=True)
     course_studyplans_json_en = models.JSONField(blank=True, null=True)
+    ordering = models.IntegerField(default=10)
+
+    class Meta:
+        ordering = ('ordering',)
 
     def __str__(self):
         return f'{self.title_it}'
