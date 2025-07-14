@@ -353,7 +353,7 @@ def application_submit(request, application_pk, application=None):
                     request,
                     messages.INFO,
                     _(
-                        "<b>Attention</b>: Your request was created anyway, even though registration failed. Registration will be performed automatically in the next few hours."
+                        "Your request was created anyway, even though registration failed. Registration will be performed automatically in the next few hours."
                     ),
                 )
 
