@@ -1,6 +1,8 @@
 from django.conf import settings
 
 
+ADMIN_PATH = getattr(settings, 'ADMIN_PATH', 'admin')
+
 PDF_FILETYPE = getattr(
     settings,
     "PDF_FILETYPE",

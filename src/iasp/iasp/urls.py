@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from generics.settings import ADMIN_PATH
+
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(f'{ADMIN_PATH}/', admin.site.urls),
 ]
 
 urlpatterns += path('', include('accounts.urls', namespace='accounts')),
