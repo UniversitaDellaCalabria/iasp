@@ -201,13 +201,13 @@ def application_protocol(
                 doc_minuta=doc_minuta,
             )
             wsclient.fascicolaDocumento(fasc)
-            msg = "Collation completed: {} in {}".format(
+            msg = _("Collation completed: {} in {}").format(
                 fascicolo_numero,
                 wsclient.numero
             )
 
         except Exception as e:
-            msg = "Collation failed: {} in {}".format(
+            msg = _("Collation failed: {} in {}").format(
                 fascicolo_numero,
                 wsclient.numero,
                 e
