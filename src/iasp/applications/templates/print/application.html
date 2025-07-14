@@ -9,7 +9,7 @@
 {% block clean_content %}
 {% get_current_language as LANGUAGE_CODE %}
 <div class="mb-4">
-    <p class="h3"> {% trans "Application for enrollment in years following the first" %}</p>
+    <p class="h3">{% trans "Application for enrollment in years following the first" %}</p>
     <p class="h5">
         {% if LANGUAGE_CODE == 'it' %}
             {{ application.call.title_it }}
@@ -19,85 +19,44 @@
     </p>
 </div>
 
-<div class="accordion accordion-left-icon my-4" id="collapseExample">
-    <div class="accordion-item">
-        <h2 class="accordion-header " id="heading0c">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse0c" aria-expanded="true" aria-controls="collapse0c">
-                {% trans "Call details" %}
-            </button>
-        </h2>
-        <div id="collapse0c" class="accordion-collapse collapse show" role="region" aria-labelledby="heading0c">
-            <div class="accordion-body">
-                <ul class="mb-0" style="font-size: 1rem">
-                    <li><b>{% trans "Places available" %}:</b> {{ application.call.places_available }}</li>
-                    <li><b>{% trans "Credits threshold" %}:</b> {{ application.call.credits_threshold }}</li>
-                    <li><b>{% trans "Active from" %}:</b> {{ application.call.start }}</li>
-                    <li><b>{% trans "Active until" %}:</b> {{ application.call.end }}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="accordion-item">
-        <h2 class="accordion-header " id="heading1c">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1c" aria-expanded="true" aria-controls="collapse1c">
-                {% trans "Application details" %}
-            </button>
-        </h2>
-        <div id="collapse1c" class="accordion-collapse collapse show" role="region" aria-labelledby="heading1c">
-            <div class="accordion-body">
-                <ul class="mb-0" style="font-size: 1rem">
-                    <li><b>{% trans "Created" %}:</b> {{ application.created }}</li>
-                    <li><b>{% trans "Last modification" %}:</b> {{ application.modified }}</li>
-                    {% if application.submission_date %}
-                    <li><b>{% trans "Submission date" %}:</b> {{ application.submission_date }}</li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="accordion-item">
-        <h2 class="accordion-header " id="heading2c">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2c" aria-expanded="true" aria-controls="collapse2c">
-                {% trans "Personal informations" %}
-            </button>
-        </h2>
-        <div id="collapse2c" class="accordion-collapse collapse show" role="region" aria-labelledby="heading2c">
-            <div class="accordion-body">
-                <ul class="mb-0" style="font-size: 1rem">
-                    <li><b>{% trans "Nationality" %}:</b> {{ application.user_country }}</li>
-                    <li><b>{% trans "Home University" %}:</b> {{ application.home_university }}</li>
-                    <li><b>{% trans "Home University country" %}:</b> {{ application.home_country }}</li>
-                    <li><b>{% trans "Home University city" %}:</b> {{ application.home_city }}</li>
-                    <li><b>{% trans "Home University course" %}:</b> {{ application.home_course }}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    {% if application.call.payment_required %}
-    <div class="accordion-item">
-        <h2 class="accordion-header " id="heading3c">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3c" aria-expanded="true" aria-controls="collapse3c">
-                {% trans "Payment details" %}
-                {% if application.call.payment_required and not application.payment_receipt %}
-                <svg class="ms-3 icon icon-sm icon-danger">
-                    <use xlink:href="{% static 'svg/sprites.svg' %}#it-warning-circle"></use>
-                </svg>
-                {% elif application.call.payment_required and application.payment_receipt %}
-                <svg class="ms-3 icon icon-sm icon-success">
-                    <use xlink:href="{% static 'svg/sprites.svg' %}#it-check-circle"></use>
-                </svg>
-                {% endif %}
-            </button>
-        </h2>
-        <div id="collapse3c" class="accordion-collapse collapse show" role="region" aria-labelledby="heading3c">
-            <div class="accordion-body">
-                {% trans "Link to payment" %}: <a href="{{ application.call.payment_url }}" target="_blank">{{ application.call.payment_url }}</a>
-                <div class="mt-3">
-                    {% include "form_template.html" with form=form disabled=1 %}
-                </div>
-            </div>
-        </div>
-    </div>
+<p class="h5">{% trans "Application details" %}</p>
+<ul style="font-size: 1rem">
+    <li><b>{% trans "Created" %}:</b> {{ application.created }}</li>
+    <li><b>{% trans "Last modification" %}:</b> {{ application.modified }}</li>
+    {% if application.submission_date %}
+    <li><b>{% trans "Submission date" %}:</b> {{ application.submission_date }}</li>
     {% endif %}
-</div>
+    {% if application.protocol_number %}
+    <li><b>{% trans "Registration details" %}:</b> {{ application.protocol_number }}/{{ application.protocol_date }}</li>
+    {% endif %}
+</ul>
+
+<p class="h5">{% trans "Personal informations" %}</p>
+<ul style="font-size: 1rem">
+    <li><b>{% trans "Nationality" %}:</b> {{ application.user_country }}</li>
+    <li><b>{% trans "First name" %}:</b> {{ request.user.first_name }}</li>
+    <li><b>{% trans "Last name" %}:</b> {{ request.user.last_name }}</li>
+    <li><b>{% trans "Taxpayer ID" %}:</b> {{ request.user.taxpayer_id }}</li>
+    <li><b>{% trans "Phone number" %}:</b> {{ request.user.phone_number }}</li>
+    <li><b>{% trans "Email" %}:</b> {{ request.user.email }}</li>
+</ul>
+
+<p class="h5">{% trans "Call details" %}</p>
+<ul style="font-size: 1rem">
+    <li><b>{% trans "Name" %}:</b> {% if LANGUAGE_CODE == 'it' %}{{ application.call.title_it }}{% else %}{{ application.call.title_en }}{% endif %}</li>
+    <li><b>{% trans "Degree course" %}:</b> {{ application.call.course_json_it.CdSName }}</li>
+    <li><b>{% trans "Year" %}:</b> {{ application.call.course_year }}</li>
+    <li><b>{% trans "Places available" %}:</b> {{ application.call.places_available }}</li>
+    <li><b>{% trans "Credits threshold" %}:</b> {{ application.call.credits_threshold }}</li>
+    <li><b>{% trans "Active from" %}:</b> {{ application.call.start }}</li>
+    <li><b>{% trans "Active until" %}:</b> {{ application.call.end }}</li>
+</ul>
+
+<p class="h5">{% trans "Career informations" %}</p>
+<ul style="font-size: 1rem">
+    <li><b>{% trans "Home University" %}:</b> {{ application.home_university }}</li>
+    <li><b>{% trans "Home University country" %}:</b> {{ application.home_country }}</li>
+    <li><b>{% trans "Home University city" %}:</b> {{ application.home_city }}</li>
+    <li><b>{% trans "Home University course" %}:</b> {{ application.home_course }}</li>
+</ul>
 {% endblock clean_content %}

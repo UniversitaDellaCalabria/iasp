@@ -20,7 +20,7 @@ class CustomUserAdmin(UserAdmin):
         (_('Angrafica'), {'fields': (('first_name', 'last_name'),
                                      ('identificativo_dipendente',
                                       'identificativo_utente'),
-                                     ('email',),
+                                     ('phone_number', 'email',),
                                      ('taxpayer_id',),
                                      # ('gender',
                                      # 'place_of_birth', 'birth_date',),
