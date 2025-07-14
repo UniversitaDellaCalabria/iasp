@@ -82,12 +82,14 @@ class Command(BaseCommand):
                         ]
                     )
 
-                    logger.info("Richiesta {} ({}) protocollata con successo: n. <b>{}/{}</b>").format(
-                            application.pk,
+                    logger.info(
+                        "[{}] utente {} richiesta {} protocollata con successo: n. <b>{}/{}</b>".format(
+                            timezone.localtime(),
                             application.user,
+                            application.pk,
                             protocol_number,
                             timezone.localtime().year
-                        ),
+                        )
                     )
 
                     print(f'[{application}] - Registered application {application.pk} - {application.call.title_it} COMPLETED')
