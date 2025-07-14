@@ -28,20 +28,23 @@ PROTOCOL_TEST_TITOLARIO = 'test_titolario_value'
 PROTOCOL_TEST_URL = getattr(settings, "PROTOCOL_TEST_URL", '')
 PROTOCOL_URL = getattr(settings, "PROTOCOL_URL", '')
 
+PROTOCOL_NAMESPACES_TEST_URL = getattr(settings, "PROTOCOL_NAMESPACES_TEST_URL", '')
+PROTOCOL_NAMESPACES_URL = getattr(settings, "PROTOCOL_NAMESPACES_URL", '')
+
 PROT_DOC_ENCODING = getattr(settings, "PROT_DOC_ENCODING", "utf-8")
 
 PROTOCOL_NAMESPACES = getattr(settings, "PROTOCOL_NAMESPACES", {
   'xsd': '{http://www.w3.org/2001/XMLSchema}',
   'ns0': '{http://www.kion.it/titulus}',
   'ns1': '{http://schemas.xmlsoap.org/soap/encoding/}',
-  'ns2': '{URL}',
+  'ns2': f'{PROTOCOL_NAMESPACES_URL}',
 })
 
 PROTOCOL_NAMESPACES_DEBUG = getattr(settings, "PROTOCOL_NAMESPACES_DEBUG", {
   'xsd': '{http://www.w3.org/2001/XMLSchema}',
   'ns0': '{http://www.kion.it/titulus}',
   'ns1': '{http://schemas.xmlsoap.org/soap/encoding/}',
-  'ns2': '{URL_PRE_PROD}',
+  'ns2': f'{PROTOCOL_NAMESPACES_TEST_URL}',
 })
 
 PROTOCOL_SEND_MAIL_DEBUG = getattr(settings, "PROTOCOL_SEND_MAIL_DEBUG", True)
