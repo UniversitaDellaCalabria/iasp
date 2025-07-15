@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-14 14:44+0200\n"
-"PO-Revision-Date: 2025-07-14 17:24+0200\n"
+"POT-Creation-Date: 2025-07-15 13:46+0200\n"
+"PO-Revision-Date: 2025-07-15 13:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -300,7 +300,7 @@ msgstr "Denominazione"
 #: applications/templates/application_required_form.html:45
 #: applications/templates/include/application_required_teachings.html:14
 #: applications/templates/print/application_required_form.html:24
-#: calls/templates/call.html:70
+#: calls/templates/call.html:80
 msgid "Code"
 msgstr "Codice"
 
@@ -309,7 +309,6 @@ msgstr "Codice"
 #: applications/templates/application_required.html:61
 #: applications/templates/application_required_form.html:46
 #: applications/templates/print/application_required_form.html:25
-#: calls/templates/calls.html:33
 msgid "Credits"
 msgstr "Crediti"
 
@@ -456,31 +455,32 @@ msgstr "Dettagli del bando"
 #: applications/templates/application.html:124
 #: applications/templates/application_new.html:35
 #: applications/templates/print/application.html:48
-#: calls/templates/call.html:74 calls/templates/calls.html:31
+#: calls/templates/call.html:53 calls/templates/call.html:84
+#: calls/templates/calls.html:31
 msgid "Year"
 msgstr "Anno"
 
 #: applications/templates/application.html:125
 #: applications/templates/print/application.html:49
-#: calls/templates/call.html:47 calls/templates/calls.html:32
+#: calls/templates/call.html:57 calls/templates/calls.html:32
 msgid "Places available"
 msgstr "Posti disponibili"
 
 #: applications/templates/application.html:126
 #: applications/templates/print/application.html:50
-#: calls/templates/call.html:51
+#: calls/templates/call.html:61 calls/templates/calls.html:33
 msgid "Credits threshold"
 msgstr "Soglia crediti"
 
 #: applications/templates/application.html:127
 #: applications/templates/print/application.html:51
-#: calls/templates/call.html:55
+#: calls/templates/call.html:65
 msgid "Active from"
 msgstr "Attivo dal"
 
 #: applications/templates/application.html:128
 #: applications/templates/print/application.html:52
-#: calls/templates/call.html:59
+#: calls/templates/call.html:69
 msgid "Active until"
 msgstr "Attivo fino al"
 
@@ -626,20 +626,22 @@ msgstr ""
 "Compila il form inserendo i dati dell'insegnamento sostenuto che vuoi "
 "utilizzare per richiedere il riconoscimento"
 
-#: applications/templates/application_new.html:41
-msgid "Requirements to be accepted"
-msgstr "Condizioni da accettare"
+#: applications/templates/application_new.html:41 calls/templates/call.html:48
+#: calls/templates/calls.html:34
+msgid "URL"
+msgstr ""
 
-#: applications/templates/application_new.html:42
-msgid "By continuing, you declare that you accept the following conditions"
-msgstr "Proseguendo dichiari di accettare le seguenti condizioni"
+#: applications/templates/application_new.html:41
+#: applications/templates/applications.html:26
+msgid "Call"
+msgstr "Bando"
 
 #: applications/templates/application_required.html:36
 msgid "Credits recognition requests"
 msgstr "Richieste di riconoscimento crediti"
 
 #: applications/templates/application_required.html:74
-#: calls/templates/call.html:121
+#: calls/templates/call.html:131
 msgid "Click here"
 msgstr "Clicca qui"
 
@@ -665,11 +667,7 @@ msgstr ""
 msgid "Request for credits recognition of required teachings"
 msgstr "Richiesta di riconoscimento crediti per insegnamenti obbligatori"
 
-#: applications/templates/applications.html:26
-msgid "Call"
-msgstr "Bando"
-
-#: applications/templates/applications.html:27 calls/templates/calls.html:34
+#: applications/templates/applications.html:27 calls/templates/calls.html:35
 msgid "Expiration"
 msgstr "Scadenza"
 
@@ -685,7 +683,7 @@ msgstr "Inviata"
 msgid "Draft"
 msgstr "Bozza"
 
-#: applications/templates/applications.html:50 calls/templates/calls.html:55
+#: applications/templates/applications.html:50 calls/templates/calls.html:67
 msgid "Details"
 msgstr "Dettagli"
 
@@ -702,7 +700,7 @@ msgid "Teaching credits"
 msgstr "Crediti insegnamento"
 
 #: applications/templates/include/application_required_teachings.html:19
-#: applications/templates/include/credits_alert.html:16
+#: applications/templates/include/credits_alert.html:18
 msgid "Acquired credits"
 msgstr "Crediti acquisiti"
 
@@ -715,27 +713,23 @@ msgid "Declared"
 msgstr "Dichiarati"
 
 #: applications/templates/include/credits_alert.html:14
+msgid "You are competing for the year"
+msgstr "Stai concorrendo per l'anno"
+
+#: applications/templates/include/credits_alert.html:16
 #: applications/views.py:262
 msgid ""
 "You have not yet reached the minimum number of required credits by the call"
 msgstr ""
 "Non hai ancora raggiunto il numero minimo di crediti richiesti dal bando"
 
-#: applications/templates/include/credits_alert.html:18
+#: applications/templates/include/credits_alert.html:20
 msgid "Your request cannot be sent."
 msgstr "La tua richiesta non può essere inviata."
 
 #: applications/templates/include/payment_alert.html:8
 msgid "E' necessario caricare la ricevuta di pagamento per inviare la domanda"
 msgstr ""
-
-#: applications/templates/include/requirements_alert.html:8
-msgid "Accepted requirements"
-msgstr "Condizioni accettate"
-
-#: applications/templates/include/requirements_alert.html:9
-msgid "You have already accepted the following conditions"
-msgstr "Hai già accettato le seguenti condizioni"
 
 #: applications/templates/print/application_required_form.html:16
 msgid "Validation request for"
@@ -816,53 +810,53 @@ msgstr "Modifica effettuata con successo"
 msgid "View currently loaded file"
 msgstr "Vedi il file attualmente caricato"
 
-#: calls/admin.py:85
+#: calls/admin.py:86
 msgid "Course studyplan (IT) trunked"
 msgstr "Piano di studio (IT) troncato"
 
-#: calls/admin.py:92
+#: calls/admin.py:93
 msgid "Course studyplan (EN) trunked"
 msgstr "Piano di studio (EN) troncato"
 
-#: calls/models.py:61
+#: calls/models.py:66
 msgid "If payment is required you must specify a URL pointing to this"
 msgstr ""
 "Se è richiesto il pagamento è necessario specificare un URL che punti a "
 "questo"
 
-#: calls/models.py:184
+#: calls/models.py:189
 msgid "Nominativo RPA"
 msgstr ""
 
-#: calls/models.py:191
+#: calls/models.py:196
 msgid "Username RPA sul sistema di protocollo"
 msgstr ""
 
-#: calls/models.py:198
+#: calls/models.py:203
 msgid "Matricola RPA sul sistema di protocollo"
 msgstr ""
 
-#: calls/models.py:201
+#: calls/models.py:206
 msgid "Invia e-mail a RPA"
 msgstr ""
 
-#: calls/models.py:210
+#: calls/models.py:215
 msgid "Codice titolario"
 msgstr ""
 
-#: calls/models.py:213
+#: calls/models.py:218
 msgid "Fascicolo numero"
 msgstr ""
 
-#: calls/models.py:216
+#: calls/models.py:221
 msgid "Fascicolo anno"
 msgstr ""
 
-#: calls/models.py:221
+#: calls/models.py:226
 msgid "Configurazione WS Protocollo Categoria"
 msgstr ""
 
-#: calls/models.py:222
+#: calls/models.py:227
 msgid "Configurazioni WS Protocollo Categorie"
 msgstr ""
 
@@ -870,31 +864,31 @@ msgstr ""
 msgid "Back to calls"
 msgstr "Torna ai bandi"
 
-#: calls/templates/call.html:65
+#: calls/templates/call.html:75
 msgid "Degree course details"
 msgstr "Dettagli del corso di laurea"
 
-#: calls/templates/call.html:78
+#: calls/templates/call.html:88
 msgid "Typology"
 msgstr "Tipilogia"
 
-#: calls/templates/call.html:88
+#: calls/templates/call.html:98
 msgid "Area"
 msgstr "Area"
 
-#: calls/templates/call.html:98
+#: calls/templates/call.html:108
 msgid "Department"
 msgstr "Dipartimento"
 
-#: calls/templates/call.html:108
+#: calls/templates/call.html:118
 msgid "Class"
 msgstr "Classe"
 
-#: calls/templates/call.html:118
+#: calls/templates/call.html:128
 msgid "Website"
 msgstr "Sito web"
 
-#: calls/templates/call.html:133
+#: calls/templates/call.html:143
 msgid "Participate"
 msgstr "Partecipa"
 
@@ -911,7 +905,7 @@ msgstr "per tutti i corsi di laurea"
 msgid "Cohort"
 msgstr "Coorte"
 
-#: calls/templates/calls.html:64
+#: calls/templates/calls.html:76
 msgid "No active calls here"
 msgstr "Nessun bando attivo"
 
@@ -967,6 +961,18 @@ msgstr ""
 #: titulus_ws/models.py:23
 msgid "Configurazioni Titulus"
 msgstr ""
+
+#~ msgid "Requirements to be accepted"
+#~ msgstr "Condizioni da accettare"
+
+#~ msgid "By continuing, you declare that you accept the following conditions"
+#~ msgstr "Proseguendo dichiari di accettare le seguenti condizioni"
+
+#~ msgid "Accepted requirements"
+#~ msgstr "Condizioni accettate"
+
+#~ msgid "You have already accepted the following conditions"
+#~ msgstr "Hai già accettato le seguenti condizioni"
 
 #~ msgid "Request successfully registered: n. <b>{}/{}</b>"
 #~ msgstr "Richiesta protocollata con successo: n. <b>{}/{}</b>"
