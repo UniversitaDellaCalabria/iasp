@@ -53,7 +53,7 @@
                                         {% endif %}
                                     </td>
                                     {% with declared_credits|get_item:teaching.AfId as declared %}
-                                    <td class="{% if declared %}table-{% if declared.1 %}success{% else %}danger{% endif %}{% endif %} text-end">
+                                    <td class="{% if declared %}table-{% if declared.1 %}success{% else %}warning{% endif %}{% endif %} text-end">
                                         {{ declared.0|default:'-' }}
                                     </td>
                                     {% endwith %}
@@ -105,7 +105,7 @@
                                             </td>
                                             <td class="text-end fst-italic">{{ module.StudyActivityCreditValue|floatformat:1 }}</td>
                                             {% with declared_credits|get_item:module.StudyActivityID as declared %}
-                                            <td class="{% if declared %}table-{% if declared.1 %}success{% else %}danger{% endif %}{% endif %} text-end fst-italic">
+                                            <td class="{% if declared %}table-{% if declared.1 %}success{% else %}warning{% endif %}{% endif %} text-end fst-italic">
                                                 {{ declared.0|default:'-' }}
                                             </td>
                                             {% endwith %}
