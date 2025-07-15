@@ -169,7 +169,7 @@ def application_protocol(
         attachment_bytes.seek(0)
         wsclient.aggiungi_allegato(
             nome=attachment_name,
-            descrizione=os.path.splitext(attachment_name),
+            descrizione=os.path.splitext(attachment_name)[0],
             fopen=attachment_bytes,
             test=test
         )
