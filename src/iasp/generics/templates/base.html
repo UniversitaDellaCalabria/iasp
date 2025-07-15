@@ -52,24 +52,29 @@
 {% block header_slim_sub_menu %}
 {% endblock header_slim_sub_menu %}
 
-
 {% block footer_menu_section %}
 {% endblock footer_menu_section %}
 
-{% block centered_container %}
-    {% block top_content %}
-    {% endblock top_content %}
+{% block container %}
+<div class="container">
+    <div class="col-12 py-5 bd-content">
+        {% block centered_container %}
+            {% block top_content %}
+            {% endblock top_content %}
 
-    {% block top_buttons_surround %}
-    <div class="mt-4 mt-lg-0 mb-4">
-        <div class="d-md-flex">
-            {% block top_buttons %}
-            {% endblock top_buttons %}
-        </div>
+            {% block top_buttons_surround %}
+            <div class="mt-4 mt-lg-0 mb-4">
+                <div class="d-md-flex">
+                    {% block top_buttons %}
+                    {% endblock top_buttons %}
+                </div>
+            </div>
+            {% endblock top_buttons_surround %}
+
+            {% block over_content %}{% endblock over_content %}
+
+            {% block clean_content %}{% endblock clean_content %}
+        {% endblock centered_container %}
     </div>
-    {% endblock top_buttons_surround %}
-
-    {% block over_content %}{% endblock over_content %}
-
-    {% block clean_content %}{% endblock clean_content %}
-{% endblock centered_container %}
+</div>
+{% endblock container %}
