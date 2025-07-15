@@ -102,6 +102,8 @@ class InsertionForm(forms.ModelForm):
             instance=kwargs.get('instance', None)
         )
         self.fields['source_degree_course'].initial = f'{self.application.home_course} - {self.application.home_university}'
+        if self.application.call.insertions_only_from_same_course:
+            self.fields['source_degree_course'].disabled = True
 
     class Meta:
         model = ApplicationInsertion

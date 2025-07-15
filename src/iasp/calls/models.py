@@ -44,6 +44,7 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     payment_required = models.BooleanField(default=False)
     payment_url = models.URLField(max_length=200, blank=True, default='')
     protocol_required = models.BooleanField(default=False)
+    insertions_only_from_same_course = models.BooleanField(default=False)
     start = models.DateTimeField()
     end = models.DateTimeField()
     url = models.URLField(max_length=200, blank=True, default='')
