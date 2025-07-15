@@ -101,7 +101,7 @@ class InsertionForm(forms.ModelForm):
         self.fields['source_teaching_attachment'].widget = CustomFileWidget(
             instance=kwargs.get('instance', None)
         )
-        self.fields['source_degree_course'].initial = self.application.home_course
+        self.fields['source_degree_course'].initial = f'{self.application.home_course} - {self.application.home_university}'
 
     class Meta:
         model = ApplicationInsertion
