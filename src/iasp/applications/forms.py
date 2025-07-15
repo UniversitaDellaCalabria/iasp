@@ -101,13 +101,25 @@ class InsertionForm(forms.ModelForm):
         self.fields['source_teaching_attachment'].widget = CustomFileWidget(
             instance=kwargs.get('instance', None)
         )
-        self.fields['source_degree_course'].initial = f'{self.application.home_course} - {self.application.home_university}'
+        self.fields['source_university'].initial = f'{self.application.home_university}'
+        if self.application.call.insertions_only_from_same_course:
+            self.fields['source_university'].disabled = True
+        self.fields['source_university_country'].initial = f'{self.application.home_country}'
+        if self.application.call.insertions_only_from_same_course:
+            self.fields['source_university_country'].disabled = True
+        self.fields['source_university_city'].initial = f'{self.application.home_city}'
+        if self.application.call.insertions_only_from_same_course:
+            self.fields['source_university_city'].disabled = True
+        self.fields['source_degree_course'].initial = f'{self.application.home_course}'
         if self.application.call.insertions_only_from_same_course:
             self.fields['source_degree_course'].disabled = True
 
     class Meta:
         model = ApplicationInsertion
         fields = [
+            'source_university',
+            'source_university_country',
+            'source_university_city',
             'source_degree_course',
             'source_teaching_name',
             'source_teaching_cod',
@@ -119,6 +131,9 @@ class InsertionForm(forms.ModelForm):
             'notes',
         ]
         labels = {
+            'source_university': _("University"),
+            'source_university_country': _("Country"),
+            'source_university_city': _("City"),
             'source_degree_course': _("Degree course"),
             'source_teaching_name': _("Name"),
             'source_teaching_cod': _("Code"),
@@ -130,6 +145,9 @@ class InsertionForm(forms.ModelForm):
             'notes': _("Notes"),
         }
         help_texts = {
+            'source_university': _("The field is pre-filled with what was entered during the application creation phase but can be modified if the course was taken in another degree course"),
+            'source_university_country': _("The field is pre-filled with what was entered during the application creation phase but can be modified if the course was taken in another degree course"),
+            'source_university_city': _("The field is pre-filled with what was entered during the application creation phase but can be modified if the course was taken in another degree course"),
             'source_degree_course': _("The field is pre-filled with what was entered during the application creation phase but can be modified if the course was taken in another degree course"),
             'source_teaching_ssd': _("Mandatory if coming from an Italian university"),
         }

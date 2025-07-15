@@ -162,6 +162,13 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
 
 class ApplicationInsertion(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     application = models.ForeignKey(Application, on_delete=models.CASCADE)
+    source_university = models.CharField(max_length=255)
+    source_university_country = models.CharField(
+        max_length=2,
+        choices=COUNTRIES,
+        default="IT"
+    )
+    source_university_city = models.CharField(max_length=255)
     source_degree_course = models.CharField(max_length=255)
     source_teaching_name = models.CharField(max_length=255)
     source_teaching_cod = models.CharField(max_length=255)

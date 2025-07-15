@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-15 13:46+0200\n"
+"POT-Creation-Date: 2025-07-15 17:01+0200\n"
 "PO-Revision-Date: 2025-07-15 13:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -279,12 +279,24 @@ msgstr "Obbligatorio per utenti non italiani"
 msgid "Mandatory if coming from a non-Italian university"
 msgstr "Obbligatorio se proveniente da un'università non italiana"
 
-#: applications/forms.py:120 applications/templates/application.html:123
+#: applications/forms.py:134
+msgid "University"
+msgstr "Università"
+
+#: applications/forms.py:135
+msgid "Country"
+msgstr "Nazione"
+
+#: applications/forms.py:136
+msgid "City"
+msgstr "Città"
+
+#: applications/forms.py:137 applications/templates/application.html:123
 #: applications/templates/print/application.html:47
 msgid "Degree course"
 msgstr "Corso di laurea"
 
-#: applications/forms.py:121 applications/templates/application.html:122
+#: applications/forms.py:138 applications/templates/application.html:122
 #: applications/templates/application_free.html:58
 #: applications/templates/application_required.html:59
 #: applications/templates/application_required_form.html:44
@@ -295,7 +307,7 @@ msgstr "Corso di laurea"
 msgid "Name"
 msgstr "Denominazione"
 
-#: applications/forms.py:122 applications/templates/application_free.html:57
+#: applications/forms.py:139 applications/templates/application_free.html:57
 #: applications/templates/application_required.html:58
 #: applications/templates/application_required_form.html:45
 #: applications/templates/include/application_required_teachings.html:14
@@ -304,7 +316,7 @@ msgstr "Denominazione"
 msgid "Code"
 msgstr "Codice"
 
-#: applications/forms.py:123 applications/templates/application_free.html:60
+#: applications/forms.py:140 applications/templates/application_free.html:60
 #: applications/templates/application_required.html:41
 #: applications/templates/application_required.html:61
 #: applications/templates/application_required_form.html:46
@@ -312,7 +324,7 @@ msgstr "Codice"
 msgid "Credits"
 msgstr "Crediti"
 
-#: applications/forms.py:124 applications/templates/application_free.html:59
+#: applications/forms.py:141 applications/templates/application_free.html:59
 #: applications/templates/application_required.html:60
 #: applications/templates/application_required_form.html:47
 #: applications/templates/include/application_required_teachings.html:16
@@ -320,25 +332,26 @@ msgstr "Crediti"
 msgid "SSD"
 msgstr ""
 
-#: applications/forms.py:125 applications/templates/application_free.html:61
+#: applications/forms.py:142 applications/templates/application_free.html:61
 #: applications/templates/application_required.html:62
 #: applications/templates/include/application_required_teachings.html:17
 msgid "Teaching program"
 msgstr "Scheda insegnamento"
 
-#: applications/forms.py:126
+#: applications/forms.py:143
 msgid "Webpage URL"
 msgstr "URL pagina web"
 
-#: applications/forms.py:127
+#: applications/forms.py:144
 msgid "Vote/outcome"
 msgstr "Voto/esito"
 
-#: applications/forms.py:128
+#: applications/forms.py:145
 msgid "Notes"
 msgstr "Note"
 
-#: applications/forms.py:131
+#: applications/forms.py:148 applications/forms.py:149
+#: applications/forms.py:150 applications/forms.py:151
 msgid ""
 "The field is pre-filled with what was entered during the application "
 "creation phase but can be modified if the course was taken in another degree "
@@ -348,15 +361,15 @@ msgstr ""
 "domanda ma può essere modificato se l'insegnamento è stato sostenuto in un "
 "altro corso di laurea"
 
-#: applications/forms.py:132 applications/forms.py:141
+#: applications/forms.py:152 applications/forms.py:161
 msgid "Mandatory if coming from an Italian university"
 msgstr "Obbligatorio se proveniente da un'università italiana"
 
-#: applications/forms.py:170 applications/forms.py:199
+#: applications/forms.py:190 applications/forms.py:219
 msgid "You have already entered this teaching!"
 msgstr "Hai già inserito questo insegnamento!"
 
-#: applications/forms.py:218
+#: applications/forms.py:238
 msgid "Payment receipt"
 msgstr "Ricevuta del pagamento"
 
@@ -818,45 +831,45 @@ msgstr "Piano di studio (IT) troncato"
 msgid "Course studyplan (EN) trunked"
 msgstr "Piano di studio (EN) troncato"
 
-#: calls/models.py:66
+#: calls/models.py:67
 msgid "If payment is required you must specify a URL pointing to this"
 msgstr ""
 "Se è richiesto il pagamento è necessario specificare un URL che punti a "
 "questo"
 
-#: calls/models.py:189
+#: calls/models.py:190
 msgid "Nominativo RPA"
 msgstr ""
 
-#: calls/models.py:196
+#: calls/models.py:197
 msgid "Username RPA sul sistema di protocollo"
 msgstr ""
 
-#: calls/models.py:203
+#: calls/models.py:204
 msgid "Matricola RPA sul sistema di protocollo"
 msgstr ""
 
-#: calls/models.py:206
+#: calls/models.py:207
 msgid "Invia e-mail a RPA"
 msgstr ""
 
-#: calls/models.py:215
+#: calls/models.py:216
 msgid "Codice titolario"
 msgstr ""
 
-#: calls/models.py:218
+#: calls/models.py:219
 msgid "Fascicolo numero"
 msgstr ""
 
-#: calls/models.py:221
+#: calls/models.py:222
 msgid "Fascicolo anno"
 msgstr ""
 
-#: calls/models.py:226
+#: calls/models.py:227
 msgid "Configurazione WS Protocollo Categoria"
 msgstr ""
 
-#: calls/models.py:227
+#: calls/models.py:228
 msgid "Configurazioni WS Protocollo Categorie"
 msgstr ""
 
@@ -1010,15 +1023,6 @@ msgstr ""
 
 #~ msgid "Home university details"
 #~ msgstr "Dettagli università di provenienza"
-
-#~ msgid "University"
-#~ msgstr "Università"
-
-#~ msgid "Country"
-#~ msgstr "Nazione"
-
-#~ msgid "City"
-#~ msgstr "Città"
 
 #~ msgid "Study course"
 #~ msgstr "Corso di studi"
