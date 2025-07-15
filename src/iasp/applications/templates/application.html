@@ -161,8 +161,8 @@
     </div>
     {% if application.call.payment_required %}
     <div class="accordion-item">
-        <h2 class="accordion-header " id="heading3c">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3c" aria-expanded="false" aria-controls="collapse3c">
+        <h2 class="accordion-header " id="heading4c">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4c" aria-expanded="false" aria-controls="collapse4c">
                 {% trans "Payment details" %}
                 {% if application.call.payment_required and not application.payment_receipt %}
                 <svg class="ms-3 icon icon-sm icon-danger">
@@ -175,7 +175,7 @@
                 {% endif %}
             </button>
         </h2>
-        <div id="collapse3c" class="accordion-collapse collapse" role="region" aria-labelledby="heading3c">
+        <div id="collapse4c" class="accordion-collapse collapse" role="region" aria-labelledby="heading4c">
             <div class="accordion-body">
                 {% trans "Link to payment" %}: <a href="{{ application.call.payment_url }}" target="_blank">{{ application.call.payment_url }}</a>
                 <div class="mt-3">
