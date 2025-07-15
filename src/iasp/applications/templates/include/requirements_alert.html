@@ -5,9 +5,6 @@
 {% with application.call.get_requirements as requirements %}
 {% if requirements %}
 <div class="alert alert-success my-3" role="alert">
-    <p class="h5 alert-heading">{% trans "Accepted requirements" %}</p>
-    <p>{% trans "You have already accepted the following conditions" %}:</p>
-    <hr>
     <p class="mb-0">
         <ul>
             {% for requirement in requirements %}
