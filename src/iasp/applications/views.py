@@ -162,6 +162,16 @@ def application_new(request, call_pk):
             application.modified_by = request.user
             application.save()
 
+            # log
+            logger.info(
+                "[{}] utente {} ha creato una domanda di partecipazione a {}".format(
+                    timezone.localtime(),
+                    request.user,
+                    call
+                )
+            )
+            # end log
+
             # messaggio di successo
             return redirect(
                 'applications:application',
