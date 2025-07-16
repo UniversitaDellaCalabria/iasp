@@ -23,15 +23,13 @@
 
 <div class="mb-4">
     <p class="h3">
-        {% trans "Application for enrollment in years following the first" %}
-    </p>
-    <p class="h5">
         {% if LANGUAGE_CODE == 'it' %}
             {{ call.title_it }}
         {% else %}
             {{ call.title_en }}
         {% endif %}
-        <br>
+    </p>
+    <p class="h5">
         {% trans "Year" %}: {{ call.course_year }}
     </p>
 </div>

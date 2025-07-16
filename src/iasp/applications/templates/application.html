@@ -55,8 +55,7 @@
 {% block clean_content %}
 {% get_current_language as LANGUAGE_CODE %}
 <div class="mb-4">
-    <p class="h3">{% trans "Application for enrollment in years following the first" %}</p>
-    <p class="h5">
+    <p class="h3">
         {% if LANGUAGE_CODE == 'it' %}
             {{ application.call.title_it }}
         {% else %}
