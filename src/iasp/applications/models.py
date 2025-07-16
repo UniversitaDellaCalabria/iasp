@@ -111,6 +111,7 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     submission_date = models.DateTimeField(blank=True, null=True)
     protocol_number = models.CharField(max_length=255, blank=True, default='')
     protocol_date = models.DateTimeField(blank=True, null=True)
+    protocol_taken = models.DateTimeField(blank=True, null=True)
 
     def get_filefield_attributes(self):
         file_fields = []

@@ -43,11 +43,17 @@ class Command(BaseCommand):
             applications = Application.objects.filter(
                 call__protocol_required=True,
                 submission_date__isnull=False,
-                protocol_date__isnull=True
+                protocol_date__isnull=True,
+                protocol_taken__isnull=True
             )
             for application in applications:
 
+                if application.protocol_taken: continue
+
                 print(f'[{application}] - Registering application {application.pk} - {application.call.title_it}')
+
+                application.protocol_taken = timezone.localtime()
+                application.save(update_fields=['protocol_taken'])
 
                 try:
                     generate_application_merged_docs(application)
@@ -102,6 +108,9 @@ class Command(BaseCommand):
                             e
                         )
                     )
+
+                    application.protocol_taken = None
+                    application.save(update_fields=['protocol_taken'])
 
                     print(f'[{application}] - Registered application {application.pk} - {application.call.title_it} FAILED')
 
