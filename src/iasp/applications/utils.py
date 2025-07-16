@@ -21,7 +21,7 @@ from . settings import (
 )
 
 
-logger = logging.getLogger('__name__')
+logger = logging.getLogger(__name__)
 
 
 def generate_application_pdf(application):
