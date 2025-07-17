@@ -17,7 +17,7 @@ def _attachment_path_required(instance, filename):
     # file will be uploaded to MEDIA_ROOT
     return "allegati/bando-{0}/domanda-{1}/obbligatori/{2}-anno/{3}".format(
         instance.application.call.id,
-        instance.application.id,
+        instance.application.user.taxpayer_id,
         instance.target_teaching_year,
         filename
     )
@@ -27,7 +27,7 @@ def _attachment_path_free(instance, filename):
     # file will be uploaded to MEDIA_ROOT
     return "allegati/bando-{0}/domanda-{1}/scelta/{2}-anno/{3}".format(
         instance.application.call.id,
-        instance.application.id,
+        instance.application.user.taxpayer_id,
         instance.free_credits.course_year,
         filename
     )
@@ -37,7 +37,7 @@ def _attachment_path_application(instance, filename):
     # file will be uploaded to MEDIA_ROOT
     return "allegati/bando-{0}/domanda-{1}/{2}".format(
         instance.call.id,
-        instance.id,
+        instance.user.taxpayer_id,
         filename
     )
 

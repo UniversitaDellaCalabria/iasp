@@ -326,7 +326,7 @@ def application_submit(request, application_pk, application=None):
 @application_check
 @application_editable
 def application_delete(request, application_pk, application=None):
-    folder_path = f'{settings.MEDIA_ROOT}/allegati/bando-{application.call.pk}/domanda-{application.pk}'
+    folder_path = f'{settings.MEDIA_ROOT}/allegati/bando-{application.call.pk}/domanda-{application.user.taxpayer_id}'
     if os.path.isdir(folder_path):
         shutil.rmtree(folder_path)
 

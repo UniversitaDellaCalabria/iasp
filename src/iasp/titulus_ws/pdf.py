@@ -25,7 +25,7 @@ def merge_attachments_pdf(application=None):
                 pageObj = pdfReader.pages[pageNum]
                 pdfWriter.add_page(pageObj)
 
-        pdfOutput = open(f'{settings.MEDIA_ROOT}/allegati/bando-{application.call.pk}/domanda-{application.pk}/allegati.pdf', 'wb')
+        pdfOutput = open(f'{settings.MEDIA_ROOT}/allegati/bando-{application.call.pk}/domanda-{application.user.taxpayer_id}/allegati.pdf', 'wb')
         pdfWriter.write(pdfOutput)
         pdfOutput.close()
     except:
