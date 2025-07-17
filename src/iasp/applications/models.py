@@ -63,14 +63,16 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         validators=[
             validate_attachment_extension,
             validate_file_size
-        ]
+        ],
+        max_length=255
     )
     home_teaching_plan = models.FileField(
         upload_to=_attachment_path_application,
         validators=[
             validate_attachment_extension,
             validate_file_size
-        ]
+        ],
+        max_length=255
     )
     home_votes_conversion = models.FileField(
         upload_to=_attachment_path_application,
@@ -78,6 +80,7 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
             validate_attachment_extension,
             validate_file_size
         ],
+        max_length=255,
         blank=True,
         null=True
     )
@@ -87,6 +90,7 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
             validate_attachment_extension,
             validate_file_size
         ],
+        max_length=255,
         blank=True,
         null=True
     )
@@ -96,6 +100,7 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
             validate_attachment_extension,
             validate_file_size
         ],
+        max_length=255,
         blank=True,
         null=True
     )
@@ -105,6 +110,7 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
             validate_attachment_extension,
             validate_file_size
         ],
+        max_length=255,
         blank=True,
         null=True
     )
@@ -184,7 +190,8 @@ class ApplicationInsertion(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         validators=[
             validate_attachment_extension,
             validate_file_size
-        ]
+        ],
+        max_length=255
     )
     source_teaching_url = models.URLField(max_length=200, blank=True, default='')
     source_teaching_grade = models.CharField(max_length=255)
