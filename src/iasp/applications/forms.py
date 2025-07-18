@@ -72,7 +72,7 @@ class ApplicationForm(forms.ModelForm):
 
         user_country = cleaned_data.get('user_country')
         home_country = cleaned_data.get('home_country')
-        home_votes_conversion = cleaned_data.get('home_votes_conversionv')
+        home_votes_conversion = cleaned_data.get('home_votes_conversion')
         home_language_certification = cleaned_data.get('home_language_certification')
         declaration_of_value = cleaned_data.get('declaration_of_value')
 
