@@ -267,7 +267,7 @@ def application_submit(request, application_pk, application=None):
     if application.get_credits_status() < application.call.credits_threshold:
         messages.add_message(
             request,
-            messages.DANGER,
+            messages.ERROR,
             '{} <b>({})</b>'.format(
                 _('You have not yet reached the minimum number of required credits by the call'),
                 application.call.credits_threshold
@@ -276,7 +276,7 @@ def application_submit(request, application_pk, application=None):
     elif application.call.payment_required and not application.payment_receipt:
         messages.add_message(
             request,
-            messages.DANGER,
+            messages.ERROR,
             _('It is necessary to upload the payment receipt to submit the application')
         )
     else:
