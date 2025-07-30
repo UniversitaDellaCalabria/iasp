@@ -33,11 +33,11 @@
 <p class="h5">{% trans "Personal informations" %}</p>
 <ul style="font-size: 1rem">
     <li><b>{% trans "Nationality" %}:</b> {{ application.user_country }}</li>
-    <li><b>{% trans "First name" %}:</b> {{ request.user.first_name }}</li>
-    <li><b>{% trans "Last name" %}:</b> {{ request.user.last_name }}</li>
-    <li><b>{% trans "Taxpayer ID" %}:</b> {{ request.user.taxpayer_id }}</li>
-    <li><b>{% trans "Phone number" %}:</b> {{ request.user.phone_number }}</li>
-    <li><b>{% trans "Email" %}:</b> {{ request.user.email }}</li>
+    <li><b>{% trans "First name" %}:</b> {{ application.user.first_name }}</li>
+    <li><b>{% trans "Last name" %}:</b> {{ application.user.last_name }}</li>
+    <li><b>{% trans "Taxpayer ID" %}:</b> {{ application.user.taxpayer_id }}</li>
+    <li><b>{% trans "Phone number" %}:</b> {{ application.user.phone_number }}</li>
+    <li><b>{% trans "Email" %}:</b> {{ application.user.email }}</li>
 </ul>
 
 <p class="h5">{% trans "Call details" %}</p>
