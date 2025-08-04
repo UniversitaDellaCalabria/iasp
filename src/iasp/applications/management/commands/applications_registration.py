@@ -1,4 +1,5 @@
 import logging
+import time
 
 from django.core.management.base import BaseCommand
 from django.utils import timezone
@@ -8,6 +9,7 @@ from calls.models import CallTitulusConfiguration
 from titulus_ws.models import TitulusConfiguration
 
 from ... models import Application
+from ... settings import REGISTRATION_JOB_SLEEP_TIME
 from ... titulus import application_protocol
 from ... utils import generate_application_merged_docs
 
@@ -46,7 +48,9 @@ class Command(BaseCommand):
                 protocol_date__isnull=True,
                 protocol_taken__isnull=True
             )
-            for application in applications:
+            for index, application in enumerate(applications):
+
+                if index: time.sleep(REGISTRATION_JOB_SLEEP_TIME)
 
                 if application.protocol_taken: continue
 

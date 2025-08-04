@@ -6,6 +6,7 @@ PDF_TEMP_FOLDER_PATH = getattr(settings, "PDF_TEMP_FOLDER_PATH", f"temp/applicat
 PDF_TEMP_FOLDER_ATTACHMENTS_PATH = getattr(settings, "PDF_TEMP_FOLDER_ATTACHMENTS_PATH", f"attachments")
 PDF_TO_MERGE_TEMP_FOLDER_PATH = getattr(settings, "PDF_TO_MERGE_TEMP_FOLDER_PATH", f"to_merge")
 
+REGISTRATION_JOB_SLEEP_TIME = getattr(settings, "REGISTRATION_JOB_SLEEP_TIME", 180) # in seconds
 
 EMAIL_BODY = getattr(settings, "EMAIL_BODY", _("""Dear {first_name} {last_name},
 your application to participate in
