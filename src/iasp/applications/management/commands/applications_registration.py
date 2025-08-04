@@ -56,7 +56,8 @@ class Command(BaseCommand):
                 application.save(update_fields=['protocol_taken'])
 
                 try:
-                    generate_application_merged_docs(application)
+                    generated_documents = generate_application_merged_docs(application)
+                    if not generated_documents: continue
 
                     protocol_call_configuration = CallTitulusConfiguration.objects.filter(
                         call=application.call,

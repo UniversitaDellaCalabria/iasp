@@ -150,6 +150,14 @@ def generate_application_docs(application):
 
 
 def generate_application_merged_docs(application):
+    attachments_path = os.path.join(
+        settings.MEDIA_ROOT,
+        f'{PDF_TEMP_FOLDER_PATH}/{application.pk}/{PDF_TEMP_FOLDER_ATTACHMENTS_PATH}'
+    )
+
+    if os.path.isdir(attachments_path):
+        return True
+
     try:
         generate_application_docs(application)
         merge_folder = os.path.join(
@@ -165,10 +173,6 @@ def generate_application_merged_docs(application):
                 for page in pdfReader.pages:
                     pdfWriter.add_page(page)
 
-        attachments_path = os.path.join(
-            settings.MEDIA_ROOT,
-            f'{PDF_TEMP_FOLDER_PATH}/{application.pk}/{PDF_TEMP_FOLDER_ATTACHMENTS_PATH}'
-        )
         os.makedirs(attachments_path, exist_ok=True)
 
         output_path = os.path.join(
