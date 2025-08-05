@@ -106,6 +106,9 @@ class WSTitulusClient(object):
                                                          attachmentBeans,
                                                          saveParams)
 
+        logger.info(self.doc)
+        logger.info(saveDocumentResponse)
+
         if saveDocumentResponse:
             root = ET.fromstring(saveDocumentResponse._value_1)
             self.numero = root[1][0].attrib['num_prot']

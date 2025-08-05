@@ -52,6 +52,7 @@ class Command(BaseCommand):
 
                 if index: time.sleep(REGISTRATION_JOB_SLEEP_TIME)
 
+                application.refresh_from_db()
                 if application.protocol_taken: continue
 
                 print(f'[{application}] - Registering application {application.pk} - {application.call.title_it}')
@@ -105,7 +106,7 @@ class Command(BaseCommand):
                 # raise Exception and do some operations
                 except Exception as e:
                     # log protocol fails
-                    logger.error(
+                    logger.exception(
                         "[{}] utente {} protocollo domanda {} fallito: {}".format(
                             timezone.localtime(),
                             application.user,

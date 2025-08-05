@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 EDITABLE_FIELDS = getattr(settings, 'EDITABLE_FIELDS', ['email', 'phone_number']) #'taxpayer_id'])
 REQUIRED_FIELDS = getattr(settings, 'REQUIRED_FIELDS', ['email',])
 
-CHANGE_EMAIL_TOKEN_LIFE = getattr(settings, 'CHANGE_EMAIL_TOKEN_LIFE', 30)
+CHANGE_EMAIL_TOKEN_LIFE = getattr(settings, 'CHANGE_EMAIL_TOKEN_LIFE', 30) # minutes
 
 SAFE_URL_PATHS = getattr(settings, 'SAFE_URL_PATHS', [])
 SAFE_URL_APPS = getattr(settings, 'SAFE_URL_APPS', ['admin', 'accounts'])
