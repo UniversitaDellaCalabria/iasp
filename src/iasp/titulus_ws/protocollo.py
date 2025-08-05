@@ -106,7 +106,6 @@ class WSTitulusClient(object):
                                                          attachmentBeans,
                                                          saveParams)
 
-        logger.info(self.doc)
         logger.info(saveDocumentResponse)
 
         if saveDocumentResponse:
