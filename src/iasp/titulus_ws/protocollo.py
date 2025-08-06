@@ -102,9 +102,9 @@ class WSTitulusClient(object):
         saveParams.sendEMail = self.send_email
         saveDocumentResponse = None
 
-        saveDocumentResponse = self.service.saveDocument(self.doc,
-                                                         attachmentBeans,
-                                                         saveParams)
+        saveDocumentResponse = self.service.saveDocument(document=self.doc,
+                                                         attachmentBeans=attachmentBeans,
+                                                         params=saveParams)
 
         logger.info(saveDocumentResponse)
 
@@ -157,7 +157,10 @@ class WSTitulusClient(object):
         self.assure_connection()
 
         if self.rpa_username:
-            self.service.setWSUser(self.rpa_username, self.rpa_code)
+            self.service.setWSUser(
+                user=self.rpa_username,
+                pnumber=self.rpa_code
+            )
 
         response = self.service.addInFolder(fascicolo)
         if response:
@@ -167,9 +170,9 @@ class WSTitulusClient(object):
     def cercaDocumento(self, key, value):
         self.assure_connection()
         query = f'[{key}]={value}'
-        return self.service.search(query,
-                                   xsd.SkipValue,
-                                   xsd.SkipValue)
+        return self.service.search(query=query,
+                                   orderby=xsd.SkipValue,
+                                   params=xsd.SkipValue)
 
 
 class Protocollo(WSTitulusClient):
