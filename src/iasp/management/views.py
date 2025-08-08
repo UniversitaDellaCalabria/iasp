@@ -17,7 +17,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 
 from applications.decorators import activity_check
-from applications.forms import InsertionRequiredForm
+from applications.forms import InsertionRequiredForm, PaymentForm
 from applications.models import *
 from applications.utils import *
 
@@ -119,12 +119,15 @@ def application(request, structure_code, call_pk, application_pk, structure=None
         application=application
     ).count()
 
+    form = PaymentForm(instance=application)
+
     return render(
         request,
         template,
         {
             'application': application,
             'call': call,
+            'form': form,
             'free_credits_rules': free_credits_rules,
             'insertions_required': insertions_required,
             'insertions_free': insertions_free,
