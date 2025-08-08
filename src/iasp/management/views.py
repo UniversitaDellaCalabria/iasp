@@ -87,7 +87,7 @@ def applications(request, structure_code, call_pk, structure=None, call=None):
     )
     f = ApplicationFilter(request.GET, queryset=applications)
     table = ApplicationTable(f.qs)
-    RequestConfig(request, paginate={"per_page": 1}).configure(table)
+    RequestConfig(request, paginate={"per_page": APPLICATIONS_PAGINATION}).configure(table)
 
     return render(
         request,
