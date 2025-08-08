@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-08 11:38+0200\n"
-"PO-Revision-Date: 2025-08-08 11:39+0200\n"
+"PO-Revision-Date: 2025-08-08 12:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -950,10 +950,8 @@ msgid "Dashboard"
 msgstr ""
 
 #: generics/templates/base.html:62
-#, fuzzy
-#| msgid "Active from"
 msgid "Active role"
-msgstr "Attivo dal"
+msgstr "Ruolo attivo"
 
 #: generics/templates/base.html:66 generics/templates/base.html:79
 #: management/tables.py:10
