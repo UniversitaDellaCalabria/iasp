@@ -39,6 +39,7 @@
     </p>
 </div>
 
+{% block application_alerts %}
 <div class="alert alert-info my-3" role="alert">
     {% trans "The number of credits for elective courses in the selected year ranges from a minimum of" %}
     <b>{{ free_credits_rule.min_value }}</b>
@@ -48,6 +49,7 @@
 
 {% include "include/credits_alert.html" %}
 {% include "include/payment_alert.html" %}
+{% endblock application_alerts %}
 
 {% if insertions %}
 <div class="table-responsive">
@@ -75,7 +77,11 @@
                     </a>
                 </td>
                 <td class="text-end">
+                    {% if structure %}
+                    <a href="{% url 'management:application_free_detail' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk year=free_credits_rule.course_year insertion_pk=insertion.pk %}" class="btn btn-info btn-xs">
+                    {% else %}
                     <a href="{% url 'applications:application_free_edit' application_pk=application.pk year=free_credits_rule.course_year insertion_pk=insertion.pk %}" class="btn btn-info btn-xs">
+                    {% endif %}
                         <svg class="icon icon-xs icon-white">
                             {% if application.is_editable %}
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>

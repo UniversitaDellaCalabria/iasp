@@ -17,6 +17,8 @@ from django.views.decorators.http import require_POST
 
 from calls.models import *
 
+from organizational_area.models import *
+
 from pathlib import Path
 
 from titulus_ws.models import TitulusConfiguration
@@ -28,7 +30,7 @@ from . forms import *
 from . models import *
 from . settings import *
 from . titulus import application_protocol
-from . utils import generate_application_merged_docs
+from . utils import *
 
 
 logger = logging.getLogger(__name__)
@@ -349,42 +351,12 @@ def application_delete(request, application_pk, application=None):
 @login_required
 @application_check
 def application_required_list(request, application_pk, application=None):
-    insertions = application.applicationinsertionrequired_set.all()
-
-    codes_to_exclude = CallExcludedActivity.objects.filter(
-        call=application.call,
-        is_active=True
-    ).values_list('code', flat=True)
-
-    codes_list = insertions.values_list('target_teaching_id', flat=True)
-
-    declared_credits = {}
-    for insertion in insertions:
-        if not declared_credits.get(insertion.target_teaching_id):
-            declared_credits[insertion.target_teaching_id] = [
-                insertion.source_teaching_credits,
-                insertion.source_teaching_credits >= insertion.target_teaching_credits
-            ]
-        else:
-            tot = declared_credits[insertion.target_teaching_id][0] + insertion.source_teaching_credits
-            declared_credits[insertion.target_teaching_id] = [
-                tot,
-                tot >= insertion.target_teaching_credits
-            ]
-
-    tot_credits = application.get_credits_status()
-
+    application_data = get_application_required_insertions_data(application)
     template = 'application_required_list.html'
     return render(
         request,
         template,
-        {
-            'codes_to_exclude': codes_to_exclude,
-            'declared_credits': declared_credits,
-            'insertions': codes_list,
-            'application': application,
-            'tot_credits': tot_credits or 0
-        }
+        {'application': application, **application_data}
     )
 
 
@@ -571,26 +543,14 @@ def application_required_delete(request, application_pk, insertion_pk, applicati
 @login_required
 @application_check
 def application_free(request, application_pk, year, application=None):
-    free_credits_rule = get_object_or_404(
-        CallFreeCreditsRule,
-        is_active=True,
-        call=application.call,
-        course_year=year
-    )
-    insertions = ApplicationInsertionFree.objects.filter(
-        application=application,
-        free_credits=free_credits_rule
-    )
-    tot_credits = application.get_credits_status()
+    data = get_application_free_insertions_data(application, year)
     template = 'application_free.html'
     return render(
         request,
         template,
         {
-            'insertions': insertions,
-            'free_credits_rule': free_credits_rule,
             'application': application,
-            'tot_credits': tot_credits or 0
+            **data
         }
     )
 
@@ -759,9 +719,12 @@ def application_free_delete(request, application_pk, insertion_pk, application=N
 def download_attachment(user, application_pk, field=''):
     application = get_object_or_404(
         Application,
-        user=user,
         pk=application_pk
     )
+
+    permission = has_permission_to_download(user, application)
+
+    if not permission: Http404
 
     mime = magic.Magic(mime=True)
     field = getattr(application, field, None)
@@ -836,15 +799,19 @@ def download_declaration_of_value(request, application_pk):
 
 @login_required
 def download_insertion_attachment(request, application_pk, insertion_pk):
+    application = get_object_or_404(Application, pk=application_pk)
+
+    permission = has_permission_to_download(request.user, application)
+
+    if not permission: Http404
+
     insertion = ApplicationInsertionRequired.objects.filter(
-        application__user=request.user,
         application__pk=application_pk,
         pk=insertion_pk
     ).first()
 
     if not insertion:
         insertion = ApplicationInsertionFree.objects.filter(
-            application__user=request.user,
             application__pk=application_pk,
             pk=insertion_pk
         ).first()

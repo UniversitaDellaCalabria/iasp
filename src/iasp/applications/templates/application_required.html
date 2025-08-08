@@ -76,7 +76,11 @@
                     </a>
                 </td>
                 <td class="text-end">
+                    {% if structure %}
+                    <a href="{% url 'management:application_required_detail' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk teaching_id=target_teaching.id insertion_pk=insertion.pk %}" class="btn btn-info btn-xs">
+                    {% else %}
                     <a href="{% url 'applications:application_required_edit' application_pk=application.pk teaching_id=target_teaching.id insertion_pk=insertion.pk %}" class="btn btn-info btn-xs">
+                    {% endif %}
                         <svg class="icon icon-xs icon-white">
                             {% if application.is_editable %}
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>

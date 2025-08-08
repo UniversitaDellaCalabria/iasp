@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load static %}
 {% load iasp_tags %}
+{% load organizational_area_tags %}
 
 
 {% block page_title %}{% trans "Enrollment in years after the first" %}{% endblock page_title %}
@@ -16,6 +17,13 @@
 {% endblock header_center_search %}
 
 {% block menu_links %}
+{% if structure %}
+<li class="nav-item">
+    <a class="nav-link ps-lg-0" href="{% url 'management:calls' structure_code=structure.unique_code %}">
+        <span>{% trans "Dashboard" %}</span>
+    </a>
+</li>
+{% else %}
 <li class="nav-item">
     <a class="nav-link ps-lg-0" href="{% url 'generics:home' %}">
         <span>{% trans "Home" %}</span>
@@ -36,10 +44,55 @@
         <span>{% trans "Account" %}</span>
     </a>
 </li>
+{% endif %}
 {% endblock menu_links %}
 
 {% block header_slim_buttons %}
 {% settings_value "LOGOUT_URL" as logout_url %}
+{% is_operator request.user as structures %}
+{% if structures %}
+<div class="nav-item dropdown w-100">
+     <a class="nav-link dropdown-toggle px-0 pe-lg-2 float-left d-block d-lg-flex" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="it-access-top-wrapper">
+            <button class="btn btn-primary btn-sm w-100" href="#" type="button">
+                <svg class="icon-expand icon icon-sm">
+                    <use href="{% static 'svg/sprites.svg' %}#it-expand"></use>
+                </svg>
+                <span>
+                    {% trans "Active role" %}:
+                    {% if structure %}
+                        {{ structure.name }}
+                    {% else %}
+                        {% trans "User" %}
+                    {% endif %}
+                </span>
+            </button>
+        </div>
+    </a>
+    <div class="dropdown-menu">
+        <div class="row">
+            <div class="col-12">
+                <div class="link-list-wrapper">
+                    <ul class="link-list">
+                        <li>
+                            <a class="list-item" href="{% if structure %}{% url 'generics:home' %}{% else %}#{% endif %}">
+                                <span>{% trans "User" %}</span>
+                            </a>
+                        </li>
+                        {% for s in structures %}
+                        <li>
+                            <a class="list-item" href="{% if structure and s.unique_code == structure.unique_code %}#{% else %}{% url 'management:calls' structure_code=s.unique_code %}{% endif %}">
+                                <span>{{ s.name }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 <a href="{{ logout_url }}">
     <button class="btn btn-primary btn-sm btn-icon" type="button">
         <svg class="icon icon-light icon-xs">

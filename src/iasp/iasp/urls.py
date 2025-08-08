@@ -30,6 +30,7 @@ urlpatterns += path('', include('accounts.urls', namespace='accounts')),
 urlpatterns += path('', include('generics.urls', namespace='generics')),
 urlpatterns += path('', include('calls.urls', namespace='calls')),
 urlpatterns += path('', include('applications.urls', namespace='applications')),
+urlpatterns += path('', include('management.urls', namespace='management')),
 
 if 'saml2_sp' in settings.INSTALLED_APPS:
     from djangosaml2 import views

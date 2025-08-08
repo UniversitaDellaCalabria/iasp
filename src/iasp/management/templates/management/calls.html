@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons_surround %}
+{% endblock top_buttons_surround %}
+
+{% block clean_content %}
+{% get_current_language as LANGUAGE_CODE %}
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Calls" %} {% trans "for" %} {{ structure }}
+    </p>
+</div>
+
+{% if structure_calls %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">{% trans "Name" %}</th>
+            <th scope="col" class="text-end">{% trans "Cohort" %}</th>
+            <th scope="col" class="text-end">{% trans "Year" %}</th>
+            <th scope="col" class="text-end">{% trans "Places available" %}</th>
+            <th scope="col" class="text-end">{% trans "Expiration" %}</th>
+            <th scope="col" class="text-end"></th>
+            <th scope="col" class="text-end"></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for call in structure_calls %}
+            <tr>
+                <td>
+                    {% if LANGUAGE_CODE == 'it' %}
+                        {{ call.title_it }}
+                    {% else %}
+                        {{ call.title_en }}
+                    {% endif %}
+                </td>
+                <td class="text-end">{{ call.course_cohort }}/{{ call.course_cohort|add:1 }}</td>
+                <td class="text-end">{{ call.course_year }}°</td>
+                <td class="text-end">{{ call.places_available }}</td>
+                <td class="text-end">{{ call.end }}</td>
+                <td class="text-end">
+                    <a href="{% url 'management:applications' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-primary btn-xs">
+                        {% trans "View applications" %}
+                    </a>
+                </td>
+                <td class="text-end">
+                    <a href="{% url 'management:call' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-primary btn-xs">
+                        {% trans "Details" %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+{% trans "No calls here" %}
+{% endif %}
+{% endblock clean_content %}

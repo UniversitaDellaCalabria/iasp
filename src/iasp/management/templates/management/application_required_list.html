@@ -1,0 +1,33 @@
+{% extends "application_required_list.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'management:calls' structure_code=structure.unique_code %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'management:call' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
+    </svg> {% trans "Call" %}
+</a>
+<a href="{% url 'management:applications' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-list"></use>
+    </svg> {% trans "Applications" %}
+</a>
+<a href="{% url 'management:application' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-user"></use>
+    </svg> {{ application.user }}
+</a>
+{% endblock top_buttons %}
+
+{% block application_alerts %}
+{% endblock application_alerts %}

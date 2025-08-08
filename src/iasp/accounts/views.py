@@ -26,9 +26,6 @@ def account(request):
 
 @login_required
 def changeData(request):
-    # ~ breadcrumbs = {reverse('pe_management:dashboard'): _('Home'),
-                   # ~ reverse('accounts:account'): _('Account'),
-                   # ~ '#': _('Edit')}
     initial = {}
     for field in EDITABLE_FIELDS:
         initial[field] = getattr(request.user, field)

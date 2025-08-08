@@ -1,0 +1,22 @@
+{% extends "call.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'management:calls' structure_code=structure.unique_code %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+{% endblock top_buttons %}
+
+{% block call_action %}
+<a href="{% url 'management:applications' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-info">
+    <svg class="icon icon-sm icon-white">
+        <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
+    </svg> {% trans "View applications" %}
+</a>
+{% endblock call_action %}

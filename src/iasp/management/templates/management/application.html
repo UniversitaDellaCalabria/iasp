@@ -1,0 +1,60 @@
+{% extends "application.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons %}
+<a href="{% url 'management:calls' structure_code=structure.unique_code %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'management:call' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
+    </svg> {% trans "Call" %}
+</a>
+<a href="{% url 'management:applications' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-list"></use>
+    </svg> {% trans "Applications" %}
+</a>
+{% endblock top_buttons %}
+
+{% block application_alerts %}
+{% endblock application_alerts %}
+
+{% block application_title %}
+{{ application.user }}
+{% endblock application_title %}
+
+{% block application_insertions_links %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <tbody>
+            <tr>
+                <td><b>{% trans "Required teachings" %}</b></td>
+                <td class="text-end"><b>{{ insertions_required }}</b> {% trans "insertions" %}</td>
+                <td class="text-end">
+                    <a href="{% url 'management:application_required_list' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk %}" class="btn btn-primary btn-xs">
+                        {% trans "Manage" %}
+                    </a>
+                </td>
+            </tr>
+            {% for rule in free_credits_rules %}
+            <tr>
+                <td><b>{% trans "Free credits" %} {{ rule.course_year }}° {% trans "year" %}</b></td>
+                <td class="text-end"><b>{{ insertions_free }}</b> {% trans "insertions" %}</td>
+                <td class="text-end">
+                    <a href="{% url 'management:application_free' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk year=rule.course_year %}" class="btn btn-primary btn-xs">
+                        {% trans "Manage" %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock application_insertions_links %}

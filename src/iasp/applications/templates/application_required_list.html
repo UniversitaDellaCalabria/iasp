@@ -39,8 +39,10 @@
     {% endif %}
 </p>
 
+{% block application_alerts %}
 {% include "include/credits_alert.html" %}
 {% include "include/payment_alert.html" %}
+{% endblock application_alerts %}
 
 {% if LANGUAGE_CODE == 'it' %}
     {% with application.call.course_json_it as course %}

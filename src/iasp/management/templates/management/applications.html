@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+{% load render_table from django_tables2 %}
+{% load django_tables2 %}
+
+
+{% block top_buttons %}
+<a href="{% url 'management:calls' structure_code=structure.unique_code %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Home" %}
+</a>
+<a href="{% url 'management:call' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
+    </svg> {% trans "Call" %}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+{% get_current_language as LANGUAGE_CODE %}
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Applications" %} {% trans "for" %} {{ call }}
+    </p>
+</div>
+<div class="card-wrapper card-space">
+    <div class="card card-bg no-after">
+        <div class="card-body">
+            <form method="get">
+                {{ filter.form.as_div }}
+                <button type="submit" class="btn btn-xs btn-primary mt-3">
+                    {% trans "Search" %}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% if table.data %}
+    {% render_table table %}
+{% else %}
+    {% trans "No items here" %}
+{% endif %}
+{% endblock clean_content %}

@@ -26,7 +26,6 @@
                 {% for group in plan.AfRequired %}
                     {% if group.Year == i %}
                         {% for teaching in group.Required %}
-                            {{ teaching.StudyActivityCod }}
                             {% if teaching.AfCod not in codes_to_exclude %}
                                 <tr {% if teaching.AfId in insertions %}class="table-primary"{% endif %}>
                                     <td class="text-nowrap">{{ teaching.AfCod }}</td>
@@ -67,7 +66,11 @@
                                                     </svg>
                                                 </a>
                                                 {% else %}
+                                                {% if structure %}
+                                                <a href="{% url 'management:application_required' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
+                                                {% else %}
                                                 <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
+                                                {% endif %}
                                                     <svg class="icon icon-xs icon-white">
                                                         <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
                                                     </svg>
@@ -118,7 +121,11 @@
                                                         </svg>
                                                     </a>
                                                     {% else %}
+                                                    {% if structure %}
+                                                    <a href="{% url 'management:application_required' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                    {% else %}
                                                     <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                    {% endif %}
                                                         <svg class="icon icon-xs icon-white">
                                                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
                                                         </svg>

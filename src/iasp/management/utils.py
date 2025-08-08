@@ -5,14 +5,9 @@ import shutil
 
 from django.conf import settings
 from django.contrib.staticfiles import finders
-from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
 from django.urls import reverse
 
-from calls.models import CallExcludedActivity, CallFreeCreditsRule
-
-from management.settings import VIEW_APPLICATIONS_OFFICE
-from organizational_area.models import OrganizationalStructureOfficeEmployee
 from pathlib import Path
 
 from weasyprint import CSS, HTML
@@ -190,73 +185,3 @@ def generate_application_merged_docs(application):
     except Exception as e:
         logger.exception(e)
         return False
-
-
-def get_application_required_insertions_data(application):
-    insertions = application.applicationinsertionrequired_set.all()
-
-    codes_to_exclude = CallExcludedActivity.objects.filter(
-        call=application.call,
-        is_active=True
-    ).values_list('code', flat=True)
-
-    codes_list = insertions.values_list('target_teaching_id', flat=True)
-
-    declared_credits = {}
-    for insertion in insertions:
-        if not declared_credits.get(insertion.target_teaching_id):
-            declared_credits[insertion.target_teaching_id] = [
-                insertion.source_teaching_credits,
-                insertion.source_teaching_credits >= insertion.target_teaching_credits
-            ]
-        else:
-            tot = declared_credits[insertion.target_teaching_id][0] + insertion.source_teaching_credits
-            declared_credits[insertion.target_teaching_id] = [
-                tot,
-                tot >= insertion.target_teaching_credits
-            ]
-
-    tot_credits = application.get_credits_status()
-    return {
-        'codes_to_exclude': codes_to_exclude,
-        'declared_credits': declared_credits,
-        'insertions': codes_list,
-        'tot_credits': tot_credits or 0
-    }
-
-
-def get_application_free_insertions_data(application, year):
-    free_credits_rule = get_object_or_404(
-        CallFreeCreditsRule,
-        is_active=True,
-        call=application.call,
-        course_year=year
-    )
-    insertions = ApplicationInsertionFree.objects.filter(
-        application=application,
-        free_credits=free_credits_rule
-    )
-    tot_credits = application.get_credits_status()
-    return {
-        'free_credits_rule': free_credits_rule,
-        'insertions': insertions,
-        'tot_credits': tot_credits or 0
-    }
-
-
-def has_permission_to_download(user, application):
-    if application.user == user:
-        return True
-    elif user.is_superuser and application.submission_date:
-        return True
-    elif application.call.course_json_it.get('DepartmentCod', '') and application.submission_date:
-        is_employee = OrganizationalStructureOfficeEmployee.objects.filter(
-            office__organizational_structure__unique_code=application.call.course_json_it['DepartmentCod'],
-            office__organizational_structure__is_active=True,
-            office__name=VIEW_APPLICATIONS_OFFICE,
-            office__is_active=True,
-            employee=user
-        ).exists()
-        if is_employee:
-            return True
-    return False
