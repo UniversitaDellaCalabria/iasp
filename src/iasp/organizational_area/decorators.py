@@ -44,7 +44,6 @@ def is_structure_operator(func_to_decorate):
                                                           .values_list('office__name', flat=True)
         if not my_offices.exists():
             raise PermissionDenied
-        original_kwargs['my_offices'] = my_offices
         return func_to_decorate(*original_args, **original_kwargs)
     return new_func
 
