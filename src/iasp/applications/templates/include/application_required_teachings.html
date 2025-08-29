@@ -72,7 +72,8 @@
                                             {% if teaching.AfId in insertions %}
                                                 {% if application.is_editable %}
                                                 <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
-                                                    <svg class="icon icon-xs icon-white">
+                                                    <svg class="icon icon-xs icon-white" aria-labelledby="edit">
+                                                        <title id="edit">{% trans "Edit" %}</title>
                                                         <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
                                                     </svg>
                                                 </a>
@@ -84,7 +85,8 @@
                                                 {% else %}
                                                 <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
                                                 {% endif %}
-                                                    <svg class="icon icon-xs icon-white">
+                                                    <svg class="icon icon-xs icon-white" aria-labelledby="view">
+                                                        <title id="view">{% trans "Details" %}</title>
                                                         <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
                                                     </svg>
                                                 </a>
@@ -138,7 +140,8 @@
                                                 {% if module.StudyActivityID in insertions %}
                                                     {% if application.is_editable %}
                                                     <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
-                                                        <svg class="icon icon-xs icon-white">
+                                                        <svg class="icon icon-xs icon-white" aria-labelledby="edit2">
+                                                            <title id="edit2">{% trans "Edit" %}</title>
                                                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
                                                         </svg>
                                                     </a>
@@ -150,7 +153,8 @@
                                                     {% else %}
                                                     <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
                                                     {% endif %}
-                                                        <svg class="icon icon-xs icon-white">
+                                                        <svg class="icon icon-xs icon-white" aria-labelledby="view2">
+                                                            <title id="view2">{% trans "Details" %}</title>
                                                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
                                                         </svg>
                                                     </a>

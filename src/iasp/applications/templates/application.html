@@ -19,7 +19,8 @@
 </a>
 {% if not application.submission_date %}
 <button type="button" class="btn btn-outline-danger btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#delete">
-    <svg class="icon icon-xs icon-danger">
+    <svg class="icon icon-xs icon-danger" aria-labelledby="delete">
+         <title id="delete">{% trans "Delete" %}</title>
         <use xlink:href="{% static 'svg/sprites.svg' %}#it-delete"></use>
     </svg>
 </button>
@@ -154,7 +155,8 @@
                 </ul>
                 {% if application.is_editable %}
                 <a href="{% url 'applications:application_edit' application_pk=application.pk %}" class="btn btn-outline-info btn-xs mt-3">
-                    <svg class="icon icon-xs icon-info">
+                    <svg class="icon icon-xs icon-info" aria-labelledby="edit">
+                        <title id="edit">{% trans "Edit" %}</title>
                         <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
                     </svg>
                 </a>

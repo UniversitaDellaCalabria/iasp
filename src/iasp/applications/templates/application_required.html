@@ -91,10 +91,12 @@
                     {% else %}
                     <a href="{% url 'applications:application_required_edit' application_pk=application.pk teaching_id=target_teaching.id insertion_pk=insertion.pk %}" class="btn btn-info btn-xs">
                     {% endif %}
-                        <svg class="icon icon-xs icon-white">
+                        <svg class="icon icon-xs icon-white" aria-labelledby="action">
                             {% if application.is_editable %}
+                            <title id="action">{% trans "Edit" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
                             {% else %}
+                            <title id="action">{% trans "Details" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
                             {% endif %}
                         </svg>
@@ -102,18 +104,21 @@
 
                     {% if commission %}
                     <a href="{% url 'management:commission_application_required_review' call_pk=application.call.pk application_pk=application.pk teaching_id=target_teaching.id insertion_pk=insertion.pk %}" class="btn btn-success btn-xs">
-                        <svg class="icon icon-xs icon-white">
+                        <svg class="icon icon-xs icon-white" aria-labelledby="edit2">
+                            <title id="edit2">{% trans "Edit" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
                         </svg>
                     </a>
                     <a href="{% url 'management:commission_application_required_review_logs' call_pk=application.call.pk application_pk=application.pk teaching_id=target_teaching.id insertion_pk=insertion.pk %}" class="btn btn-primary btn-xs">
-                        <svg class="icon icon-xs icon-white">
+                        <svg class="icon icon-xs icon-white" aria-labelledby="logs">
+                            <title id="logs">{% trans "Logs" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-file"></use>
                         </svg>
                     </a>
                     {% if insertion.review %}
                     <button type="button" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#delete">
-                        <svg class="icon icon-xs icon-white">
+                        <svg class="icon icon-xs icon-white" aria-labelledby="delete">
+                            <title id="delete">{% trans "Delete" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-delete"></use>
                         </svg>
                     </button>
@@ -148,7 +153,8 @@
 
                     {% if application.is_editable %}
                     <button type="button" class="btn btn-outline-danger btn-xs" data-bs-toggle="modal" data-bs-target="#delete">
-                        <svg class="icon icon-xs icon-danger">
+                        <svg class="icon icon-xs icon-danger" aria-labelledby="delete2">
+                            <title id="delete2">{% trans "Delete" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-delete"></use>
                         </svg>
                     </button>
