@@ -41,5 +41,14 @@
         {% trans "Review credits for" %} {{ insertion.source_teaching_name }}
     </p>
 </div>
+<div class="alert alert-info my-3" role="alert">
+    <ul>
+        <li>{% trans "Code" %}: {{ insertion.source_teaching_cod }}</li>
+        <li>{% trans "Name" %}: {{ insertion.source_teaching_name }}</li>
+        <li>{% trans "SSD" %}: {{ insertion.source_teaching_ssd|default:'-' }}</li>
+        <li>{% trans "Teaching credits" %}: {{ insertion.target_teaching_credits }}</li>
+        <li>{% trans "Acquired credits" %}: {{ insertion.source_teaching_credits }}</li>
+    </ul>
+</div>
 {% include "form_template.html" with form=form %}
 {% endblock clean_content %}
