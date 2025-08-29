@@ -41,6 +41,7 @@
         {% trans "Commission actions log" %}
     </p>
 </div>
+{% if logs %}
 <div class="it-list-wrapper">
   <ul class="it-list">
       {% for log in logs %}
@@ -59,4 +60,7 @@
     {% endfor %}
   </ul>
 </div>
+{% else %}
+{% trans "No items here" %}
+{% endif %}
 {% endblock clean_content %}
