@@ -13,7 +13,7 @@
     <p class="h3">{% trans "Enrollment in years after the first" %}</p>
 </div>
 <div class="row">
-  <div class="col-12 col-lg-4">
+  <div class="col-12 col-lg-6">
     <!--start card-->
     <div class="card-wrapper card-space">
       <div class="card card-bg no-after">
@@ -29,7 +29,7 @@
     </div>
     <!--end card-->
   </div>
-  <div class="col-12 col-lg-4">
+  <div class="col-12 col-lg-6">
     <!--start card-->
     <div class="card-wrapper card-space">
       <div class="card card-bg no-after">
@@ -45,6 +45,7 @@
     </div>
     <!--end card-->
   </div>
+  {% comment %}
   <div class="col-12 col-lg-4">
     <!--start card-->
     <div class="card-wrapper card-space">
@@ -52,17 +53,16 @@
         <div class="card-body">
           <h3 class="card-title h4">{% trans "Evaluation commissions" %}</h3>
           <p class="cart-text">{% trans "Work in progress..." %}</p>
-          {% comment %}
           <a class="read-more" href="#">
             <span class="text">Leggi di più</span>
             <span class="visually-hidden">su Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</span>
             <svg class="icon"><use href="{% static 'svg/sprites.svg' %}#it-arrow-right"></use></svg>
           </a>
-          {% endcomment %}
         </div>
       </div>
     </div>
     <!--end card-->
   </div>
+  {% endcomment %}
 </div>
 {% endblock clean_content %}

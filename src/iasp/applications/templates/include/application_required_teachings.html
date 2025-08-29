@@ -6,7 +6,6 @@
 
 {% for i in course.CdSDuration|add:1|to_range %}
 <p class="h4 mt-4">{% trans "Teachings" %} {{ i }}° {% trans "year" %}</p>
-
 <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered">
         <thead>
@@ -17,6 +16,9 @@
             <th scope="col" class="text-end">{% trans "Teaching program" %}</th>
             <th scope="col" class="text-end">{% trans "Teaching credits" %}</th>
             <th scope="col" class="text-end">{% trans "Acquired credits" %}</th>
+            {% if commission or application.call.can_show_commission_reviews %}
+            <th scope="col" class="text-end table-warning">{% trans "Credits review" %}</th>
+            {% endif %}
             <th scope="col"></th>
           </tr>
         </thead>
@@ -52,9 +54,18 @@
                                         {% endif %}
                                     </td>
                                     {% with declared_credits|get_item:teaching.AfId as declared %}
+                                    {% if not commission and not application.call.can_show_commission_reviews %}
                                     <td class="{% if declared %}table-{% if declared.1 %}success{% else %}warning{% endif %}{% endif %} text-end">
+                                    {% else %}
+                                    <td class="text-end fst-italic">
+                                    {% endif %}
                                         {{ declared.0|default:'-' }}
                                     </td>
+                                    {% if commission or application.call.can_show_commission_reviews %}
+                                    <td class="{% if declared %}table-{% if declared.3 %}success{% else %}warning{% endif %}{% endif %} text-end">
+                                        {{ declared.2|default:'-' }}
+                                    </td>
+                                    {% endif %}
                                     {% endwith %}
                                     <td class="text-end">
                                         {% if not teaching.AfSubModules %}
@@ -68,6 +79,8 @@
                                                 {% else %}
                                                 {% if structure %}
                                                 <a href="{% url 'management:application_required' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
+                                                {% elif commission %}
+                                                <a href="{% url 'management:commission_application_required' call_pk=application.call.pk application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
                                                 {% else %}
                                                 <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
                                                 {% endif %}
@@ -108,9 +121,18 @@
                                             </td>
                                             <td class="text-end fst-italic">{{ module.StudyActivityCreditValue|floatformat:1 }}</td>
                                             {% with declared_credits|get_item:module.StudyActivityID as declared %}
+                                            {% if not commission and not application.call.can_show_commission_reviews %}
                                             <td class="{% if declared %}table-{% if declared.1 %}success{% else %}warning{% endif %}{% endif %} text-end fst-italic">
+                                            {% else %}
+                                            <td class="text-end fst-italic">
+                                            {% endif %}
                                                 {{ declared.0|default:'-' }}
                                             </td>
+                                            {% if commission or application.call.can_show_commission_reviews %}
+                                            <td class="{% if declared %}table-{% if declared.3 %}success{% else %}warning{% endif %}{% endif %} text-end fst-italic">
+                                                {{ declared.2|default:'-' }}
+                                            </td>
+                                            {% endif %}
                                             {% endwith %}
                                             <td class="text-end">
                                                 {% if module.StudyActivityID in insertions %}
@@ -123,6 +145,8 @@
                                                     {% else %}
                                                     {% if structure %}
                                                     <a href="{% url 'management:application_required' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                    {% elif commission %}
+                                                    <a href="{% url 'management:commission_application_required' call_pk=application.call.pk application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
                                                     {% else %}
                                                     <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
                                                     {% endif %}

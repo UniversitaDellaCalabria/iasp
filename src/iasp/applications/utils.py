@@ -11,8 +11,11 @@ from django.urls import reverse
 
 from calls.models import CallExcludedActivity, CallFreeCreditsRule
 
+from management.models import *
 from management.settings import VIEW_APPLICATIONS_OFFICE
+
 from organizational_area.models import OrganizationalStructureOfficeEmployee
+
 from pathlib import Path
 
 from weasyprint import CSS, HTML
@@ -192,7 +195,7 @@ def generate_application_merged_docs(application):
         return False
 
 
-def get_application_required_insertions_data(application):
+def get_application_required_insertions_data(application, show_commission_review=False):
     insertions = application.applicationinsertionrequired_set.all()
 
     codes_to_exclude = CallExcludedActivity.objects.filter(
@@ -207,16 +210,20 @@ def get_application_required_insertions_data(application):
         if not declared_credits.get(insertion.target_teaching_id):
             declared_credits[insertion.target_teaching_id] = [
                 insertion.source_teaching_credits,
-                insertion.source_teaching_credits >= insertion.target_teaching_credits
+                insertion.source_teaching_credits >= insertion.target_teaching_credits,
+                insertion.review.changed_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits,
+                insertion.review.changed_credits >= insertion.target_teaching_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits >= insertion.target_teaching_credits,
             ]
         else:
             tot = declared_credits[insertion.target_teaching_id][0] + insertion.source_teaching_credits
+            tot_review = declared_credits[insertion.target_teaching_id][2] + (insertion.review.changed_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits)
             declared_credits[insertion.target_teaching_id] = [
                 tot,
-                tot >= insertion.target_teaching_credits
+                tot >= insertion.target_teaching_credits,
+                tot_review,
+                tot_review >= insertion.target_teaching_credits
             ]
-
-    tot_credits = application.get_credits_status()
+    tot_credits = application.get_credits_status(show_commission_review)
     return {
         'codes_to_exclude': codes_to_exclude,
         'declared_credits': declared_credits,
@@ -225,7 +232,7 @@ def get_application_required_insertions_data(application):
     }
 
 
-def get_application_free_insertions_data(application, year):
+def get_application_free_insertions_data(application, year, show_commission_review=False):
     free_credits_rule = get_object_or_404(
         CallFreeCreditsRule,
         is_active=True,
@@ -236,7 +243,8 @@ def get_application_free_insertions_data(application, year):
         application=application,
         free_credits=free_credits_rule
     )
-    tot_credits = application.get_credits_status()
+
+    tot_credits = application.get_credits_status(show_commission_review)
     return {
         'free_credits_rule': free_credits_rule,
         'insertions': insertions,
@@ -259,4 +267,12 @@ def has_permission_to_download(user, application):
         ).exists()
         if is_employee:
             return True
+    if CallCommission.objects.filter(
+        call__pk=application.call_id,
+        call__is_active=True,
+        is_active=True,
+        callcommissionmember__user=user,
+        callcommissionmember__is_active=True
+    ).exists():
+        return True
     return False

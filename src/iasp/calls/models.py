@@ -136,6 +136,11 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
                                 return result
         return {}
 
+    def can_show_commission_reviews(self):
+        if not self.commission: return False
+        if not self.commission.is_active: return False
+        return self.commission.show_results
+
 
 class CallExcludedActivity(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     call = models.ForeignKey(Call, on_delete=models.CASCADE)

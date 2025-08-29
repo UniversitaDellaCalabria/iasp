@@ -46,7 +46,13 @@ def applications(request):
 @login_required
 @application_check
 def application(request, application_pk, template='application.html', application=None):
-    tot_credits = application.get_credits_status()
+    show_commission_review = CallCommission.objects.filter(
+        call=application.call,
+        is_active=True,
+        show_results=True
+    ).exists()
+
+    tot_credits = application.get_credits_status(show_commission_review)
 
     free_credits_rules = CallFreeCreditsRule.objects.filter(
         call=application.call,
@@ -351,7 +357,17 @@ def application_delete(request, application_pk, application=None):
 @login_required
 @application_check
 def application_required_list(request, application_pk, application=None):
-    application_data = get_application_required_insertions_data(application)
+    show_commission_review = CallCommission.objects.filter(
+        call=application.call,
+        is_active=True,
+        show_results=True
+    ).exists()
+
+    application_data = get_application_required_insertions_data(
+        application=application,
+        show_commission_review=show_commission_review
+    )
+
     template = 'application_required_list.html'
     return render(
         request,
@@ -543,8 +559,20 @@ def application_required_delete(request, application_pk, insertion_pk, applicati
 @login_required
 @application_check
 def application_free(request, application_pk, year, application=None):
-    data = get_application_free_insertions_data(application, year)
+    show_commission_review = CallCommission.objects.filter(
+        call=application.call,
+        is_active=True,
+        show_results=True
+    ).exists()
+
+    data = get_application_free_insertions_data(
+        application=application,
+        year=year,
+        show_commission_review=show_commission_review
+    )
+
     template = 'application_free.html'
+
     return render(
         request,
         template,
@@ -723,8 +751,7 @@ def download_attachment(user, application_pk, field=''):
     )
 
     permission = has_permission_to_download(user, application)
-
-    if not permission: Http404
+    if not permission: raise Http404
 
     mime = magic.Magic(mime=True)
     field = getattr(application, field, None)

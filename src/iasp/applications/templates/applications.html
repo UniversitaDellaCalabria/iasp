@@ -28,6 +28,7 @@
             <th scope="col">{% trans "Created" %}</th>
             <th scope="col">{% trans "Last modification" %}</th>
             <th scope="col">{% trans "Status" %}</th>
+            <th scope="col">{% trans "Registration number" %}</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -45,6 +46,7 @@
                         <span class="badge bg-warning">{% trans "Draft" %}</span>
                     {% endif %}
                 </td>
+                <td>{{ application.submission_number|default:'-' }}</td>
                 <td>
                     <a href="{% url 'applications:application' application_pk=application.pk %}" class="btn btn-primary btn-xs">
                         {% trans "Details" %}

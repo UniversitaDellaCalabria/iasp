@@ -1,5 +1,5 @@
 import os
-
+from django.apps import apps
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
@@ -11,6 +11,9 @@ from generics.models import *
 
 from . settings import COUNTRIES
 from . validators import *
+
+
+# ~ CommissionLogModel = apps.get_model('management', 'ApplicationInsertionCommissionReviewLogUser')
 
 
 def _attachment_path_required(instance, filename):
@@ -136,8 +139,35 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
             return False
         return self.get_credits_status() >= self.call.credits_threshold
 
-    def get_credits_status(self):
+    def get_credits_status(self, show_commission_review=False):
+        # ~ tot_required = 0
+
+        # ~ required_insertions = (
+            # ~ ApplicationInsertionRequired.objects
+            # ~ .filter(
+                # ~ application=self,
+                # ~ target_teaching_year__lte=self.call.credits_reference_year
+            # ~ )
+            # ~ .values('target_teaching_id', 'target_teaching_credits')
+            # ~ .annotate(total_source_credits=Sum('source_teaching_credits'))
+        # ~ )
+
+        # ~ for req in required_insertions:
+            # ~ tot_required += min(req['total_source_credits'], req['target_teaching_credits'])
+
+        # ~ free_insertions = ApplicationInsertionFree.objects.filter(
+            # ~ application=self,
+            # ~ free_credits__course_year__lte=self.call.credits_reference_year,
+            # ~ free_credits__is_active=True
+        # ~ ).annotate(
+            # ~ min_credits=Case(
+                # ~ When(source_teaching_credits__lt=F('free_credits__max_value'), then=F('source_teaching_credits')),
+                # ~ default=F('free_credits__max_value')
+            # ~ )
+        # ~ )
+
         tot_required = 0
+        tot_free = 0
 
         required_insertions = (
             ApplicationInsertionRequired.objects
@@ -145,24 +175,18 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
                 application=self,
                 target_teaching_year__lte=self.call.credits_reference_year
             )
-            .values('target_teaching_id', 'target_teaching_credits')
-            .annotate(total_source_credits=Sum('source_teaching_credits'))
         )
 
         for req in required_insertions:
-            tot_required += min(req['total_source_credits'], req['target_teaching_credits'])
+            tot_required += req.get_credits(show_commission_review)
 
         free_insertions = ApplicationInsertionFree.objects.filter(
             application=self,
-            free_credits__course_year__lt=self.call.credits_reference_year,
+            free_credits__course_year__lte=self.call.credits_reference_year,
             free_credits__is_active=True
-        ).annotate(
-            min_credits=Case(
-                When(source_teaching_credits__lt=F('free_credits__max_value'), then=F('source_teaching_credits')),
-                default=F('free_credits__max_value')
-            )
         )
-        tot_free = free_insertions.aggregate(Sum('min_credits'))['min_credits__sum'] or 0
+        for free in free_insertions:
+            tot_free += free.get_credits(show_commission_review)
 
         return tot_required + tot_free
 
@@ -200,6 +224,11 @@ class ApplicationInsertion(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     class Meta:
         abstract = True
 
+    def get_credits(self, show_commission_reviews=False):
+        if show_commission_reviews and hasattr(self, 'review'):
+            return self.review.changed_credits
+        return self.source_teaching_credits
+
 
 class ApplicationInsertionRequired(ApplicationInsertion):
     target_teaching_name = models.CharField(max_length=255)
@@ -216,6 +245,13 @@ class ApplicationInsertionRequired(ApplicationInsertion):
     class Meta:
         ordering = ('target_teaching_year', 'target_teaching_cod')
 
+    def get_credits(self, show_commission_reviews=True):
+        value = super().get_credits(show_commission_reviews)
+        if value > self.target_teaching_credits:
+            return self.target_teaching_credits
+        return value
+
+
 class ApplicationInsertionFree(ApplicationInsertion):
     source_teaching_attachment = models.FileField(
         upload_to=_attachment_path_free,
@@ -228,3 +264,9 @@ class ApplicationInsertionFree(ApplicationInsertion):
         CallFreeCreditsRule,
         on_delete=models.PROTECT
     )
+
+    def get_credits(self, show_commission_reviews=True):
+        value = super().get_credits(show_commission_reviews)
+        if value > self.free_credits.max_value:
+            return self.free_credits.max_value
+        return value

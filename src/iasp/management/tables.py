@@ -23,3 +23,17 @@ class ApplicationTable(tables.Table):
         template_name = "django_tables2/bootstrap5-responsive.html"
         fields = ("user", "submission_date", "protocol_number", "protocol_date")
         attrs = {"class": "table table-bordered table-striped table-hover"}
+
+
+class CommissionApplicationTable(ApplicationTable):
+    user = tables.TemplateColumn(
+        verbose_name=_("User"),
+        template_code='''
+        <a href="{% url 'management:commission_application' commission.call.pk record.pk %}">
+            {{ record.user }}
+        </a>
+        '''
+    )
+
+    class Meta:
+        attrs = {"class": "table table-bordered table-striped table-hover"}

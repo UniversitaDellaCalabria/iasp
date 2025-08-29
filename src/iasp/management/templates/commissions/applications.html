@@ -1,0 +1,21 @@
+{% extends "structures/applications.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+{% load render_table from django_tables2 %}
+{% load django_tables2 %}
+
+
+{% block top_buttons %}
+<a href="{% url 'management:commissions' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Commissions" %}
+</a>
+<a href="{% url 'management:commission' call_pk=commission.call.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
+    </svg> {{ commission.name }}
+</a>
+{% endblock top_buttons %}

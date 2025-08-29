@@ -2,6 +2,8 @@ from django import forms
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
+from management.admin import CallCommissionInline
+
 from . models import *
 
 
@@ -76,6 +78,7 @@ class CallAdmin(admin.ModelAdmin):
         CallRequirementInline,
         CallFreeCreditsRuleInline,
         CallTitulusConfigurationInline,
+        CallCommissionInline,
     ]
 
     def course_studyplan_json_it_trunked(self, obj):

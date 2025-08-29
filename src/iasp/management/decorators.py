@@ -1,6 +1,10 @@
-from django.shortcuts import get_object_or_404
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from django.utils.translation import gettext_lazy as _
 
 from applications.models import Application
+
+from . models import CallCommission
 
 
 def application_check(func_to_decorate):
@@ -17,60 +21,49 @@ def application_check(func_to_decorate):
     return new_func
 
 
-# ~ def application_editable(func_to_decorate):
-    # ~ def new_func(*original_args, **original_kwargs):
-        # ~ request = original_args[0]
-        # ~ application = original_kwargs['application']
-        # ~ if not application.is_editable():
-            # ~ messages.add_message(
-                # ~ request,
-                # ~ messages.ERROR,
-                # ~ _('Unable to edit application')
-            # ~ )
-            # ~ return redirect(
-                # ~ 'applications:application',
-                # ~ application_pk=application.pk
-            # ~ )
-        # ~ return func_to_decorate(*original_args, **original_kwargs)
-    # ~ return new_func
+def belongs_to_a_commission(func_to_decorate):
+    def new_func(*original_args, **original_kwargs):
+        request = original_args[0]
+        commissions = CallCommission.objects.filter(
+            is_active=True,
+            callcommissionmember__user=request.user,
+            callcommissionmember__is_active=True
+        )
+
+        if not commissions.exists():
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _('Access denied')
+            )
+            return redirect('generics:home')
+
+        original_kwargs['commissions'] = commissions
+        return func_to_decorate(*original_args, **original_kwargs)
+    return new_func
 
 
-# ~ def activity_check(func_to_decorate):
-    # ~ def new_func(*original_args, **original_kwargs):
-        # ~ request = original_args[0]
-        # ~ application = original_kwargs['application']
-        # ~ teaching_id = original_kwargs['teaching_id']
-        # ~ target_teaching = application.call.get_teaching_data(
-            # ~ teaching_id,
-            # ~ request.LANGUAGE_CODE
-        # ~ )
-        # ~ if target_teaching['modules']:
-            # ~ messages.add_message(
-                # ~ request,
-                # ~ messages.ERROR,
-                # ~ _('The activity is divided into modules. Request validation for each of them')
-            # ~ )
-            # ~ return redirect(
-                # ~ 'applications:application_required_list',
-                # ~ application_pk=application.pk
-            # ~ )
 
-        # ~ codes_to_exclude = CallExcludedActivity.objects.filter(
-            # ~ call=application.call,
-            # ~ is_active=True
-        # ~ ).values_list('code', flat=True)
+def belongs_to_commission(func_to_decorate):
+    def new_func(*original_args, **original_kwargs):
+        request = original_args[0]
+        call_pk = original_kwargs['call_pk']
+        commission = CallCommission.objects.filter(
+            call__pk=call_pk,
+            call__is_active=True,
+            is_active=True,
+            callcommissionmember__user=request.user,
+            callcommissionmember__is_active=True
+        ).select_related('call').first()
 
-        # ~ if target_teaching['cod'] in codes_to_exclude:
-            # ~ messages.add_message(
-                # ~ request,
-                # ~ messages.ERROR,
-                # ~ _('It is not possible to request validation of credits for this activity')
-            # ~ )
-            # ~ return redirect(
-                # ~ 'applications:application_required_list',
-                # ~ application_pk=application.pk
-            # ~ )
+        if not commission or not commission.is_in_progress():
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _('Access denied')
+            )
+            return redirect('generics:home')
 
-        # ~ original_kwargs['target_teaching'] = target_teaching
-        # ~ return func_to_decorate(*original_args, **original_kwargs)
-    # ~ return new_func
+        original_kwargs['commission'] = commission
+        return func_to_decorate(*original_args, **original_kwargs)
+    return new_func

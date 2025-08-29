@@ -29,10 +29,11 @@ from organizational_area.decorators import *
 
 from pathlib import Path
 
-from . decorators import *
-from . filters import ApplicationFilter
-from . settings import *
-from . tables import ApplicationTable
+from .. decorators import *
+from .. filters import ApplicationFilter
+from .. models import *
+from .. settings import *
+from .. tables import *
 
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,7 @@ logger = logging.getLogger(__name__)
 @login_required
 @is_structure_operator
 def calls(request, structure_code, structure=None):
-    template = 'management/calls.html'
+    template = 'structures/calls.html'
     calls = Call.objects.filter(
         is_active=True,
         course_json_it__isnull=False
@@ -65,7 +66,7 @@ def calls(request, structure_code, structure=None):
 @is_structure_operator
 @can_manage_call
 def call(request, structure_code, call_pk, structure=None, call=None):
-    template = 'management/call.html'
+    template = 'structures/call.html'
     return render(
         request,
         template,
@@ -80,7 +81,7 @@ def call(request, structure_code, call_pk, structure=None, call=None):
 @is_structure_operator
 @can_manage_call
 def applications(request, structure_code, call_pk, structure=None, call=None):
-    template = 'management/applications.html'
+    template = 'structures/applications.html'
     applications = Application.objects.filter(
         call=call,
         submission_date__isnull=False
@@ -106,7 +107,16 @@ def applications(request, structure_code, call_pk, structure=None, call=None):
 @can_manage_call
 @application_check
 def application(request, structure_code, call_pk, application_pk, structure=None, call=None, application=None):
-    template = 'management/application.html'
+    template = 'structures/application.html'
+
+    show_commission_review = CallCommission.objects.filter(
+        call=application.call,
+        is_active=True,
+        show_results=True
+    ).exists()
+
+    tot_credits = application.get_credits_status(show_commission_review)
+
     insertions_required = ApplicationInsertionRequired.objects.filter(
         application=application
     ).count()
@@ -132,6 +142,7 @@ def application(request, structure_code, call_pk, application_pk, structure=None
             'insertions_required': insertions_required,
             'insertions_free': insertions_free,
             'structure': structure,
+            'tot_credits': tot_credits
         }
     )
 
@@ -141,8 +152,19 @@ def application(request, structure_code, call_pk, application_pk, structure=None
 @can_manage_call
 @application_check
 def application_required_list(request, structure_code, call_pk, application_pk, structure=None, call=None, application=None):
-    template = 'management/application_required_list.html'
-    application_data = get_application_required_insertions_data(application)
+    template = 'structures/application_required_list.html'
+
+    show_commission_review = CallCommission.objects.filter(
+        call=application.call,
+        is_active=True,
+        show_results=True
+    ).exists()
+
+    application_data = get_application_required_insertions_data(
+        application=application,
+        show_commission_review=show_commission_review
+    )
+
     return render(
         request,
         template,
@@ -165,7 +187,7 @@ def application_required(request, structure_code, call_pk, application_pk, teach
         application=application,
         target_teaching_id=teaching_id
     )
-    template = 'management/application_required.html'
+    template = 'structures/application_required.html'
     return render(
         request,
         template,
@@ -185,7 +207,7 @@ def application_required(request, structure_code, call_pk, application_pk, teach
 @application_check
 @activity_check
 def application_required_detail(request, structure_code, call_pk, application_pk, teaching_id, insertion_pk, structure=None, call=None, application=None, target_teaching={}):
-    template = 'management/application_required_detail.html'
+    template = 'structures/application_required_detail.html'
     insertion = get_object_or_404(
         ApplicationInsertionRequired,
         application=application,
@@ -215,8 +237,20 @@ def application_required_detail(request, structure_code, call_pk, application_pk
 @can_manage_call
 @application_check
 def application_free(request, structure_code, call_pk, application_pk, year, structure=None, call=None, application=None):
-    data = get_application_free_insertions_data(application, year)
-    template = 'management/application_free.html'
+    show_commission_review = CallCommission.objects.filter(
+        call=application.call,
+        is_active=True,
+        show_results=True
+    ).exists()
+
+    data = get_application_free_insertions_data(
+        application=application,
+        year=year,
+        show_commission_review=show_commission_review
+    )
+
+    template = 'structures/application_free.html'
+
     return render(
         request,
         template,
@@ -252,7 +286,7 @@ def application_free_detail(request, structure_code, call_pk, application_pk, ye
         application=application,
         free_credits_rule=free_credits_rule
     )
-    template = 'management/application_free_detail.html'
+    template = 'structures/application_free_detail.html'
 
     return render(
         request,

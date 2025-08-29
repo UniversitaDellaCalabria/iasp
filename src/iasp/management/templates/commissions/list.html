@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load iasp_tags %}
+
+
+{% block top_buttons_surround %}
+{% endblock top_buttons_surround %}
+
+{% block clean_content %}
+{% get_current_language as LANGUAGE_CODE %}
+<div class="mb-4">
+    <p class="h3">
+        {% trans "My commissions" %}
+    </p>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">{% trans "Call" %}</th>
+            <th scope="col">{% trans "Name" %}</th>
+            <th scope="col" class="text-end">{% trans "Start" %}</th>
+            <th scope="col" class="text-end">{% trans "End" %}</th>
+            <th scope="col" class="text-end">{% trans "Active" %}</th>
+            <th scope="col" class="text-end"></th>
+            <th scope="col" class="text-end"></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for commission in commissions %}
+            <tr>
+                <td>{{ commission.call }}</td>
+                <td>{{ commission.name }}</td>
+                <td class="text-end">{{ commission.start }}</td>
+                <td class="text-end">{{ commission.end }}</td>
+                <td class="text-end">
+                    {% if commission.is_in_progress %}
+                    <svg class="icon icon-sm icon-success">
+                        <use href="{% static 'svg/sprites.svg' %}#it-check-circle"></use>
+                    </svg>
+                    {% else %}
+                    <svg class="icon icon-sm icon-danger">
+                        <use href="{% static 'svg/sprites.svg' %}#it-close-circle"></use>
+                    </svg>
+                    {% endif %}
+                </td>
+                <td class="text-end">
+                    <a href="{% url 'management:commission_applications' call_pk=commission.call.pk %}" class="btn btn-primary btn-xs">
+                        {% trans "View applications" %}
+                    </a>
+                </td>
+                <td class="text-end">
+                    <a href="{% url 'management:commission' call_pk=commission.call.pk %}" class="btn btn-primary btn-xs">
+                        {% trans "Details" %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock clean_content %}

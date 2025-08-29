@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load static %}
+
+
+{% if tot_credits >= application.call.credits_threshold %}
+<div class="alert alert-success my-3" role="alert">
+    {% trans "The candidate has reached the minimum limit of required credits by the call" %} (<b>{{ application.call.credits_threshold }}</b>).
+    <br>
+    {% trans "Declared" %} <b>{{ tot_credits|floatformat:1 }}</b>.
+</div>
+{% else %}
+<div class="alert alert-danger my-3" role="alert">
+    <p class="h5 alert-heading">{% trans "Warning" %}</p>
+    {% trans "The candidate has not reached the minimum number of required credits by the call" %} (<b>{{ application.call.credits_threshold }}</b>).
+    <br>
+    {% trans "Acquired credits" %} <b>{{ tot_credits|floatformat:1 }}</b>.
+</div>
+{% endif %}

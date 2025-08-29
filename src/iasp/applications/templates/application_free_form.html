@@ -24,7 +24,7 @@
 <a href="{% url 'applications:application_free' application_pk=application.pk year=free_credits_rule.course_year %}" class="btn btn-outline-secondary ms-md-1">
     <svg class="icon icon-sm">
         <use href="{% static 'svg/sprites.svg' %}#it-list"></use>
-    </svg> {% trans "Free credits" %}{{ free_credits_rule.course_year }}° {% trans "year" %}
+    </svg> {% trans "Free credits" %} {{ free_credits_rule.course_year }}° {% trans "year" %}
 </a>
 {% endblock top_buttons %}
 

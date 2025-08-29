@@ -16,13 +16,12 @@
 {% block header_center_search %}
 {% endblock header_center_search %}
 
+{% block header_slim_top_left %}
+<span class="text-white">{{ request.user }}</span>
+{% endblock header_slim_top_left %}
+
 {% block menu_links %}
-{% if structure %}
-<li class="nav-item">
-    <a class="nav-link ps-lg-0" href="{% url 'management:calls' structure_code=structure.unique_code %}">
-        <span>{% trans "Dashboard" %}</span>
-    </a>
-</li>
+{% if structure or commissions or commission %}
 {% else %}
 <li class="nav-item">
     <a class="nav-link ps-lg-0" href="{% url 'generics:home' %}">
@@ -62,6 +61,8 @@
                     {% trans "Active role" %}:
                     {% if structure %}
                         {{ structure.name }}
+                    {% elif commissions or commission %}
+                        {% trans "Commission member" %}
                     {% else %}
                         {% trans "User" %}
                     {% endif %}
@@ -75,7 +76,7 @@
                 <div class="link-list-wrapper">
                     <ul class="link-list">
                         <li>
-                            <a class="list-item" href="{% if structure %}{% url 'generics:home' %}{% else %}#{% endif %}">
+                            <a class="list-item" href="{% if structure or commissions or commission %}{% url 'generics:home' %}{% else %}#{% endif %}">
                                 <span>{% trans "User" %}</span>
                             </a>
                         </li>
@@ -86,6 +87,11 @@
                             </a>
                         </li>
                         {% endfor %}
+                        <li>
+                            <a class="list-item" href="{% url 'management:commissions' %}">
+                                <span>{% trans "Commission member" %}</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

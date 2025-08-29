@@ -1,0 +1,40 @@
+{% extends "structures/application_required_detail.html" %}
+
+{% load i18n %}
+{% load static %}
+
+
+{% block top_buttons %}
+<a href="{% url 'management:commissions' %}" class="btn btn-outline-secondary">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-arrow-left"></use>
+    </svg> {% trans "Commissions" %}
+</a>
+<a href="{% url 'management:commission' call_pk=application.call.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
+    </svg> {{ commission.name }}
+</a>
+<a href="{% url 'management:commission_applications' call_pk=application.call.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-list"></use>
+    </svg> {% trans "Applications" %}
+</a>
+<a href="{% url 'management:commission_application' call_pk=application.call.pk application_pk=application.pk %}" class="btn btn-outline-secondary ms-md-1">
+    <svg class="icon icon-sm">
+        <use href="{% static 'svg/sprites.svg' %}#it-user"></use>
+    </svg> {{ application.user }}
+</a>
+<a href="{% url 'management:commission_application_free' call_pk=application.call.pk application_pk=application.pk year=year %}" class="btn btn-outline-secondary ms-md-1">
+    {% trans "Free credits" %} {{ year }}° {% trans "year" %}
+</a>
+{% endblock top_buttons %}
+
+{% block clean_content %}
+<div class="mb-4">
+    <p class="h3">
+        {% trans "Review credits for" %} {{ insertion.source_teaching_name }}
+    </p>
+</div>
+{% include "form_template.html" with form=form %}
+{% endblock clean_content %}
