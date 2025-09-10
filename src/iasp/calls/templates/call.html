@@ -139,7 +139,7 @@
 
 <div class="d-grid gap-2">
     {% block call_action %}
-    <a href="{% url 'applications:application_new' call_pk=application.call.pk %}" class="btn btn-success">
+    <a href="{% url 'applications:application_new' call_pk=call.pk %}" class="btn btn-success">
         <svg class="icon icon-sm icon-white">
             <use xlink:href="{% static 'svg/sprites.svg' %}#it-check"></use>
         </svg> {% trans "Participate" %}
