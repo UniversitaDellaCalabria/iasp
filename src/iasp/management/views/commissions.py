@@ -306,6 +306,25 @@ def application_required_review(request, call_pk, application_pk, teaching_id, i
                 )
             )
 
+            # log
+            logger.info(
+                "[{time}] utente {user}, commissione \"{commission}\" del bando \"{call}\", "
+                "ha revisionato il valore dei CFU (da {old_credits} a {new_credits}) "
+                "per l'insegnamento di \"{teaching}\", inserito per la convalida di {target_teaching}, "
+                "nella domanda di {student}".format(
+                    time=timezone.localtime(),
+                    user=request.user,
+                    commission=commission.name,
+                    call=commission.call,
+                    old_credits=insertion.source_teaching_credits,
+                    new_credits=review.changed_credits,
+                    teaching=insertion.source_teaching_name,
+                    target_teaching=insertion.target_teaching_name,
+                    student=application.user,
+                )
+            )
+            # end log
+
             messages.add_message(
                 request,
                 messages.SUCCESS,
@@ -386,6 +405,25 @@ def application_free_review(request, call_pk, application_pk, year, insertion_pk
                 )
             )
 
+            # log
+            logger.info(
+                "[{time}] utente {user}, commissione \"{commission}\" del bando \"{call}\", "
+                "ha revisionato il valore dei CFU (da {old_credits} a {new_credits}) "
+                "per l'insegnamento di \"{teaching}\", crediti a scelta {year}° anno, "
+                "nella domanda di {student}".format(
+                    time=timezone.localtime(),
+                    user=request.user,
+                    commission=commission.name,
+                    call=commission.call,
+                    old_credits=insertion.source_teaching_credits,
+                    new_credits=review.changed_credits,
+                    teaching=insertion.source_teaching_name,
+                    year=insertion.free_credits.course_year,
+                    student=application.user,
+                )
+            )
+            # end log
+
             messages.add_message(
                 request,
                 messages.SUCCESS,
@@ -444,6 +482,23 @@ def application_required_review_delete(request, call_pk, application_pk, teachin
             text=_("Review deleted")
         )
 
+        # log
+        logger.info(
+            "[{time}] utente {user}, commissione \"{commission}\" del bando \"{call}\", "
+            "ha eliminato la revisione dei CFU "
+            "per l'insegnamento di \"{teaching}\", inserito per la convalida di {target_teaching}, "
+            "nella domanda di {student}".format(
+                time=timezone.localtime(),
+                user=request.user,
+                commission=commission.name,
+                call=commission.call,
+                teaching=insertion.source_teaching_name,
+                target_teaching=insertion.target_teaching_name,
+                student=application.user,
+            )
+        )
+        # end log
+
         review.delete()
 
         messages.add_message(
@@ -493,6 +548,23 @@ def application_free_review_delete(request, call_pk, application_pk, year, inser
             object_id=insertion.pk,
             text=_("Review deleted")
         )
+
+        # log
+        logger.info(
+            "[{time}] utente {user}, commissione \"{commission}\" del bando \"{call}\", "
+            "ha eliminato la revisione dei CFU "
+            "per l'insegnamento di \"{teaching}\", crediti a scelta {year}° anno, "
+            "nella domanda di {student}".format(
+                time=timezone.localtime(),
+                user=request.user,
+                commission=commission.name,
+                call=commission.call,
+                teaching=insertion.source_teaching_name,
+                year=insertion.free_credits.course_year,
+                student=application.user,
+            )
+        )
+        # end log
 
         review.delete()
 

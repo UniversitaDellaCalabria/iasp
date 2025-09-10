@@ -117,14 +117,14 @@
                         </svg>
                     </a>
                     {% if insertion.review %}
-                    <button type="button" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#delete">
+                    <button type="button" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#delete-commission-{{ insertion.pk }}">
                         <svg class="icon icon-xs icon-white" aria-labelledby="delete">
                             <title id="delete">{% trans "Delete" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-delete"></use>
                         </svg>
                     </button>
                     <div class="it-example-modal">
-                       <div class="modal" tabindex="-1" role="dialog" id="delete" aria-labelledby="actionTitle">
+                       <div class="modal" tabindex="-1" role="dialog" id="delete-commission{{ insertion.pk }}" aria-labelledby="actionTitle">
                           <div class="modal-dialog" role="document">
                              <div class="modal-content">
                                 <div class="modal-header">
@@ -153,14 +153,14 @@
                     {% endif %}
 
                     {% if application.is_editable %}
-                    <button type="button" class="btn btn-outline-danger btn-xs" data-bs-toggle="modal" data-bs-target="#delete">
+                    <button type="button" class="btn btn-outline-danger btn-xs" data-bs-toggle="modal" data-bs-target="#delete-{{ insertion.pk }}">
                         <svg class="icon icon-xs icon-danger" aria-labelledby="delete2">
                             <title id="delete2">{% trans "Delete" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-delete"></use>
                         </svg>
                     </button>
                     <div class="it-example-modal text-start">
-                       <div class="modal" tabindex="-1" role="dialog" id="delete" aria-labelledby="actionTitle">
+                       <div class="modal" tabindex="-1" role="dialog" id="delete-{{ insertion.pk }}" aria-labelledby="actionTitle">
                           <div class="modal-dialog" role="document">
                              <div class="modal-content">
                                 <div class="modal-header">
