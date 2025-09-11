@@ -53,6 +53,7 @@ class ApplicationInsertionCommissionReview(CreatedModifiedBy, TimeStampedModel):
         blank=False,
         null=True
     )
+    changed_grade = models.CharField(max_length=255)
     notes = models.TextField()
 
     class Meta:

@@ -9,10 +9,12 @@ class ApplicationInsertionRequiredCommissionReviewForm(forms.ModelForm):
         model = ApplicationInsertionRequiredCommissionReview
         fields = [
             'changed_credits',
+            'changed_grade',
             'notes',
         ]
         labels = {
             'changed_credits': _("Credits"),
+            'changed_credits': _("Vote/outcome"),
             'notes': _("Notes"),
         }
 
@@ -22,9 +24,11 @@ class ApplicationInsertionFreeCommissionReviewForm(forms.ModelForm):
         model = ApplicationInsertionFreeCommissionReview
         fields = [
             'changed_credits',
+            'changed_grade',
             'notes',
         ]
         labels = {
             'changed_credits': _("Credits"),
+            'changed_credits': _("Vote/outcome"),
             'notes': _("Notes"),
         }

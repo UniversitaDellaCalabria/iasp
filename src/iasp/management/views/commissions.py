@@ -311,7 +311,8 @@ def application_required_review(request, call_pk, application_pk, teaching_id, i
             # log
             logger.info(
                 "[{time}] utente {user}, commissione \"{commission}\" del bando \"{call}\", "
-                "ha revisionato il valore dei CFU (da {old_credits} a {new_credits}) "
+                "ha revisionato il valore dei CFU (da {old_credits} a {new_credits}), "
+                "voto da {old_grade} a {new_grade}, "
                 "per l'insegnamento di \"{teaching}\", inserito per la convalida di {target_teaching}, "
                 "nella domanda di {student}".format(
                     time=timezone.localtime(),
@@ -319,7 +320,9 @@ def application_required_review(request, call_pk, application_pk, teaching_id, i
                     commission=commission.name,
                     call=commission.call,
                     old_credits=insertion.source_teaching_credits,
+                    old_grade=insertion.source_teaching_grade,
                     new_credits=review.changed_credits,
+                    new_grade=review.changed_grade,
                     teaching=insertion.source_teaching_name,
                     target_teaching=insertion.target_teaching_name,
                     student=application.user,
@@ -410,7 +413,8 @@ def application_free_review(request, call_pk, application_pk, year, insertion_pk
             # log
             logger.info(
                 "[{time}] utente {user}, commissione \"{commission}\" del bando \"{call}\", "
-                "ha revisionato il valore dei CFU (da {old_credits} a {new_credits}) "
+                "ha revisionato il valore dei CFU (da {old_credits} a {new_credits}), "
+                "voto da {old_grade} a {new_grade}, "
                 "per l'insegnamento di \"{teaching}\", crediti a scelta {year}° anno, "
                 "nella domanda di {student}".format(
                     time=timezone.localtime(),
@@ -418,7 +422,9 @@ def application_free_review(request, call_pk, application_pk, year, insertion_pk
                     commission=commission.name,
                     call=commission.call,
                     old_credits=insertion.source_teaching_credits,
+                    old_grade=insertion.source_teaching_grade,
                     new_credits=review.changed_credits,
+                    new_grade=review.changed_grade,
                     teaching=insertion.source_teaching_name,
                     year=insertion.free_credits.course_year,
                     student=application.user,
