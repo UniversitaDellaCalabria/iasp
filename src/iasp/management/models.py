@@ -1,6 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
@@ -73,18 +71,3 @@ class ApplicationInsertionFreeCommissionReview(CreatedModifiedBy, TimeStampedMod
         validators=[MinValueValidator(0.0)]
     )
     notes = models.TextField()
-
-
-class ApplicationInsertionCommissionReviewLog(models.Model):
-    created_by = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
-    created = models.DateTimeField(auto_now_add=True)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-    text = models.TextField()
-
-    class Meta:
-        ordering = ("-created",)
-        indexes = [
-            models.Index(fields=['content_type', 'object_id']),
-        ]

@@ -26,6 +26,8 @@ from calls.models import *
 
 from django_tables2 import RequestConfig
 
+from generics.models import Log
+
 from organizational_area.decorators import *
 
 from pathlib import Path
@@ -294,7 +296,7 @@ def application_required_review(request, call_pk, application_pk, teaching_id, i
             review.modified_by = request.user
             review.save()
 
-            ApplicationInsertionCommissionReviewLog.objects.create(
+            Log.objects.create(
                 created_by=request.user,
                 content_type = ContentType.objects.get_for_model(insertion),
                 object_id=insertion.pk,
@@ -393,7 +395,7 @@ def application_free_review(request, call_pk, application_pk, year, insertion_pk
             review.modified_by = request.user
             review.save()
 
-            ApplicationInsertionCommissionReviewLog.objects.create(
+            Log.objects.create(
                 created_by=request.user,
                 content_type = ContentType.objects.get_for_model(insertion),
                 object_id=insertion.pk,
@@ -475,7 +477,7 @@ def application_required_review_delete(request, call_pk, application_pk, teachin
             _('Review not found')
         )
     else:
-        ApplicationInsertionCommissionReviewLog.objects.create(
+        Log.objects.create(
             created_by=request.user,
             content_type = ContentType.objects.get_for_model(insertion),
             object_id=insertion.pk,
@@ -542,7 +544,7 @@ def application_free_review_delete(request, call_pk, application_pk, year, inser
             _('Review not found')
         )
     else:
-        ApplicationInsertionCommissionReviewLog.objects.create(
+        Log.objects.create(
             created_by=request.user,
             content_type = ContentType.objects.get_for_model(insertion),
             object_id=insertion.pk,
@@ -594,7 +596,7 @@ def application_required_review_logs(request, call_pk, application_pk, teaching_
         pk=insertion_pk
     )
 
-    logs = ApplicationInsertionCommissionReviewLog.objects.filter(
+    logs = Log.objects.filter(
         content_type=ContentType.objects.get_for_model(insertion),
         object_id=insertion.pk
     )
@@ -629,7 +631,7 @@ def application_free_review_logs(request, call_pk, application_pk, year, inserti
         pk=insertion_pk
     )
 
-    logs = ApplicationInsertionCommissionReviewLog.objects.filter(
+    logs = Log.objects.filter(
         content_type=ContentType.objects.get_for_model(insertion),
         object_id=insertion.pk
     )
