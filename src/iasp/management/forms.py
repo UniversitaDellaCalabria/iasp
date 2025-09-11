@@ -14,7 +14,7 @@ class ApplicationInsertionRequiredCommissionReviewForm(forms.ModelForm):
         ]
         labels = {
             'changed_credits': _("Credits"),
-            'changed_credits': _("Vote/outcome"),
+            'changed_grade': _("Vote/outcome"),
             'notes': _("Notes"),
         }
 
@@ -29,6 +29,6 @@ class ApplicationInsertionFreeCommissionReviewForm(forms.ModelForm):
         ]
         labels = {
             'changed_credits': _("Credits"),
-            'changed_credits': _("Vote/outcome"),
+            'changed_grade': _("Vote/outcome"),
             'notes': _("Notes"),
         }
