@@ -17,7 +17,7 @@
             <th scope="col" class="text-end">{% trans "Teaching credits" %}</th>
             <th scope="col" class="text-end">{% trans "Acquired credits" %}</th>
             {% if commission or application.call.can_show_commission_reviews %}
-            <th scope="col" class="text-end table-warning">{% trans "Credits review" %}</th>
+            <th scope="col" class="text-end table-info">{% trans "Credits review" %}</th>
             {% endif %}
             <th scope="col"></th>
           </tr>
@@ -54,16 +54,12 @@
                                         {% endif %}
                                     </td>
                                     {% with declared_credits|get_item:teaching.AfId as declared %}
-                                    {% if not commission and not application.call.can_show_commission_reviews %}
                                     <td class="{% if declared %}table-{% if declared.1 %}success{% else %}warning{% endif %}{% endif %} text-end">
-                                    {% else %}
-                                    <td class="text-end fst-italic">
-                                    {% endif %}
                                         {{ declared.0|default:'-' }}
                                     </td>
                                     {% if commission or application.call.can_show_commission_reviews %}
-                                    <td class="{% if declared %}table-{% if declared.3 %}success{% else %}warning{% endif %}{% endif %} text-end">
-                                        {{ declared.2|default:'-' }}
+                                    <td class="table-{% if declared %}{% if declared.2 == 0 %}danger{% elif declared.3 %}success{% elif declared.3 is not none %}warning{% else %}info{% endif %}{% else %}info{% endif %} text-end">
+                                        {{ declared.2|default_if_none:'-' }}
                                     </td>
                                     {% endif %}
                                     {% endwith %}
@@ -123,16 +119,12 @@
                                             </td>
                                             <td class="text-end fst-italic">{{ module.StudyActivityCreditValue|floatformat:1 }}</td>
                                             {% with declared_credits|get_item:module.StudyActivityID as declared %}
-                                            {% if not commission and not application.call.can_show_commission_reviews %}
                                             <td class="{% if declared %}table-{% if declared.1 %}success{% else %}warning{% endif %}{% endif %} text-end fst-italic">
-                                            {% else %}
-                                            <td class="text-end fst-italic">
-                                            {% endif %}
                                                 {{ declared.0|default:'-' }}
                                             </td>
                                             {% if commission or application.call.can_show_commission_reviews %}
-                                            <td class="{% if declared %}table-{% if declared.3 %}success{% else %}warning{% endif %}{% endif %} text-end fst-italic">
-                                                {{ declared.2|default:'-' }}
+                                            <td class="table-{% if declared %}{% if declared.2 == 0 %}danger{% elif declared.3 %}success{% elif declared.3 is not none %}warning{% else %}info{% endif %}{% else %}info{% endif %} text-end">
+                                                {{ declared.2|default_if_none:'-' }}
                                             </td>
                                             {% endif %}
                                             {% endwith %}

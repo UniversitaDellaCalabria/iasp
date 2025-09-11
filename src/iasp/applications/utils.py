@@ -211,12 +211,15 @@ def get_application_required_insertions_data(application, show_commission_review
             declared_credits[insertion.target_teaching_id] = [
                 insertion.source_teaching_credits,
                 insertion.source_teaching_credits >= insertion.target_teaching_credits,
-                insertion.review.changed_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits,
-                insertion.review.changed_credits >= insertion.target_teaching_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits >= insertion.target_teaching_credits,
+                # ~ insertion.review.changed_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits,
+                insertion.review.changed_credits if hasattr(insertion, 'review') else None,
+                # ~ insertion.review.changed_credits >= insertion.target_teaching_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits >= insertion.target_teaching_credits,
+                insertion.review.changed_credits >= insertion.target_teaching_credits if hasattr(insertion, 'review') else None,
             ]
         else:
             tot = declared_credits[insertion.target_teaching_id][0] + insertion.source_teaching_credits
-            tot_review = declared_credits[insertion.target_teaching_id][2] + (insertion.review.changed_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits)
+            # ~ tot_review = declared_credits[insertion.target_teaching_id][2] + (insertion.review.changed_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits)
+            tot_review = declared_credits[insertion.target_teaching_id][2] + (insertion.review.changed_credits if hasattr(insertion, 'review') else None)
             declared_credits[insertion.target_teaching_id] = [
                 tot,
                 tot >= insertion.target_teaching_credits,
