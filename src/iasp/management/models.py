@@ -50,8 +50,6 @@ class ApplicationInsertionCommissionReview(CreatedModifiedBy, TimeStampedModel):
         max_digits=3,
         decimal_places=1,
         validators=[MinValueValidator(0.0)],
-        blank=False,
-        null=True
     )
     changed_grade = models.CharField(max_length=255)
     notes = models.TextField()
