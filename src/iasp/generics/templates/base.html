@@ -2,7 +2,9 @@
 
 {% load i18n %}
 {% load static %}
+
 {% load iasp_tags %}
+{% load management_tags %}
 {% load organizational_area_tags %}
 
 
@@ -48,8 +50,9 @@
 
 {% block header_slim_buttons %}
 {% settings_value "LOGOUT_URL" as logout_url %}
+{% is_commission_member request.user as commission_member %}
 {% is_operator request.user as structures %}
-{% if structures %}
+{% if commission_member or structures %}
 <div class="nav-item dropdown w-100">
      <a class="nav-link dropdown-toggle px-0 pe-lg-2 float-left d-block d-lg-flex" href="#" data-bs-toggle="dropdown" aria-expanded="false">
         <div class="it-access-top-wrapper">

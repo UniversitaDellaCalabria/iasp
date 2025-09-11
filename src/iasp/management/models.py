@@ -45,29 +45,31 @@ class CallCommissionMember(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         ]
 
 
-class ApplicationInsertionRequiredCommissionReview(CreatedModifiedBy, TimeStampedModel):
+class ApplicationInsertionCommissionReview(CreatedModifiedBy, TimeStampedModel):
+    changed_credits = models.DecimalField(
+        max_digits=3,
+        decimal_places=1,
+        validators=[MinValueValidator(0.0)],
+        blank=False,
+        null=True
+    )
+    notes = models.TextField()
+
+    class Meta:
+        abstract = True
+
+
+class ApplicationInsertionRequiredCommissionReview(ApplicationInsertionCommissionReview):
     insertion = models.OneToOneField(
         ApplicationInsertionRequired,
         on_delete=models.PROTECT,
         related_name="review"
     )
-    changed_credits = models.DecimalField(
-        max_digits=3,
-        decimal_places=1,
-        validators=[MinValueValidator(0.0)]
-    )
-    notes = models.TextField()
 
 
-class ApplicationInsertionFreeCommissionReview(CreatedModifiedBy, TimeStampedModel):
+class ApplicationInsertionFreeCommissionReview(ApplicationInsertionCommissionReview):
     insertion = models.OneToOneField(
         ApplicationInsertionFree,
         on_delete=models.PROTECT,
         related_name="review"
     )
-    changed_credits = models.DecimalField(
-        max_digits=3,
-        decimal_places=1,
-        validators=[MinValueValidator(0.0)]
-    )
-    notes = models.TextField()

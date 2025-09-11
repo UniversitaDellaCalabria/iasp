@@ -8,7 +8,7 @@
     <br>
     {% trans "Declared" %} <b>{{ tot_credits|floatformat:1 }}</b>.
 </div>
-{% elif not application.submission_date %} %}
+{% elif not application.submission_date %}
 <div class="alert alert-danger my-3" role="alert">
     <p class="h5 alert-heading">{% trans "Warning" %}</p>
     {% trans "You are competing for the year" %} <b>{{ application.call.course_year }}</b>.
