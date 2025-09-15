@@ -219,7 +219,15 @@ def get_application_required_insertions_data(application, show_commission_review
         else:
             tot = declared_credits[insertion.target_teaching_id][0] + insertion.source_teaching_credits
             # ~ tot_review = declared_credits[insertion.target_teaching_id][2] + (insertion.review.changed_credits if hasattr(insertion, 'review') else insertion.source_teaching_credits)
-            tot_review = declared_credits[insertion.target_teaching_id][2] + (insertion.review.changed_credits if hasattr(insertion, 'review') else None)
+            tot_review = declared_credits[insertion.target_teaching_id][2]
+            insertion_review_changed_credits = insertion.review.changed_credits if hasattr(insertion, 'review') else None
+            tot_review_item = None
+            if tot_review != None and insertion_review_changed_credits != None:
+                tot_review_item = tot_review + insertion_review_changed_credits
+            elif tot_review != None and insertion_review_changed_credits == None:
+                tot_review_item = tot_review
+            elif tot_review == None and insertion_review_changed_credits != None:
+                tot_review = insertion_review_changed_credits
             declared_credits[insertion.target_teaching_id] = [
                 tot,
                 tot >= insertion.target_teaching_credits,
