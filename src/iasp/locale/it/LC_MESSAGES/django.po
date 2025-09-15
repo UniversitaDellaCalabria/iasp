@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-11 16:13+0200\n"
-"PO-Revision-Date: 2025-09-11 16:13+0200\n"
+"POT-Creation-Date: 2025-09-15 17:53+0200\n"
+"PO-Revision-Date: 2025-09-15 17:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -373,7 +373,7 @@ msgid "Vote/outcome"
 msgstr "Voto/esito"
 
 #: applications/forms.py:146 management/forms.py:18 management/forms.py:33
-#: management/views/commissions.py:306 management/views/commissions.py:408
+#: management/views/commissions.py:308 management/views/commissions.py:412
 msgid "Notes"
 msgstr "Note"
 
@@ -724,7 +724,7 @@ msgstr "Richiesta di riconoscimento crediti a scelta di"
 #: applications/views.py:516 applications/views.py:628
 #: applications/views.py:704
 #: management/templates/management/credits_alert.html:13
-#: management/views/commissions.py:348 management/views/commissions.py:450
+#: management/views/commissions.py:350 management/views/commissions.py:454
 msgid "Warning"
 msgstr "Attenzione"
 
@@ -901,8 +901,8 @@ msgstr "Ricevuta caricata con successo"
 #: applications/views.py:106 applications/views.py:192
 #: applications/views.py:257 applications/views.py:441
 #: applications/views.py:516 applications/views.py:628
-#: applications/views.py:704 management/views/commissions.py:348
-#: management/views/commissions.py:450
+#: applications/views.py:704 management/views/commissions.py:350
+#: management/views/commissions.py:454
 msgid "There are errors in the form"
 msgstr "Ci sono errori nel form"
 
@@ -914,8 +914,8 @@ msgstr "Impossibile partecipare al bando selezionato"
 msgid "There is already an application against you for this call"
 msgstr "Esiste già una domanda a tuo carico per questo bando"
 
-#: applications/views.py:247 management/views/commissions.py:336
-#: management/views/commissions.py:438
+#: applications/views.py:247 management/views/commissions.py:338
+#: management/views/commissions.py:442
 msgid "Data modified successfully"
 msgstr "Dati modificati con successo"
 
@@ -1203,19 +1203,23 @@ msgstr "Bandi"
 msgid "No calls here"
 msgstr "Nessun bando"
 
-#: management/views/commissions.py:304 management/views/commissions.py:406
+#: management/views/commissions.py:304 management/views/commissions.py:408
 msgid "New credits value"
 msgstr "Nuovo valore crediti"
 
-#: management/views/commissions.py:483 management/views/commissions.py:550
+#: management/views/commissions.py:306 management/views/commissions.py:410
+msgid "New grade value"
+msgstr "Nuovo valore voto"
+
+#: management/views/commissions.py:487 management/views/commissions.py:554
 msgid "Review not found"
 msgstr "Revisione non trovata"
 
-#: management/views/commissions.py:490 management/views/commissions.py:557
+#: management/views/commissions.py:494 management/views/commissions.py:561
 msgid "Review deleted"
 msgstr "Revisione eliminata"
 
-#: management/views/commissions.py:515 management/views/commissions.py:582
+#: management/views/commissions.py:519 management/views/commissions.py:586
 msgid "Review removed successfully"
 msgstr "Revisione eliminata con successo"
 

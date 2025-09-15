@@ -300,9 +300,11 @@ def application_required_review(request, call_pk, application_pk, teaching_id, i
                 created_by=request.user,
                 content_type = ContentType.objects.get_for_model(insertion),
                 object_id=insertion.pk,
-                text="{}: {} / {}: {}".format(
+                text="{}: {} / {}: {} / {}: {}".format(
                     _("New credits value"),
                     review.changed_credits,
+                    _("New grade value"),
+                    review.changed_grade,
                     _("Notes"),
                     review.notes
                 )
@@ -402,9 +404,11 @@ def application_free_review(request, call_pk, application_pk, year, insertion_pk
                 created_by=request.user,
                 content_type = ContentType.objects.get_for_model(insertion),
                 object_id=insertion.pk,
-                text="{}: {} / {}: {}".format(
+                text="{}: {} / {}: {} / {}: {}".format(
                     _("New credits value"),
                     review.changed_credits,
+                    _("New grade value"),
+                    review.changed_grade,
                     _("Notes"),
                     review.notes
                 )
