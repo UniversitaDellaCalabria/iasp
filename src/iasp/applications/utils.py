@@ -232,7 +232,7 @@ def get_application_required_insertions_data(application, show_commission_review
                 tot,
                 tot >= insertion.target_teaching_credits,
                 tot_review,
-                tot_review >= insertion.target_teaching_credits
+                tot_review >= insertion.target_teaching_credits if tot_review else None
             ]
     tot_credits = application.get_credits_status(show_commission_review)
     return {
