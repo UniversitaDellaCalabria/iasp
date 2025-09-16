@@ -26,6 +26,7 @@
             <th scope="col" class="text-end">{% trans "Year" %}</th>
             <th scope="col" class="text-end">{% trans "Places available" %}</th>
             <th scope="col" class="text-end">{% trans "Expiration" %}</th>
+            <th scope="col" class="text-end">{% trans "Applications" %}</th>
             <th scope="col" class="text-end"></th>
             <th scope="col" class="text-end"></th>
           </tr>
@@ -44,6 +45,7 @@
                 <td class="text-end">{{ call.course_year }}°</td>
                 <td class="text-end">{{ call.places_available }}</td>
                 <td class="text-end">{{ call.end }}</td>
+                <td class="text-end">{{ call.applications_count }}</td>
                 <td class="text-end">
                     <a href="{% url 'management:applications' structure_code=structure.unique_code call_pk=call.pk %}" class="btn btn-primary btn-xs">
                         {% trans "View applications" %}

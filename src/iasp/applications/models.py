@@ -47,7 +47,7 @@ def _attachment_path_application(instance, filename):
 
 class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
-    call = models.ForeignKey(Call, on_delete=models.PROTECT)
+    call = models.ForeignKey(Call, on_delete=models.PROTECT, related_name="applications")
     user_country = models.CharField(
         max_length=2,
         choices=COUNTRIES,

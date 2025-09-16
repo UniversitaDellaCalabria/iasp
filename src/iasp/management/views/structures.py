@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import get_template
@@ -46,6 +46,11 @@ def calls(request, structure_code, structure=None):
     calls = Call.objects.filter(
         is_active=True,
         course_json_it__isnull=False
+    ).annotate(
+        applications_count=Count(
+            "applications",
+            filter=Q(applications__submission_date__isnull=False)
+        )
     )
     structure_calls = []
     for call in calls:
