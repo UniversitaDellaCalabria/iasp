@@ -24,6 +24,7 @@
             <th scope="col">{% trans "Name" %}</th>
             <th scope="col" class="text-end">{% trans "Start" %}</th>
             <th scope="col" class="text-end">{% trans "End" %}</th>
+            <th scope="col" class="text-end">{% trans "Applications" %}</th>
             <th scope="col" class="text-end">{% trans "Active" %}</th>
             <th scope="col" class="text-end"></th>
             <th scope="col" class="text-end"></th>
@@ -36,6 +37,7 @@
                 <td>{{ commission.name }}</td>
                 <td class="text-end">{{ commission.start }}</td>
                 <td class="text-end">{{ commission.end }}</td>
+                <td class="text-end">{{ commission.applications_count }}</td>
                 <td class="text-end">
                     {% if commission.is_in_progress %}
                     <svg class="icon icon-sm icon-success">

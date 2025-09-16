@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import gettext_lazy as _
 
@@ -28,6 +29,11 @@ def belongs_to_a_commission(func_to_decorate):
             is_active=True,
             callcommissionmember__user=request.user,
             callcommissionmember__is_active=True
+        ).annotate(
+            applications_count=Count(
+                "call__applications",
+                filter=Q(call__applications__submission_date__isnull=False)
+            )
         )
 
         if not commissions.exists():
