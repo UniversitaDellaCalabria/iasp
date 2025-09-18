@@ -227,12 +227,12 @@ def get_application_required_insertions_data(application, show_commission_review
             elif tot_review != None and insertion_review_changed_credits == None:
                 tot_review_item = tot_review
             elif tot_review == None and insertion_review_changed_credits != None:
-                tot_review = insertion_review_changed_credits
+                tot_review_item = insertion_review_changed_credits
             declared_credits[insertion.target_teaching_id] = [
                 tot,
                 tot >= insertion.target_teaching_credits,
-                tot_review,
-                tot_review >= insertion.target_teaching_credits if tot_review else None
+                tot_review_item,
+                tot_review_item >= insertion.target_teaching_credits if tot_review_item else None
             ]
     tot_credits = application.get_credits_status(show_commission_review)
     return {

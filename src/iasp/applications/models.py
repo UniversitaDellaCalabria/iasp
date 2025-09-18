@@ -169,6 +169,7 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         tot_required = 0
         tot_free = 0
 
+        # required
         required_insertions = (
             ApplicationInsertionRequired.objects
             .filter(
@@ -177,17 +178,37 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
             )
         )
 
+        _limits = {}
         for req in required_insertions:
-            tot_required += req.get_credits(show_commission_review)
+            if not _limits.get(req.target_teaching_id, None):
+                _limits[req.target_teaching_id] = req.get_credits(show_commission_review)
+            else:
+                _limits[req.target_teaching_id] += req.get_credits(show_commission_review)
+            if _limits[req.target_teaching_id] > req.target_teaching_credits:
+                _limits[req.target_teaching_id] = req.target_teaching_credits
 
+        for course in _limits:
+            tot_required += _limits[course]
+
+        # free
         free_insertions = ApplicationInsertionFree.objects.filter(
             application=self,
             free_credits__course_year__lte=self.call.credits_reference_year,
             free_credits__is_active=True
         )
-        for free in free_insertions:
-            tot_free += free.get_credits(show_commission_review)
 
+        _limits = {}
+        for free in free_insertions:
+            if not _limits.get(free.free_credits_id, None):
+                _limits[free.free_credits_id] = req.get_credits(show_commission_review)
+            else:
+                _limits[free.free_credits_id] += req.get_credits(show_commission_review)
+            if _limits[free.free_credits_id] > free.free_credits.max_value:
+                _limits[free.free_credits_id] = free.free_credits.max_value
+        for rule in _limits:
+            tot_free += _limits[rule]
+
+        # tot
         return tot_required + tot_free
 
 
@@ -245,11 +266,11 @@ class ApplicationInsertionRequired(ApplicationInsertion):
     class Meta:
         ordering = ('target_teaching_year', 'target_teaching_cod')
 
-    def get_credits(self, show_commission_reviews=True):
-        value = super().get_credits(show_commission_reviews)
-        if value > self.target_teaching_credits:
-            return self.target_teaching_credits
-        return value
+    # ~ def get_credits(self, show_commission_reviews=True):
+        # ~ value = super().get_credits(show_commission_reviews)
+        # ~ if value > self.target_teaching_credits:
+            # ~ return self.target_teaching_credits
+        # ~ return value
 
 
 class ApplicationInsertionFree(ApplicationInsertion):
@@ -265,8 +286,8 @@ class ApplicationInsertionFree(ApplicationInsertion):
         on_delete=models.PROTECT
     )
 
-    def get_credits(self, show_commission_reviews=True):
-        value = super().get_credits(show_commission_reviews)
-        if value > self.free_credits.max_value:
-            return self.free_credits.max_value
-        return value
+    # ~ def get_credits(self, show_commission_reviews=True):
+        # ~ value = super().get_credits(show_commission_reviews)
+        # ~ if value > self.free_credits.max_value:
+            # ~ return self.free_credits.max_value
+        # ~ return value
