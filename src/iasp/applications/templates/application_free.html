@@ -63,6 +63,7 @@
             <th scope="col" class="text-end">{% trans "Teaching program" %}</th>
             {% if commission or application.call.can_show_commission_reviews %}
             <th scope="col" class="text-end table-info">{% trans "Credits review" %}</th>
+            <th scope="col" class="text-end table-info">{% trans "Vote review" %}</th>
             <th scope="col" class="text-end table-info">{% trans "Review notes" %}</th>
             {% endif %}
             <th scope="col"></th>
@@ -81,8 +82,9 @@
                     </a>
                 </td>
                 {% if commission or application.call.can_show_commission_reviews %}
-                <td class="text-end">{{ insertion.review.changed_credits|default:"-" }}</td>
-                <td class="text-end">{{ insertion.review.notes|default_if_none:"-" }}</td>
+                <td class="text-end">{{ insertion.review.changed_credits|default_if_none:"-" }}</td>
+                <td class="text-end">{{ insertion.review.changed_grade|default:"-" }}</td>
+                <td class="text-end">{{ insertion.review.notes|default:"-" }}</td>
                 {% endif %}
                 <td class="text-end">
                     {% if structure %}
