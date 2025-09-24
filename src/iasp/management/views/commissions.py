@@ -733,7 +733,7 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
             if not application.call.insertions_only_from_same_course:
                 data.extend(
                     [
-                        f"{required.source_university} - {required.source_university_city} ({required.source_university_city})",
+                        f"{required.source_university} - {required.source_university_city} ({required.source_university_country})",
                         required.source_degree_course
                     ]
                 )
@@ -785,7 +785,7 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
         for free in insertions_free:
             data = [
                 f"{free.source_teaching_name} ({free.source_teaching_ssd or '-'})",
-                f"{free.source_university} - {free.source_university_city} ({free.source_university_city})",
+                f"{free.source_university} - {free.source_university_city} ({free.source_university_country})",
                 free.source_degree_course,
                 free.source_teaching_credits,
                 free.source_teaching_grade,
