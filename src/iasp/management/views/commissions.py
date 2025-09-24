@@ -766,15 +766,26 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
 
         labels = [
             "Attività formativa sostenuta",
-            "Università",
-            "Corso",
-            "CFU",
-            "Voto",
-            "Vincolo insegnamenti a scelta",
-            "CFU riconosciuti",
-            "Voto riconosciuto",
-            "Note",
         ]
+
+        if not application.call.insertions_only_from_same_course:
+            labels.extend(
+                [
+                    "Università",
+                    "Corso",
+                ]
+            )
+
+        labels.extend(
+            [
+                "CFU",
+                "Voto",
+                "Vincolo insegnamenti a scelta",
+                "CFU riconosciuti",
+                "Voto riconosciuto",
+                "Note",
+            ]
+        )
 
         ws.append(labels)
 
@@ -785,15 +796,27 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
         for free in insertions_free:
             data = [
                 f"{free.source_teaching_name} ({free.source_teaching_ssd or '-'})",
-                f"{free.source_university} ({free.source_university_city} - {free.source_university_country})",
-                free.source_degree_course,
-                free.source_teaching_credits,
-                free.source_teaching_grade,
-                f"Insegnamenti a scelta {free.free_credits.course_year}° anno (max {free.free_credits.max_value} CFU)".replace("\r", "").replace("\n", ""),
-                free.review.changed_credits if hasattr(free, 'review') else free.source_teaching_credits,
-                free.review.changed_grade if hasattr(free, 'review') else free.source_teaching_grade,
-                free.review.notes if hasattr(free, 'review') else "-",
             ]
+
+            if not application.call.insertions_only_from_same_course:
+                data.extend(
+                    [
+                        f"{free.source_university} ({free.source_university_city} - {free.source_university_country})",
+                        required.source_degree_course
+                    ]
+                )
+
+            data.extend(
+                [
+                    free.source_teaching_credits,
+                    free.source_teaching_grade,
+                    f"Insegnamenti a scelta {free.free_credits.course_year}° anno (max {free.free_credits.max_value} CFU)".replace("\r", "").replace("\n", ""),
+                    free.review.changed_credits if hasattr(free, 'review') else free.source_teaching_credits,
+                    free.review.changed_grade if hasattr(free, 'review') else free.source_teaching_grade,
+                    free.review.notes if hasattr(free, 'review') else "-",
+                ]
+            )
+
             ws.append(data)
     # end free
 
