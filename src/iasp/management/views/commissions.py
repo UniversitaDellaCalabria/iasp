@@ -742,7 +742,7 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
                 [
                     required.source_teaching_credits,
                     required.source_teaching_grade,
-                    f"{required.target_teaching_cod} -{required.target_teaching_name} - {required.target_teaching_ssd} ({required.target_teaching_credits} CFU)",
+                    f"{required.target_teaching_cod} -{required.target_teaching_name} - {required.target_teaching_ssd} ({required.target_teaching_credits} CFU)".replace("\r", "").replace("\n", ""),
                     required.review.changed_credits if hasattr(required, 'review') else required.target_teaching_credits,
                     required.review.changed_grade if hasattr(required, 'review') else required.source_teaching_grade,
                     required.review.notes if hasattr(required, 'review') else "-",
@@ -789,7 +789,7 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
                 free.source_degree_course,
                 free.source_teaching_credits,
                 free.source_teaching_grade,
-                f"Insegnamenti a scelta {free.free_credits.course_year}° anno (max {free.free_credits.max_value} CFU)",
+                f"Insegnamenti a scelta {free.free_credits.course_year}° anno (max {free.free_credits.max_value} CFU)".replace("\r", "").replace("\n", ""),
                 free.review.changed_credits if hasattr(free, 'review') else free.target_teaching_credits,
                 free.review.changed_grade if hasattr(free, 'review') else free.source_teaching_grade,
                 free.review.notes if hasattr(free, 'review') else "-",
