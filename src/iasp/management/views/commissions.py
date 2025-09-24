@@ -685,7 +685,7 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
     # required
     insertions_required = ApplicationInsertionRequired.objects.filter(
         application=application
-    ).prefetch_related('review')
+    ).prefetch_related('review').order_by('target_teaching_name')
 
     if insertions_required.exists():
         ws.append([])
