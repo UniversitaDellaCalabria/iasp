@@ -16,7 +16,7 @@
         <use href="{% static 'svg/sprites.svg' %}#it-folder"></use>
     </svg> {{ commission.name }}
 </a>
-<a href="" class="btn btn-outline-secondary ms-md-1">
+<a href="{% url 'management:commission_applications' call_pk=application.call.pk %}" class="btn btn-outline-secondary ms-md-1">
     <svg class="icon icon-sm">
         <use href="{% static 'svg/sprites.svg' %}#it-list"></use>
     </svg> {% trans "Applications" %}
