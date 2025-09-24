@@ -697,16 +697,27 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
         ws.append([])
 
         labels = [
-            "Attività formativa sostenuta",
-            "Università",
-            "Corso",
-            "CFU",
-            "Voto",
-            "Attività formativa convalidata",
-            "CFU riconosciuti",
-            "Voto riconosciuto",
-            "Note",
+            "Attività formativa sostenuta"
         ]
+
+        if not application.call.insertions_only_from_same_course:
+            labels.extend(
+                [
+                    "Università",
+                    "Corso",
+                ]
+            )
+
+        labels.extend(
+            [
+                "CFU",
+                "Voto",
+                "Attività formativa convalidata",
+                "CFU riconosciuti",
+                "Voto riconosciuto",
+                "Note",
+            ]
+        )
 
         ws.append(labels)
 
@@ -717,15 +728,27 @@ def export_xls(request, call_pk, application_pk, commission=None, application=No
         for required in insertions_required:
             data = [
                 f"{required.source_teaching_name} ({required.source_teaching_ssd or '-'})",
-                f"{required.source_university} - {required.source_university_city} ({required.source_university_city})",
-                required.source_degree_course,
-                required.source_teaching_credits,
-                required.source_teaching_grade,
-                f"{required.target_teaching_cod} -{required.target_teaching_name} - {required.target_teaching_ssd} ({required.target_teaching_credits} CFU)",
-                required.review.changed_credits if hasattr(required, 'review') else required.target_teaching_credits,
-                required.review.changed_grade if hasattr(required, 'review') else required.source_teaching_grade,
-                required.review.notes if hasattr(required, 'review') else "-",
             ]
+
+            if not application.call.insertions_only_from_same_course:
+                data.extend(
+                    [
+                        f"{required.source_university} - {required.source_university_city} ({required.source_university_city})",
+                        required.source_degree_course
+                    ]
+                )
+
+            data.extend(
+                [
+                    required.source_teaching_credits,
+                    required.source_teaching_grade,
+                    f"{required.target_teaching_cod} -{required.target_teaching_name} - {required.target_teaching_ssd} ({required.target_teaching_credits} CFU)",
+                    required.review.changed_credits if hasattr(required, 'review') else required.target_teaching_credits,
+                    required.review.changed_grade if hasattr(required, 'review') else required.source_teaching_grade,
+                    required.review.notes if hasattr(required, 'review') else "-",
+                ]
+            )
+
             ws.append(data)
     # end required
 
