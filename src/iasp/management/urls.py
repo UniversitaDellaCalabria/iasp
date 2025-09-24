@@ -13,6 +13,7 @@ urlpatterns = [
     path(f'{prefix}/commissions/call/<int:call_pk>/', commissions.detail, name='commission'),
     path(f'{prefix}/commissions/call/<int:call_pk>/applications/', commissions.applications, name='commission_applications'),
     path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/', commissions.application, name='commission_application'),
+    path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/export/', commissions.export_xls, name='commission_application_export'),
 
     path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/required/', commissions.application_required_list, name='commission_application_required_list'),
     path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/required/<int:teaching_id>/', commissions.application_required, name='commission_application_required'),

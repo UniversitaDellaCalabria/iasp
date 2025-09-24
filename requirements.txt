@@ -12,3 +12,5 @@ weasyprint
 
 django-tables2
 django-filter
+
+openpyxl

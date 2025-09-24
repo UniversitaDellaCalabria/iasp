@@ -24,6 +24,13 @@
 {% endblock top_buttons %}
 
 {% block application_alerts %}
+<div class="text-end">
+    <a href="{% url 'management:commission_application_export' call_pk=application.call.pk application_pk=application.pk %}" class="btn btn-outline-secondary ms-md-1">
+        <svg class="icon icon-sm">
+            <use href="{% static 'svg/sprites.svg' %}#it-file-xlsx"></use>
+        </svg> {% trans "Export" %}
+    </a>
+</div>
 {% include "management/credits_alert.html" %}
 {% endblock application_alerts %}
 
