@@ -60,6 +60,7 @@
             <th scope="col">{% trans "Name" %}</th>
             <th scope="col" class="text-end">{% trans "SSD" %}</th>
             <th scope="col" class="text-end">{% trans "Credits" %}</th>
+            <th scope="col" class="text-end">{% trans "Vote/outcome" %}</th>
             <th scope="col" class="text-end">{% trans "Teaching program" %}</th>
             {% if commission or application.call.can_show_commission_reviews %}
             <th scope="col" class="text-end table-info">{% trans "Credits review" %}</th>
@@ -76,6 +77,7 @@
                 <td>{{ insertion.source_teaching_name }}</td>
                 <td class="text-end">{{ insertion.source_teaching_ssd|default:'-' }}</td>
                 <td class="text-end">{{ insertion.source_teaching_credits }}</td>
+                <td class="text-end">{{ insertion.source_teaching_grade }}</td>
                 <td class="text-end">
                     <a href="{% url 'applications:download_insertion_attachment' application_pk=application.pk insertion_pk=insertion.pk %}" target="_blank" title="Clicca qui">
                         {% trans "Download" %}
