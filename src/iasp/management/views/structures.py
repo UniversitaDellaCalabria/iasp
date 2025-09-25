@@ -34,6 +34,7 @@ from .. filters import ApplicationFilter
 from .. models import *
 from .. settings import *
 from .. tables import *
+from .. utils import export_xls
 
 
 logger = logging.getLogger(__name__)
@@ -304,3 +305,11 @@ def application_free_detail(request, structure_code, call_pk, application_pk, ye
             'structure': structure,
         }
     )
+
+
+@login_required
+@is_structure_operator
+@can_manage_call
+@application_check
+def export(request, structure_code, call_pk, application_pk, structure=None, call=None, application=None):
+    return export_xls(application)

@@ -1,187 +1,182 @@
 import logging
 import os
-import pypdf
-import shutil
+import logging
 
 from django.conf import settings
-from django.contrib.staticfiles import finders
-from django.template.loader import get_template
-from django.urls import reverse
+from django.http import HttpResponse
 
-from pathlib import Path
+from applications.models import *
+from calls.models import CallFreeCreditsRule
 
-from weasyprint import CSS, HTML
-
-from . forms import InsertionFreeForm, InsertionRequiredForm
-from . models import ApplicationInsertionFree, ApplicationInsertionRequired
-from . settings import (
-    PDF_TEMP_FOLDER_PATH,
-    PDF_TEMP_FOLDER_ATTACHMENTS_PATH,
-    PDF_TO_MERGE_TEMP_FOLDER_PATH
-)
+from openpyxl import Workbook
+from openpyxl.styles import Font
 
 
 logger = logging.getLogger(__name__)
 
 
-def generate_application_pdf(application):
-    template = get_template('print/application.html')
-    context = {
-        'application': application,
-    }
-    html = template.render(context)
+def export_xls(application):
+    # Crea un nuovo file Excel
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Dati"
 
-    application_folder_path = os.path.join(
-        settings.MEDIA_ROOT,
-        f'{PDF_TEMP_FOLDER_PATH}/{application.pk}'
+    ws.append(["Candidato", str(application.user)])
+    ws.append(["Nazionalità", application.user_country])
+    ws.append(["Università", f"{application.home_university} ({application.home_city} - {application.home_country})"])
+    ws.append(["Corso", application.home_course])
+
+    ws.append([])
+
+    ws.append(["Data di invio", application.submission_date.strftime("%d/%m/%Y %H:%M:%S")])
+    ws.append(["Num. protocollo", application.protocol_number])
+    ws.append(["Data protocollo", application.protocol_date.strftime("%d/%m/%Y %H:%M:%S") if application.protocol_date else "-"])
+
+    # required
+    insertions_required = ApplicationInsertionRequired.objects.filter(
+        application=application
+    ).prefetch_related('review').order_by('target_teaching_name')
+
+    if insertions_required.exists():
+        ws.append([])
+
+        ws.append(["Insegnamenti previsti dal piano"])
+        # Applica il grassetto
+        ws.cell(row=ws.max_row, column=1).font = Font(bold=True)
+
+        ws.append([])
+
+        labels = [
+            "Attività formativa sostenuta"
+        ]
+
+        if not application.call.insertions_only_from_same_course:
+            labels.extend(
+                [
+                    "Università",
+                    "Corso",
+                ]
+            )
+
+        labels.extend(
+            [
+                "CFU",
+                "Voto",
+                "Attività formativa convalidata",
+                "CFU riconosciuti",
+                "Voto riconosciuto",
+                "Note",
+            ]
+        )
+
+        ws.append(labels)
+
+        # Applica il grassetto all'ultima riga
+        for col in range(1, len(labels) + 1):
+            ws.cell(row=ws.max_row, column=col).font = Font(bold=True)
+
+        for required in insertions_required:
+            data = [
+                f"{required.source_teaching_name} ({required.source_teaching_ssd or '-'})",
+            ]
+
+            if not application.call.insertions_only_from_same_course:
+                data.extend(
+                    [
+                        f"{required.source_university} ({required.source_university_city} - {required.source_university_country})",
+                        required.source_degree_course
+                    ]
+                )
+
+            data.extend(
+                [
+                    required.source_teaching_credits,
+                    required.source_teaching_grade,
+                    f"{required.target_teaching_cod} - {required.target_teaching_name} - {required.target_teaching_ssd} ({required.target_teaching_credits} CFU)".replace("\r", "").replace("\n", ""),
+                    required.review.changed_credits if hasattr(required, 'review') else required.source_teaching_credits,
+                    required.review.changed_grade if hasattr(required, 'review') else required.source_teaching_grade,
+                    required.review.notes if hasattr(required, 'review') else "-",
+                ]
+            )
+
+            ws.append(data)
+    # end required
+
+    # free
+    insertions_free = ApplicationInsertionFree.objects.filter(
+        application=application
+    ).select_related('free_credits')
+
+    if insertions_free.exists():
+        ws.append([])
+        ws.append(["Insegnamenti a scelta"])
+        # Applica il grassetto
+        ws.cell(row=ws.max_row, column=1).font = Font(bold=True)
+        ws.append([])
+
+        labels = [
+            "Attività formativa sostenuta",
+        ]
+
+        if not application.call.insertions_only_from_same_course:
+            labels.extend(
+                [
+                    "Università",
+                    "Corso",
+                ]
+            )
+
+        labels.extend(
+            [
+                "CFU",
+                "Voto",
+                "Vincolo insegnamenti a scelta",
+                "CFU riconosciuti",
+                "Voto riconosciuto",
+                "Note",
+            ]
+        )
+
+        ws.append(labels)
+
+        # Applica il grassetto all'ultima riga
+        for col in range(1, len(labels) + 1):
+            ws.cell(row=ws.max_row, column=col).font = Font(bold=True)
+
+        for free in insertions_free:
+            data = [
+                f"{free.source_teaching_name} ({free.source_teaching_ssd or '-'})",
+            ]
+
+            if not application.call.insertions_only_from_same_course:
+                data.extend(
+                    [
+                        f"{free.source_university} ({free.source_university_city} - {free.source_university_country})",
+                        required.source_degree_course
+                    ]
+                )
+
+            data.extend(
+                [
+                    free.source_teaching_credits,
+                    free.source_teaching_grade,
+                    f"Insegnamenti a scelta {free.free_credits.course_year}° anno (max {free.free_credits.max_value} CFU)".replace("\r", "").replace("\n", ""),
+                    free.review.changed_credits if hasattr(free, 'review') else free.source_teaching_credits,
+                    free.review.changed_grade if hasattr(free, 'review') else free.source_teaching_grade,
+                    free.review.notes if hasattr(free, 'review') else "-",
+                ]
+            )
+
+            ws.append(data)
+    # end free
+
+    # Prepara la risposta HTTP
+    response = HttpResponse(
+        content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
-    if os.path.isdir(application_folder_path):
-        shutil.rmtree(application_folder_path)
+    response["Content-Disposition"] = f'attachment; filename="domanda_{application.pk}.xlsx"'
 
-    os.makedirs(application_folder_path, exist_ok=True)
-    file_path = os.path.join(application_folder_path, 'domanda.pdf')
+    # Salva il file direttamente nella response
+    wb.save(response)
 
-    css_italia_path = finders.find('css/bootstrap-italia.min.css')  # percorso reale sul disco
-    css_italia = CSS(filename=css_italia_path)
-    # ~ css_unical_path = finders.find('css/unical-style.css')  # percorso reale sul disco
-    # ~ css_unical = CSS(filename=css_unical_path)
-    HTML(string=html).write_pdf(file_path, stylesheets=[css_italia]) #, css_unical])
-
-
-def get_application_attachments(application):
-    attachments = application.get_filefield_attributes()
-    for attachment in attachments:
-        attachment_file = getattr(application, attachment)
-        if not attachment_file: continue
-
-        folder_path = os.path.join(
-            settings.MEDIA_ROOT,
-            f'{PDF_TEMP_FOLDER_PATH}/{application.pk}/{PDF_TEMP_FOLDER_ATTACHMENTS_PATH}'
-        )
-        os.makedirs(folder_path, exist_ok=True)
-
-        attachment_source = getattr(application, attachment).path
-        attachment_destination = os.path.join(
-            folder_path,
-            f'{attachment}.pdf'
-        )
-        shutil.copyfile(attachment_source, attachment_destination)
-
-
-def generate_required_insertion_pdf(application):
-    css_italia_path = finders.find('css/bootstrap-italia.min.css')  # percorso reale sul disco
-    css_italia = CSS(filename=css_italia_path)
-
-    for insertion in application.applicationinsertionrequired_set.all():
-        target_teaching = application.call.get_teaching_data(
-            insertion.target_teaching_id
-        )
-        form = InsertionRequiredForm(
-            target_teaching=target_teaching,
-            instance=insertion,
-            application=application
-        )
-
-        template = get_template('print/application_required_form.html')
-        context = {
-            'application': application,
-            'form': form,
-            'target_teaching': target_teaching
-        }
-        html = template.render(context)
-
-        folder_path = os.path.join(
-            settings.MEDIA_ROOT,
-            f'{PDF_TEMP_FOLDER_PATH}/{application.pk}/{PDF_TO_MERGE_TEMP_FOLDER_PATH}'
-        )
-        os.makedirs(folder_path, exist_ok=True)
-        file_path = os.path.join(folder_path, f'required-{insertion.pk:03d}-a.pdf')
-
-        HTML(string=html).write_pdf(file_path, stylesheets=[css_italia])
-
-        attachment_source = insertion.source_teaching_attachment.path
-        attachment_destination = os.path.join(
-            folder_path,
-            f'required-{insertion.pk:03d}-file.pdf'
-        )
-        shutil.copyfile(attachment_source, attachment_destination)
-
-
-def generate_free_insertion_pdf(application):
-    css_italia_path = finders.find('css/bootstrap-italia.min.css')  # percorso reale sul disco
-    css_italia = CSS(filename=css_italia_path)
-
-    for insertion in application.applicationinsertionfree_set.all():
-        form = InsertionFreeForm(
-            instance=insertion,
-            application=application,
-            free_credits_rule=insertion.free_credits
-        )
-        template = get_template('print/application_free_form.html')
-        context = {
-            'free_credits_rule': insertion.free_credits,
-            'application': application,
-            'form': form
-        }
-        html = template.render(context)
-
-        folder_path = os.path.join(
-            settings.MEDIA_ROOT,
-            f'{PDF_TEMP_FOLDER_PATH}/{application.pk}/{PDF_TO_MERGE_TEMP_FOLDER_PATH}'
-        )
-        os.makedirs(folder_path, exist_ok=True)
-        file_path = os.path.join(folder_path, f'zfree-{insertion.pk:03d}-a.pdf')
-
-        HTML(string=html).write_pdf(file_path, stylesheets=[css_italia])
-
-        attachment_source = insertion.source_teaching_attachment.path
-        attachment_destination = os.path.join(
-            folder_path,
-            f'zfree-{insertion.pk:03d}-file.pdf'
-        )
-        shutil.copyfile(attachment_source, attachment_destination)
-
-
-def generate_application_docs(application):
-    generate_application_pdf(application)
-    get_application_attachments(application)
-    generate_required_insertion_pdf(application)
-    generate_free_insertion_pdf(application)
-
-
-def generate_application_merged_docs(application):
-    attachments_path = os.path.join(
-        settings.MEDIA_ROOT,
-        f'{PDF_TEMP_FOLDER_PATH}/{application.pk}/{PDF_TEMP_FOLDER_ATTACHMENTS_PATH}'
-    )
-
-    if os.path.isdir(attachments_path):
-        return True
-
-    try:
-        generate_application_docs(application)
-        merge_folder = os.path.join(
-            settings.MEDIA_ROOT,
-            f'{PDF_TEMP_FOLDER_PATH}/{application.pk}/{PDF_TO_MERGE_TEMP_FOLDER_PATH}'
-        )
-        pdfWriter = pypdf.PdfWriter()
-        # Filtra solo i file .pdf nella cartella
-        pdf_files = sorted(Path(merge_folder).glob('*.pdf'))
-        for pdf_file in pdf_files:
-            with open(pdf_file, 'rb') as pdfFileObj:
-                pdfReader = pypdf.PdfReader(pdfFileObj)
-                for page in pdfReader.pages:
-                    pdfWriter.add_page(page)
-
-        os.makedirs(attachments_path, exist_ok=True)
-
-        output_path = os.path.join(
-            attachments_path,
-            f'inserimenti.pdf'
-        )
-        with open(output_path, 'wb') as pdfOutput:
-            pdfWriter.write(pdfOutput)
-        return True
-    except Exception as e:
-        logger.exception(e)
-        return False
+    return response

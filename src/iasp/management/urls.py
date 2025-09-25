@@ -13,7 +13,7 @@ urlpatterns = [
     path(f'{prefix}/commissions/call/<int:call_pk>/', commissions.detail, name='commission'),
     path(f'{prefix}/commissions/call/<int:call_pk>/applications/', commissions.applications, name='commission_applications'),
     path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/', commissions.application, name='commission_application'),
-    path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/export/', commissions.export_xls, name='commission_application_export'),
+    path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/export/', commissions.export, name='commission_application_export'),
 
     path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/required/', commissions.application_required_list, name='commission_application_required_list'),
     path(f'{prefix}/commissions/call/<int:call_pk>/applications/<int:application_pk>/required/<int:teaching_id>/', commissions.application_required, name='commission_application_required'),
@@ -35,6 +35,7 @@ urlpatterns = [
     path(f'{prefix}/<str:structure_code>/call/<int:call_pk>/', structures.call, name='call'),
     path(f'{prefix}/<str:structure_code>/call/<int:call_pk>/applications/', structures.applications, name='applications'),
     path(f'{prefix}/<str:structure_code>/call/<int:call_pk>/applications/<int:application_pk>/', structures.application, name='application'),
+    path(f'{prefix}/<str:structure_code>/call/<int:call_pk>/applications/<int:application_pk>/export/', structures.export, name='application_export'),
 
     path(f'{prefix}/<str:structure_code>/call/<int:call_pk>/applications/<int:application_pk>/required/', structures.application_required_list, name='application_required_list'),
     path(f'{prefix}/<str:structure_code>/call/<int:call_pk>/applications/<int:application_pk>/required/<int:teaching_id>/', structures.application_required, name='application_required'),
