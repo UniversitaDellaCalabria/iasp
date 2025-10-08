@@ -200,9 +200,9 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         _limits = {}
         for free in free_insertions:
             if not _limits.get(free.free_credits_id, None):
-                _limits[free.free_credits_id] = req.get_credits(show_commission_review)
+                _limits[free.free_credits_id] = free.get_credits(show_commission_review)
             else:
-                _limits[free.free_credits_id] += req.get_credits(show_commission_review)
+                _limits[free.free_credits_id] += free.get_credits(show_commission_review)
             if _limits[free.free_credits_id] > free.free_credits.max_value:
                 _limits[free.free_credits_id] = free.free_credits.max_value
         for rule in _limits:
