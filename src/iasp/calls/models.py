@@ -84,8 +84,8 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
 
         if not self.course_studyplans_json_it or critical_data_changed:
             try:
-                plans_it = requests.get(f"{STORAGE_API_CDS_STUDYPLANS}?lang=it&cds_cod={self.course_cod}&year={self.course_cohort}&format=json", timeout=10000).json()['results']
-                plans_en = requests.get(f"{STORAGE_API_CDS_STUDYPLANS}?lang=en&cds_cod={self.course_cod}&year={self.course_cohort}&format=json", timeout=10000).json()['results']
+                plans_it = requests.get(f"{STORAGE_API_CDS_STUDYPLANS}{self.course_cod}/{self.course_cohort}?lang=it&format=json", timeout=10000).json()['results']
+                plans_en = requests.get(f"{STORAGE_API_CDS_STUDYPLANS}{self.course_cod}/{self.course_cohort}?lang=en&format=json", timeout=10000).json()['results']
             except:
                 plans_it = {}
                 plans_en = {}
@@ -110,30 +110,31 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     def get_teaching_data(self, teaching_id, lang="it"):
         data = self.course_studyplans_json_en if lang == "en" else self.course_studyplans_json_it
         if not data: return {}
-        result = {}
         for plan in data[0]['PlanTabs']:
             if plan['PlanTabCod'].upper() == self.study_plan_cod.upper():
-                for group in plan['AfRequired']:
-                    for teaching in group['Required']:
+                for rule in plan['Rules']:
+                    for teaching in rule['Required']:
                         if teaching['AfId'] == teaching_id:
-                            result['name'] = teaching['AfDescription']
-                            result['id'] = teaching['AfId']
-                            result['cod'] = teaching['AfCod']
-                            result['credits'] = teaching['CreditValue']
-                            result['ssd'] = teaching['SettCod']
-                            result['year'] = group['Year']
-                            result['modules'] = True if teaching['AfSubModules'] else False
-                            return result
+                            return {
+                                'name': teaching['AfDescription'],
+                                'id': teaching['AfId'],
+                                'cod': teaching['AfCod'],
+                                'credits': teaching['CreditValue'],
+                                'ssd': teaching['SettCod'],
+                                'year': rule['Year'],
+                                'modules': True if teaching['AfSubModules'] else False
+                            }
                         for module in teaching['AfSubModules']:
                             if module['StudyActivityID'] == teaching_id:
-                                result['name'] = module['StudyActivityName']
-                                result['id'] = module['StudyActivityID']
-                                result['cod'] = module['StudyActivityCod']
-                                result['credits'] = module['StudyActivityCreditValue']
-                                result['ssd'] = module['StudyActivitySettCod']
-                                result['year'] = group['Year']
-                                result['modules'] = False
-                                return result
+                                return {
+                                    'name': module['StudyActivityName'],
+                                    'id': module['StudyActivityID'],
+                                    'cod': module['StudyActivityCod'],
+                                    'credits': module['StudyActivityCreditValue'],
+                                    'ssd': module['StudyActivitySettCod'],
+                                    'year': rule['Year'],
+                                    'modules': False
+                                }
         return {}
 
     def can_show_commission_reviews(self):

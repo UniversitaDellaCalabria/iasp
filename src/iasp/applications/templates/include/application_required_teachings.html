@@ -25,9 +25,9 @@
         <tbody>
         {% for plan in plans.0.PlanTabs %}
             {% if plan.PlanTabCod|upper == application.call.study_plan_cod|upper %}
-                {% for group in plan.AfRequired %}
-                    {% if group.Year == i %}
-                        {% for teaching in group.Required %}
+                {% for rule in plan.Rules %}
+                    {% if rule.Year == i %}
+                        {% for teaching in rule.Required %}
                             {% if teaching.AfCod not in codes_to_exclude %}
                                 <tr {% if teaching.AfId in insertions %}class="table-primary"{% endif %}>
                                     <td class="text-nowrap">{{ teaching.AfCod }}</td>
@@ -64,7 +64,7 @@
                                     {% endif %}
                                     {% endwith %}
                                     <td class="text-end">
-                                        {% if not teaching.AfSubModules %}
+                                        {% if not teaching.AfSubModules and teaching.AfId %}
                                             {% if teaching.AfId in insertions %}
                                                 {% if application.is_editable %}
                                                 <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=teaching.AfId %}" class="btn btn-info btn-xs">
@@ -129,34 +129,38 @@
                                             {% endif %}
                                             {% endwith %}
                                             <td class="text-end">
-                                                {% if module.StudyActivityID in insertions %}
-                                                    {% if application.is_editable %}
-                                                    <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
-                                                        <svg class="icon icon-xs icon-white" aria-labelledby="edit2">
-                                                            <title id="edit2">{% trans "Edit" %}</title>
-                                                            <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
+                                                {% if module.StudyActivityID %}
+                                                    {% if module.StudyActivityID in insertions %}
+                                                        {% if application.is_editable %}
+                                                        <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                            <svg class="icon icon-xs icon-white" aria-labelledby="edit2">
+                                                                <title id="edit2">{% trans "Edit" %}</title>
+                                                                <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
+                                                            </svg>
+                                                        </a>
+                                                        {% else %}
+                                                        {% if structure %}
+                                                        <a href="{% url 'management:application_required' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                        {% elif commission %}
+                                                        <a href="{% url 'management:commission_application_required' call_pk=application.call.pk application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                        {% else %}
+                                                        <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                        {% endif %}
+                                                            <svg class="icon icon-xs icon-white" aria-labelledby="view2">
+                                                                <title id="view2">{% trans "Details" %}</title>
+                                                                <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
+                                                            </svg>
+                                                        </a>
+                                                        {% endif %}
+                                                    {% elif application.is_editable %}
+                                                    <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-success btn-xs">
+                                                        <svg class="icon icon-xs icon-white">
+                                                            <use xlink:href="{% static 'svg/sprites.svg' %}#it-plus"></use>
                                                         </svg>
                                                     </a>
                                                     {% else %}
-                                                    {% if structure %}
-                                                    <a href="{% url 'management:application_required' structure_code=structure.unique_code call_pk=call.pk application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
-                                                    {% elif commission %}
-                                                    <a href="{% url 'management:commission_application_required' call_pk=application.call.pk application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
-                                                    {% else %}
-                                                    <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-info btn-xs">
+                                                    -
                                                     {% endif %}
-                                                        <svg class="icon icon-xs icon-white" aria-labelledby="view2">
-                                                            <title id="view2">{% trans "Details" %}</title>
-                                                            <use xlink:href="{% static 'svg/sprites.svg' %}#it-password-visible"></use>
-                                                        </svg>
-                                                    </a>
-                                                    {% endif %}
-                                                {% elif application.is_editable %}
-                                                <a href="{% url 'applications:application_required' application_pk=application.pk teaching_id=module.StudyActivityID %}" class="btn btn-success btn-xs">
-                                                    <svg class="icon icon-xs icon-white">
-                                                        <use xlink:href="{% static 'svg/sprites.svg' %}#it-plus"></use>
-                                                    </svg>
-                                                </a>
                                                 {% else %}
                                                 -
                                                 {% endif %}
