@@ -15,6 +15,15 @@ from openpyxl.styles import Font
 logger = logging.getLogger(__name__)
 
 
+def find_father_teaching(plan_rules, teaching_id):
+    for rule in plan_rules:
+        for teaching in rule['Required']:
+            for module in teaching['AfSubModules']:
+                if module['StudyActivityID'] == teaching_id:
+                    return f"{teaching['AfCod']} - {teaching['AfDescription']}"
+    return ''
+
+                            
 def export_xls(application):
     # Crea un nuovo file Excel
     wb = Workbook()
@@ -38,6 +47,8 @@ def export_xls(application):
     ).prefetch_related('review').order_by('target_teaching_name')
 
     if insertions_required.exists():
+        plan_rules = application.call.course_studyplans_json_it[0]['PlanTabs'][0]['Rules']
+        
         ws.append([])
 
         ws.append(["Insegnamenti previsti dal piano"])
@@ -63,6 +74,7 @@ def export_xls(application):
                 "CFU",
                 "Voto",
                 "Attività formativa convalidata",
+                "Attività formativa integrata",
                 "CFU riconosciuti",
                 "Voto riconosciuto",
                 "Note",
@@ -70,12 +82,17 @@ def export_xls(application):
         )
 
         ws.append(labels)
-
+        
         # Applica il grassetto all'ultima riga
         for col in range(1, len(labels) + 1):
             ws.cell(row=ws.max_row, column=col).font = Font(bold=True)
 
         for required in insertions_required:
+            father_teaching_info = find_father_teaching(
+                plan_rules,
+                required.target_teaching_id
+            )
+
             data = [
                 f"{required.source_teaching_name} ({required.source_teaching_ssd or '-'})",
             ]
@@ -93,6 +110,7 @@ def export_xls(application):
                     required.source_teaching_credits,
                     required.source_teaching_grade,
                     f"{required.target_teaching_cod} - {required.target_teaching_name} - {required.target_teaching_ssd} ({required.target_teaching_credits} CFU)".replace("\r", "").replace("\n", ""),
+                    father_teaching_info or "-",
                     required.review.changed_credits if hasattr(required, 'review') else required.source_teaching_credits,
                     required.review.changed_grade if hasattr(required, 'review') else required.source_teaching_grade,
                     required.review.notes if hasattr(required, 'review') else "-",
