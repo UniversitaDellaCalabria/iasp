@@ -108,7 +108,9 @@
                                                     <use href="{% static 'svg/sprites.svg' %}#it-arrow-right-triangle"></use>
                                                 </svg> {{ module.StudyActivityCod }}
                                             </td>
-                                            <td class="fst-italic">{{ module.StudyActivityName }}</td>
+                                            <td class="fst-italic">
+                                                {{ module.StudyActivityName }} {% if module.studyActivityPartitionCod %}({{ module.studyActivityPartitionCod }}){% endif %}
+                                            </td>
                                             <td class="text-end text-nowrap fst-italic">{{ module.StudyActivitySettCod }}</td>
                                             <td class="text-end fst-italic">
                                                 <a href="https://www.unical.it/storage/cds/{{ course.RegDidId }}/activities/{{ module.StudyActivityID }}/" target="_blank" title="Clicca qui">
