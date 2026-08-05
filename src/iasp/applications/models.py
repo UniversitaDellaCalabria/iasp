@@ -260,7 +260,7 @@ class ApplicationInsertionRequired(ApplicationInsertion):
         decimal_places=1,
         validators=[MinValueValidator(0.0)]
     )
-    target_teaching_ssd = models.CharField(max_length=10)
+    target_teaching_ssd = models.CharField(max_length=255)
     target_teaching_year = models.PositiveIntegerField()
 
     class Meta:
