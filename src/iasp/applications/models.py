@@ -229,7 +229,7 @@ class ApplicationInsertion(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         decimal_places=1,
         validators=[MinValueValidator(0.0)]
     )
-    source_teaching_ssd = models.CharField(max_length=10, blank=True, default='')
+    source_teaching_ssd = models.CharField(max_length=255, blank=True, default='')
     source_teaching_attachment = models.FileField(
         upload_to=_attachment_path_required,
         validators=[
