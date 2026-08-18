@@ -279,7 +279,8 @@ class ApplicationInsertionFree(ApplicationInsertion):
         validators=[
             validate_attachment_extension,
             validate_file_size
-        ]
+        ],
+        max_length=255
     )
     free_credits = models.ForeignKey(
         CallFreeCreditsRule,
