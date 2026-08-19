@@ -130,10 +130,18 @@ def application(request, structure_code, call_pk, application_pk, structure=None
     free_credits_rules = CallFreeCreditsRule.objects.filter(
         call=call,
         is_active=True
+    ).annotate(
+        insertions=Count(
+            'applicationinsertionfree',
+            filter=Q(
+                applicationinsertionfree__application=application
+            ),
+        )
     )
-    insertions_free = ApplicationInsertionFree.objects.filter(
-        application=application
-    ).count()
+    
+    # ~ insertions_free = ApplicationInsertionFree.objects.filter(
+        # ~ application=application
+    # ~ ).count()
 
     form = PaymentForm(instance=application)
 
@@ -146,7 +154,7 @@ def application(request, structure_code, call_pk, application_pk, structure=None
             'form': form,
             'free_credits_rules': free_credits_rules,
             'insertions_required': insertions_required,
-            'insertions_free': insertions_free,
+            # ~ 'insertions_free': insertions_free,
             'structure': structure,
             'tot_credits': tot_credits
         }

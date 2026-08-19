@@ -8,7 +8,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.db.models import F, Case, When, Sum
+from django.db.models import Count, Q, F, Case, When, Sum
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import get_template
@@ -57,15 +57,22 @@ def application(request, application_pk, template='application.html', applicatio
     free_credits_rules = CallFreeCreditsRule.objects.filter(
         call=application.call,
         is_active=True
+    ).annotate(
+        insertions=Count(
+            'applicationinsertionfree',
+            filter=Q(
+                applicationinsertionfree__application=application
+            ),
+        )
     )
-
+    
     insertions_required = ApplicationInsertionRequired.objects.filter(
         application=application
     ).count()
 
-    insertions_free = ApplicationInsertionFree.objects.filter(
-        application=application
-    ).count()
+    # ~ insertions_free = ApplicationInsertionFree.objects.filter(
+        # ~ application=application
+    # ~ ).count()
 
     # ~ template = 'application.html'
 
@@ -114,7 +121,7 @@ def application(request, application_pk, template='application.html', applicatio
             'form': form,
             'free_credits_rules': free_credits_rules,
             'insertions_required': insertions_required,
-            'insertions_free': insertions_free,
+            # ~ 'insertions_free': insertions_free,
             'tot_credits': tot_credits or 0
         }
     )

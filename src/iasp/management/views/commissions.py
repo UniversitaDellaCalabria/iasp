@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import get_template
@@ -111,10 +111,18 @@ def application(request, call_pk, application_pk, commission=None, application=N
     free_credits_rules = CallFreeCreditsRule.objects.filter(
         call__pk=call_pk,
         is_active=True
+    ).annotate(
+        insertions=Count(
+            'applicationinsertionfree',
+            filter=Q(
+                applicationinsertionfree__application=application
+            ),
+        )
     )
-    insertions_free = ApplicationInsertionFree.objects.filter(
-        application=application
-    ).count()
+    
+    # ~ insertions_free = ApplicationInsertionFree.objects.filter(
+        # ~ application=application
+    # ~ ).count()
 
     form = PaymentForm(instance=application)
 

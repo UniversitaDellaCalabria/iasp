@@ -54,7 +54,7 @@
             {% for rule in free_credits_rules %}
             <tr>
                 <td><b>{% trans "Free credits" %} {{ rule.course_year }}° {% trans "year" %}</b></td>
-                <td class="text-end"><b>{{ insertions_free }}</b> {% trans "insertions" %}</td>
+                <td class="text-end"><b>{{ rule.insertions }}</b> {% trans "insertions" %}</td>
                 <td class="text-end">
                     <a href="{% url 'management:commission_application_free' call_pk=application.call.pk application_pk=application.pk year=rule.course_year %}" class="btn btn-primary btn-xs">
                         {% trans "Manage" %}
