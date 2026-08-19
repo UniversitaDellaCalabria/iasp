@@ -54,10 +54,12 @@ def changeData(request):
                 token = f'{request.user.id}|{email}|{timezone.now()}'
                 encrypted_data = encrypt_to_jwe(token)
                 url = f'{base_url}?token={encrypted_data}'
-                body=_("Confirm your email by clicking here {}").format(url)
+                body=_("Confirm your email by clicking here:\n\n<{}>").format(url)
+                html_body=_('Confirm your email by clicking here:<br><br><a href="{}">{}</a>').format(url, url)
                 result = send_mail(
                     subject=_("Email confirmation"),
                     message=body,
+                    html_message=html_body,
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[email],
                     fail_silently=True,
