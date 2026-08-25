@@ -192,7 +192,7 @@ def generate_application_merged_docs(application):
         return True
     except Exception as e:
         logger.exception(e)
-        return False
+        raise
 
 
 def get_application_required_insertions_data(application, show_commission_review=False):

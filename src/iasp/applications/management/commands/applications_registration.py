@@ -55,6 +55,14 @@ class Command(BaseCommand):
                 application.refresh_from_db()
                 if application.protocol_taken: continue
 
+                logger.info(
+                    "[{}] utente {} richiesta {} presa in carico per il protocollo".format(
+                        timezone.localtime(),
+                        application.user,
+                        application.pk
+                    )
+                )
+
                 print(f'[{application}] - Registering application {application.pk} - {application.call.title_it}')
 
                 application.protocol_taken = timezone.localtime()
@@ -62,7 +70,6 @@ class Command(BaseCommand):
 
                 try:
                     generated_documents = generate_application_merged_docs(application)
-                    if not generated_documents: continue
 
                     protocol_call_configuration = CallTitulusConfiguration.objects.filter(
                         call=application.call,
@@ -91,7 +98,7 @@ class Command(BaseCommand):
                     )
 
                     logger.info(
-                        "[{}] utente {} richiesta {} protocollata con successo: n. <b>{}/{}</b>".format(
+                        "[{}] utente {} richiesta {} protocollata con successo: n. {}/{}".format(
                             timezone.localtime(),
                             application.user,
                             application.pk,
@@ -100,11 +107,14 @@ class Command(BaseCommand):
                         )
                     )
 
-                    print(f'[{application}] - Registered application {application.pk} - {application.call.title_it} COMPLETED')
+                    print(f'[{application}] - Registration for application {application.pk} - {application.call.title_it} COMPLETED')
 
                 # if protocol fails
                 # raise Exception and do some operations
                 except Exception as e:
+                    application.protocol_taken = None
+                    application.save(update_fields=['protocol_taken'])
+
                     # log protocol fails
                     logger.exception(
                         "[{}] utente {} protocollo domanda {} fallito: {}".format(
@@ -115,10 +125,7 @@ class Command(BaseCommand):
                         )
                     )
 
-                    application.protocol_taken = None
-                    application.save(update_fields=['protocol_taken'])
-
-                    print(f'[{application}] - Registered application {application.pk} - {application.call.title_it} FAILED')
+                    print(f'[{application}] - Registration for application {application.pk} - {application.call.title_it} FAILED')
 
                     continue
 
