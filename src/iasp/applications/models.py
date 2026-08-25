@@ -231,12 +231,7 @@ class ApplicationInsertion(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     )
     source_teaching_ssd = models.CharField(max_length=255, blank=True, default='')
     source_teaching_attachment = models.FileField(
-        upload_to=_attachment_path_required,
-        validators=[
-            validate_attachment_extension,
-            validate_file_size
-        ],
-        max_length=255
+        upload_to="abstract_fake_dir"
     )
     source_teaching_url = models.URLField(max_length=200, blank=True, default='')
     source_teaching_grade = models.CharField(max_length=255)
@@ -252,6 +247,14 @@ class ApplicationInsertion(ActivableModel, CreatedModifiedBy, TimeStampedModel):
 
 
 class ApplicationInsertionRequired(ApplicationInsertion):
+    source_teaching_attachment = models.FileField(
+        upload_to=_attachment_path_required,
+        validators=[
+            validate_attachment_extension,
+            validate_file_size
+        ],
+        max_length=255
+    )
     target_teaching_name = models.CharField(max_length=255)
     target_teaching_id = models.IntegerField()
     target_teaching_cod = models.CharField(max_length=255)
