@@ -195,6 +195,38 @@ def generate_application_merged_docs(application):
         raise
 
 
+def delete_application_merged_docs(application):
+    # delete temp_folder with merged docs
+    application_temp_folder = os.path.join(
+        settings.MEDIA_ROOT,
+        f'{PDF_TEMP_FOLDER_PATH}/{application.pk}'
+    )
+    if os.path.exists(application_temp_folder) and os.path.isdir(application_temp_folder):
+        try:
+            shutil.rmtree(application_temp_folder)
+            logger.info(
+                "[{}] richiesta {} - cartella di allegati temporanea eliminata".format(
+                    timezone.localtime(),
+                    application.pk,
+                )
+            )
+        except OSError as e:
+            logger.exception(
+                "[{}] richiesta {} - errore eliminazione cartella allegati temporanea: {}".format(
+                    timezone.localtime(),
+                    application.pk,
+                    e
+                )
+            )
+    else:
+        logger.info(
+            "[{}] richiesta {} - cartella di allegati temporanea inesistente".format(
+                timezone.localtime(),
+                application.pk,
+            )
+        )
+
+
 def get_application_required_insertions_data(application, show_commission_review=False):
     insertions = application.applicationinsertionrequired_set.all()
 

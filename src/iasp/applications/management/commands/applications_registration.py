@@ -11,12 +11,13 @@ from titulus_ws.models import TitulusConfiguration
 from ... models import Application
 from ... settings import REGISTRATION_JOB_SLEEP_TIME
 from ... titulus import application_protocol
-from ... utils import generate_application_merged_docs
-
+from ... utils import (
+    delete_application_merged_docs, 
+    generate_application_merged_docs
+)
 
 
 logger = logging.getLogger(__name__)
-
 
 
 def confirm():
@@ -53,7 +54,9 @@ class Command(BaseCommand):
                 if index: time.sleep(REGISTRATION_JOB_SLEEP_TIME)
 
                 application.refresh_from_db()
-                if application.protocol_taken: continue
+
+                if application.protocol_taken: 
+                    continue
 
                 logger.info(
                     "[{}] utente {} richiesta {} presa in carico per il protocollo".format(
@@ -69,7 +72,7 @@ class Command(BaseCommand):
                 application.save(update_fields=['protocol_taken'])
 
                 try:
-                    generated_documents = generate_application_merged_docs(application)
+                    generate_application_merged_docs(application)
 
                     protocol_call_configuration = CallTitulusConfiguration.objects.filter(
                         call=application.call,
@@ -96,6 +99,8 @@ class Command(BaseCommand):
                             "protocol_date"
                         ]
                     )
+
+                    delete_application_merged_docs(application)
 
                     logger.info(
                         "[{}] utente {} richiesta {} protocollata con successo: n. {}/{}".format(
