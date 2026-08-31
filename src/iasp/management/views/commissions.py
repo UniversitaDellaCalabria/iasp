@@ -135,7 +135,7 @@ def application(request, call_pk, application_pk, commission=None, application=N
             'form': form,
             'free_credits_rules': free_credits_rules,
             'insertions_required': insertions_required,
-            'insertions_free': insertions_free,
+            # ~ 'insertions_free': insertions_free,
             'tot_credits': tot_credits
         }
     )
