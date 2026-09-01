@@ -67,6 +67,8 @@ class CallAdmin(admin.ModelAdmin):
         'is_active',
     )
     list_editable = ('is_active', 'ordering')
+    list_filter = ('is_active', 'is_public')
+    search_fields = ('title_it', 'course_cod')
     readonly_fields = (
         'course_json_it',
         'course_json_en',
