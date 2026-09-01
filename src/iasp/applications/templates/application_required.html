@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load static %}
 
+{% load applications_tags %}
 {% load iasp_tags %}
 
 
@@ -31,6 +32,8 @@
 
 {% block clean_content %}
 {% get_current_language as LANGUAGE_CODE %}
+{% is_editable application request.user as is_editable %}
+
 <div class="mb-4">
     <p class="h3">
         {% trans "Credits recognition requests" %}
@@ -96,7 +99,7 @@
                     <a href="{% url 'applications:application_required_edit' application_pk=application.pk teaching_id=target_teaching.id insertion_pk=insertion.pk %}" class="btn btn-info btn-xs">
                     {% endif %}
                         <svg class="icon icon-xs icon-white" aria-labelledby="action">
-                            {% if application.is_editable %}
+                            {% if is_editable %}
                             <title id="action">{% trans "Edit" %}</title>
                             <use xlink:href="{% static 'svg/sprites.svg' %}#it-pencil"></use>
                             {% else %}
@@ -155,7 +158,7 @@
                     {% endif %}
                     {% endif %}
 
-                    {% if application.is_editable %}
+                    {% if is_editable %}
                     <button type="button" class="btn btn-outline-danger btn-xs" data-bs-toggle="modal" data-bs-target="#delete-{{ insertion.pk }}">
                         <svg class="icon icon-xs icon-danger" aria-labelledby="delete2">
                             <title id="delete2">{% trans "Delete" %}</title>
@@ -201,7 +204,7 @@
 </div>
 {% endif %}
 
-{% if application.is_editable %}
+{% if is_editable %}
 <div class="d-grid gap-2 mt-4">
     <a href="{% url 'applications:application_required_new' application_pk=application.pk teaching_id=target_teaching.id %}" class="btn btn-success">
         {% trans "Add new recognition request" %}

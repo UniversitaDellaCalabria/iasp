@@ -129,11 +129,11 @@ class Application(ActivableModel, CreatedModifiedBy, TimeStampedModel):
                 file_fields.append(field.name)
         return file_fields
 
-    def is_editable(self):
-        return self.call.is_in_progress() and not self.submission_date
+    def is_editable(self, user):
+        return self.call.is_in_progress() and self.call.user_is_enabled(user=user) and not self.submission_date
 
-    def is_submittabile(self):
-        if not self.is_editable():
+    def is_submittable(self, user):
+        if not self.is_editable(user=user):
             return False
         if self.call.payment_required and not self.payment_receipt:
             return False

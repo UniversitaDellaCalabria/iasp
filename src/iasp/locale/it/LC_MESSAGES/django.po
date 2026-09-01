@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-19 18:47+0200\n"
-"PO-Revision-Date: 2026-08-19 18:48+0200\n"
+"POT-Creation-Date: 2026-09-01 13:04+0200\n"
+"PO-Revision-Date: 2026-09-01 13:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -84,7 +84,7 @@ msgid "TaxPayer ID - codice fiscale"
 msgstr "Codice fiscale"
 
 #: accounts/models.py:36 accounts/templates/account.html:36
-#: applications/templates/application.html:111
+#: applications/templates/application.html:113
 #: applications/templates/print/application.html:39
 msgid "Phone number"
 msgstr "Numero di telefono"
@@ -103,12 +103,12 @@ msgstr ""
 
 #: accounts/templates/account.html:13
 #: accounts/templates/change_user_data.html:11
-#: applications/templates/application.html:13
+#: applications/templates/application.html:14
 #: applications/templates/application_edit.html:12
-#: applications/templates/application_free.html:13
-#: applications/templates/application_free_form.html:12
+#: applications/templates/application_free.html:14
+#: applications/templates/application_free_form.html:14
 #: applications/templates/application_new.html:12
-#: applications/templates/application_required.html:13
+#: applications/templates/application_required.html:14
 #: applications/templates/application_required_form.html:12
 #: applications/templates/application_required_list.html:13
 #: applications/templates/applications.html:12 calls/templates/call.html:12
@@ -130,37 +130,37 @@ msgid "Account"
 msgstr ""
 
 #: accounts/templates/account.html:24
-#: applications/templates/application.html:108
+#: applications/templates/application.html:110
 #: applications/templates/print/application.html:36
 msgid "First name"
 msgstr "Nome"
 
 #: accounts/templates/account.html:28
-#: applications/templates/application.html:109
+#: applications/templates/application.html:111
 #: applications/templates/print/application.html:37
 msgid "Last name"
 msgstr "Cognome"
 
 #: accounts/templates/account.html:32
-#: applications/templates/application.html:112
+#: applications/templates/application.html:114
 #: applications/templates/print/application.html:40
 msgid "Email"
 msgstr ""
 
 #: accounts/templates/account.html:40
-#: applications/templates/application.html:110
+#: applications/templates/application.html:112
 #: applications/templates/print/application.html:38
 msgid "Taxpayer ID"
 msgstr "Codice fiscale"
 
 #: accounts/templates/account.html:49
-#: applications/templates/application.html:159
-#: applications/templates/application_free.html:101
-#: applications/templates/application_free.html:113
-#: applications/templates/application_required.html:100
-#: applications/templates/application_required.html:112
-#: applications/templates/include/application_required_teachings.html:72
-#: applications/templates/include/application_required_teachings.html:139
+#: applications/templates/application.html:161
+#: applications/templates/application_free.html:103
+#: applications/templates/application_free.html:115
+#: applications/templates/application_required.html:103
+#: applications/templates/application_required.html:115
+#: applications/templates/include/application_required_teachings.html:74
+#: applications/templates/include/application_required_teachings.html:141
 msgid "Edit"
 msgstr "Modifica"
 
@@ -230,8 +230,8 @@ msgstr "Token scaduto"
 msgid "Email updated successfully"
 msgstr "Email aggiornata con successo"
 
-#: applications/decorators.py:31 applications/views.py:485
-#: applications/views.py:679
+#: applications/decorators.py:31 applications/views.py:502
+#: applications/views.py:697
 msgid "Unable to edit application"
 msgstr "Impossibile modificare la domanda"
 
@@ -251,48 +251,48 @@ msgstr ""
 msgid "I agree with what is stated in the call"
 msgstr "Accetto quanto specificato nel bando"
 
-#: applications/forms.py:58 applications/templates/application.html:107
+#: applications/forms.py:58 applications/templates/application.html:109
 #: applications/templates/print/application.html:35
 msgid "Nationality"
 msgstr "Nazionalità"
 
-#: applications/forms.py:59 applications/templates/application.html:146
+#: applications/forms.py:59 applications/templates/application.html:148
 #: applications/templates/print/application.html:56
 msgid "Home University"
 msgstr "Università di provenienza"
 
-#: applications/forms.py:60 applications/templates/application.html:147
+#: applications/forms.py:60 applications/templates/application.html:149
 #: applications/templates/print/application.html:57
 msgid "Home University country"
 msgstr "Nazione Università di provenienza"
 
-#: applications/forms.py:61 applications/templates/application.html:148
+#: applications/forms.py:61 applications/templates/application.html:150
 #: applications/templates/print/application.html:58
 msgid "Home University city"
 msgstr "Città Università di provenienza"
 
-#: applications/forms.py:62 applications/templates/application.html:149
+#: applications/forms.py:62 applications/templates/application.html:151
 #: applications/templates/print/application.html:59
 msgid "Home University course"
 msgstr "Corso Università di provenienza"
 
-#: applications/forms.py:63 applications/templates/application.html:150
+#: applications/forms.py:63 applications/templates/application.html:152
 msgid "Signed self-certification of taken exams"
 msgstr "Autocertificazione firmata degli esami sostenuti"
 
-#: applications/forms.py:64 applications/templates/application.html:151
+#: applications/forms.py:64 applications/templates/application.html:153
 msgid "Origin course study plan"
 msgstr "Piano didattico del corso di provenienza"
 
-#: applications/forms.py:65 applications/templates/application.html:152
+#: applications/forms.py:65 applications/templates/application.html:154
 msgid "Official votes conversion table"
 msgstr "Tabella ufficiale di conversione dei voti"
 
-#: applications/forms.py:66 applications/templates/application.html:153
+#: applications/forms.py:66 applications/templates/application.html:155
 msgid "Certification of knowledge of Italian language (at least B2)"
 msgstr "Certificazione conoscenza lingua italiana (almeno B2)"
 
-#: applications/forms.py:67 applications/templates/application.html:154
+#: applications/forms.py:67 applications/templates/application.html:156
 msgid "Declaration of value"
 msgstr "Dichiarazione di valore"
 
@@ -316,16 +316,16 @@ msgstr "Nazione"
 msgid "City"
 msgstr "Città"
 
-#: applications/forms.py:138 applications/templates/application.html:127
+#: applications/forms.py:138 applications/templates/application.html:129
 #: applications/templates/print/application.html:46
 msgid "Degree course"
 msgstr "Corso di laurea"
 
-#: applications/forms.py:139 applications/templates/application.html:126
-#: applications/templates/application_free.html:60
-#: applications/templates/application_required.html:59
+#: applications/forms.py:139 applications/templates/application.html:128
+#: applications/templates/application_free.html:62
+#: applications/templates/application_required.html:62
 #: applications/templates/application_required_form.html:44
-#: applications/templates/include/application_required_teachings.html:14
+#: applications/templates/include/application_required_teachings.html:16
 #: applications/templates/print/application.html:45
 #: applications/templates/print/application_required_form.html:23
 #: calls/templates/calls.html:29
@@ -336,10 +336,10 @@ msgstr "Corso di laurea"
 msgid "Name"
 msgstr "Denominazione"
 
-#: applications/forms.py:140 applications/templates/application_free.html:59
-#: applications/templates/application_required.html:58
+#: applications/forms.py:140 applications/templates/application_free.html:61
+#: applications/templates/application_required.html:61
 #: applications/templates/application_required_form.html:45
-#: applications/templates/include/application_required_teachings.html:13
+#: applications/templates/include/application_required_teachings.html:15
 #: applications/templates/print/application_required_form.html:24
 #: calls/templates/call.html:81
 #: management/templates/commissions/application_free_review.html:41
@@ -347,28 +347,28 @@ msgstr "Denominazione"
 msgid "Code"
 msgstr "Codice"
 
-#: applications/forms.py:141 applications/templates/application_free.html:62
-#: applications/templates/application_required.html:41
-#: applications/templates/application_required.html:61
+#: applications/forms.py:141 applications/templates/application_free.html:64
+#: applications/templates/application_required.html:44
+#: applications/templates/application_required.html:64
 #: applications/templates/application_required_form.html:46
 #: applications/templates/print/application_required_form.html:25
 #: management/forms.py:16 management/forms.py:31
 msgid "Credits"
 msgstr "Crediti"
 
-#: applications/forms.py:142 applications/templates/application_free.html:61
-#: applications/templates/application_required.html:60
+#: applications/forms.py:142 applications/templates/application_free.html:63
+#: applications/templates/application_required.html:63
 #: applications/templates/application_required_form.html:47
-#: applications/templates/include/application_required_teachings.html:15
+#: applications/templates/include/application_required_teachings.html:17
 #: applications/templates/print/application_required_form.html:26
 #: management/templates/commissions/application_free_review.html:43
 #: management/templates/commissions/application_required_review.html:48
 msgid "SSD"
 msgstr ""
 
-#: applications/forms.py:143 applications/templates/application_free.html:64
-#: applications/templates/application_required.html:63
-#: applications/templates/include/application_required_teachings.html:16
+#: applications/forms.py:143 applications/templates/application_free.html:66
+#: applications/templates/application_required.html:66
+#: applications/templates/include/application_required_teachings.html:18
 msgid "Teaching program"
 msgstr "Scheda insegnamento"
 
@@ -376,8 +376,8 @@ msgstr "Scheda insegnamento"
 msgid "Webpage URL"
 msgstr "URL pagina web"
 
-#: applications/forms.py:145 applications/templates/application_free.html:63
-#: applications/templates/application_required.html:62 management/forms.py:17
+#: applications/forms.py:145 applications/templates/application_free.html:65
+#: applications/templates/application_required.html:65 management/forms.py:17
 #: management/forms.py:32
 #: management/templates/commissions/application_free_review.html:46
 #: management/templates/commissions/application_required_review.html:51
@@ -435,12 +435,12 @@ msgstr ""
 "Questo è un messaggio automatico.\n"
 "Si prega di non rispondere a questa email.\n"
 
-#: applications/templates/application.html:18
+#: applications/templates/application.html:19
 #: applications/templates/application_edit.html:17
-#: applications/templates/application_free.html:18
-#: applications/templates/application_free_form.html:17
+#: applications/templates/application_free.html:19
+#: applications/templates/application_free_form.html:19
 #: applications/templates/application_new.html:17
-#: applications/templates/application_required.html:18
+#: applications/templates/application_required.html:19
 #: applications/templates/application_required_form.html:17
 #: applications/templates/application_required_list.html:18
 #: applications/templates/applications.html:18 generics/templates/base.html:40
@@ -448,67 +448,67 @@ msgstr ""
 msgid "My applications"
 msgstr "Le mie domande"
 
-#: applications/templates/application.html:23
-#: applications/templates/application_free.html:126
-#: applications/templates/application_free.html:162
-#: applications/templates/application_required.html:125
-#: applications/templates/application_required.html:161
+#: applications/templates/application.html:24
+#: applications/templates/application_free.html:128
+#: applications/templates/application_free.html:164
+#: applications/templates/application_required.html:128
+#: applications/templates/application_required.html:164
 msgid "Delete"
 msgstr "Elimina"
 
-#: applications/templates/application.html:38
+#: applications/templates/application.html:39
 msgid "Are you sure you want to delete the application?"
 msgstr "Sei sicuro di voler eliminare la domanda?"
 
-#: applications/templates/application.html:45
-#: applications/templates/application.html:259
-#: applications/templates/application_free.html:148
-#: applications/templates/application_free.html:184
-#: applications/templates/application_required.html:147
-#: applications/templates/application_required.html:183
+#: applications/templates/application.html:46
+#: applications/templates/application.html:262
+#: applications/templates/application_free.html:150
+#: applications/templates/application_free.html:186
+#: applications/templates/application_required.html:150
+#: applications/templates/application_required.html:186
 #: generics/templates/form_template.html:55
 msgid "Yes, proceed"
 msgstr "Si, procedi"
 
-#: applications/templates/application.html:80
+#: applications/templates/application.html:82
 #: applications/templates/print/application.html:21
 msgid "Application details"
 msgstr "Dettagli della domanda"
 
-#: applications/templates/application.html:86
+#: applications/templates/application.html:88
 #: applications/templates/applications.html:28
 #: applications/templates/print/application.html:23
 msgid "Created"
 msgstr "Creata"
 
-#: applications/templates/application.html:87
+#: applications/templates/application.html:89
 #: applications/templates/applications.html:29
 #: applications/templates/print/application.html:24
 msgid "Last modification"
 msgstr "Ultima modifica"
 
-#: applications/templates/application.html:89
+#: applications/templates/application.html:91
 #: applications/templates/print/application.html:26 management/tables.py:17
 msgid "Submission date"
 msgstr "Data di invio"
 
-#: applications/templates/application.html:92
+#: applications/templates/application.html:94
 #: applications/templates/print/application.html:29
 msgid "Registration details"
 msgstr "Dettagli protocollo"
 
-#: applications/templates/application.html:101
+#: applications/templates/application.html:103
 #: applications/templates/print/application.html:33
 msgid "Personal informations"
 msgstr "Informazioni personali"
 
-#: applications/templates/application.html:120
+#: applications/templates/application.html:122
 #: applications/templates/print/application.html:43
 #: calls/templates/call.html:43
 msgid "Call details"
 msgstr "Dettagli del bando"
 
-#: applications/templates/application.html:128
+#: applications/templates/application.html:130
 #: applications/templates/application_new.html:33
 #: applications/templates/print/application.html:47
 #: calls/templates/call.html:54 calls/templates/call.html:85
@@ -516,56 +516,56 @@ msgstr "Dettagli del bando"
 msgid "Year"
 msgstr "Anno"
 
-#: applications/templates/application.html:129
+#: applications/templates/application.html:131
 #: applications/templates/print/application.html:48
 #: calls/templates/call.html:58 calls/templates/calls.html:32
 #: management/templates/structures/calls.html:27
 msgid "Places available"
 msgstr "Posti disponibili"
 
-#: applications/templates/application.html:130
+#: applications/templates/application.html:132
 #: applications/templates/print/application.html:49
 #: calls/templates/call.html:62 calls/templates/calls.html:33
 msgid "Credits threshold"
 msgstr "Soglia crediti"
 
-#: applications/templates/application.html:131
+#: applications/templates/application.html:133
 #: applications/templates/print/application.html:50
 #: calls/templates/call.html:66
 msgid "Active from"
 msgstr "Attivo dal"
 
-#: applications/templates/application.html:132
+#: applications/templates/application.html:134
 #: applications/templates/print/application.html:51
 #: calls/templates/call.html:70
 msgid "Active until"
 msgstr "Attivo fino al"
 
-#: applications/templates/application.html:140
+#: applications/templates/application.html:142
 #: applications/templates/print/application.html:54
 msgid "Career informations"
 msgstr "Informazioni carriera"
 
-#: applications/templates/application.html:150
-#: applications/templates/application.html:151
 #: applications/templates/application.html:152
 #: applications/templates/application.html:153
 #: applications/templates/application.html:154
-#: applications/templates/application_free.html:83
-#: applications/templates/application_required.html:82
+#: applications/templates/application.html:155
+#: applications/templates/application.html:156
+#: applications/templates/application_free.html:85
+#: applications/templates/application_required.html:85
 msgid "Download"
 msgstr "Scarica"
 
-#: applications/templates/application.html:171
+#: applications/templates/application.html:173
 msgid "Payment details"
 msgstr "Dettagli del pagamento"
 
-#: applications/templates/application.html:185
+#: applications/templates/application.html:187
 msgid "Link to payment"
 msgstr "Link al pagamento"
 
-#: applications/templates/application.html:204
-#: applications/templates/application_required.html:28
+#: applications/templates/application.html:206
+#: applications/templates/application_required.html:29
 #: applications/templates/application_required_form.html:27
 #: management/templates/commissions/application.html:46
 #: management/templates/commissions/application_required.html:31
@@ -578,8 +578,8 @@ msgstr "Link al pagamento"
 msgid "Required teachings"
 msgstr "Insegnamenti obbligatori"
 
-#: applications/templates/application.html:205
-#: applications/templates/application.html:215
+#: applications/templates/application.html:207
+#: applications/templates/application.html:217
 #: management/templates/commissions/application.html:47
 #: management/templates/commissions/application.html:57
 #: management/templates/structures/application.html:47
@@ -587,8 +587,8 @@ msgstr "Insegnamenti obbligatori"
 msgid "insertions"
 msgstr "inserimenti"
 
-#: applications/templates/application.html:208
-#: applications/templates/application.html:218
+#: applications/templates/application.html:210
+#: applications/templates/application.html:220
 #: generics/templates/base_page.html:40
 #: management/templates/commissions/application.html:50
 #: management/templates/commissions/application.html:60
@@ -597,8 +597,8 @@ msgstr "inserimenti"
 msgid "Manage"
 msgstr "Gestisci"
 
-#: applications/templates/application.html:214
-#: applications/templates/application_free_form.html:27
+#: applications/templates/application.html:216
+#: applications/templates/application_free_form.html:29
 #: management/templates/commissions/application.html:56
 #: management/templates/commissions/application_free_detail.html:29
 #: management/templates/commissions/application_free_logs.html:29
@@ -608,11 +608,11 @@ msgstr "Gestisci"
 msgid "Free credits"
 msgstr "Crediti a scelta"
 
-#: applications/templates/application.html:214
-#: applications/templates/application_free.html:31
-#: applications/templates/application_free_form.html:27
-#: applications/templates/application_free_form.html:34
-#: applications/templates/include/application_required_teachings.html:8
+#: applications/templates/application.html:216
+#: applications/templates/application_free.html:33
+#: applications/templates/application_free_form.html:29
+#: applications/templates/application_free_form.html:36
+#: applications/templates/include/application_required_teachings.html:10
 #: applications/templates/print/application_free_form.html:16
 #: management/templates/commissions/application.html:56
 #: management/templates/commissions/application_free_detail.html:29
@@ -623,30 +623,30 @@ msgstr "Crediti a scelta"
 msgid "year"
 msgstr "anno"
 
-#: applications/templates/application.html:233
+#: applications/templates/application.html:236
 msgid "Submit"
 msgstr "Invia"
 
-#: applications/templates/application.html:241
-#: applications/templates/application_free.html:171
-#: applications/templates/application_required.html:170
+#: applications/templates/application.html:244
+#: applications/templates/application_free.html:173
+#: applications/templates/application_required.html:173
 #: generics/templates/form_template.html:35
 #: generics/templates/form_template.html:43
 msgid "Confirm"
 msgstr "Conferma"
 
-#: applications/templates/application.html:248
+#: applications/templates/application.html:251
 msgid "Are you sure you want to submit the application?"
 msgstr "Sei sicuro di voler inviare la domanda?"
 
-#: applications/templates/application.html:251
+#: applications/templates/application.html:254
 msgid "The operation will not be reversible."
 msgstr "L'operazione non sarà reversibile."
 
 #: applications/templates/application_edit.html:22
-#: applications/templates/application_free.html:23
-#: applications/templates/application_free_form.html:22
-#: applications/templates/application_required.html:23
+#: applications/templates/application_free.html:24
+#: applications/templates/application_free_form.html:24
+#: applications/templates/application_required.html:24
 #: applications/templates/application_required_form.html:22
 #: applications/templates/application_required_list.html:23
 msgid "Back to application"
@@ -656,11 +656,11 @@ msgstr "Torna alla domanda"
 msgid "Edit application for"
 msgstr "Modifica domanda per"
 
-#: applications/templates/application_free.html:31
+#: applications/templates/application_free.html:33
 msgid "Requests for recognition of free credits of"
 msgstr "Richiesta di riconoscimento crediti a scelta di"
 
-#: applications/templates/application_free.html:44
+#: applications/templates/application_free.html:46
 msgid ""
 "The number of credits for elective courses in the selected year ranges from "
 "a minimum of"
@@ -668,84 +668,84 @@ msgstr ""
 "Il numero di crediti per gli insegnamenti a scelta dell'anno selezionato va "
 "da un minimo di"
 
-#: applications/templates/application_free.html:46
+#: applications/templates/application_free.html:48
 msgid "to a maximum of"
 msgstr "a un massimo di"
 
-#: applications/templates/application_free.html:66
-#: applications/templates/application_required.html:65
-#: applications/templates/include/application_required_teachings.html:20
+#: applications/templates/application_free.html:68
+#: applications/templates/application_required.html:68
+#: applications/templates/include/application_required_teachings.html:22
 msgid "Credits review"
 msgstr "Revisione crediti"
 
-#: applications/templates/application_free.html:67
-#: applications/templates/application_required.html:66
+#: applications/templates/application_free.html:69
+#: applications/templates/application_required.html:69
 msgid "Vote review"
 msgstr "Revisione voto"
 
-#: applications/templates/application_free.html:68
-#: applications/templates/application_required.html:67
+#: applications/templates/application_free.html:70
+#: applications/templates/application_required.html:70
 msgid "Review notes"
 msgstr "Note revisione"
 
-#: applications/templates/application_free.html:104
-#: applications/templates/application_required.html:103
+#: applications/templates/application_free.html:106
+#: applications/templates/application_required.html:106
 #: applications/templates/applications.html:52
-#: applications/templates/include/application_required_teachings.html:85
-#: applications/templates/include/application_required_teachings.html:152
+#: applications/templates/include/application_required_teachings.html:87
+#: applications/templates/include/application_required_teachings.html:154
 #: calls/templates/calls.html:67 management/templates/commissions/list.html:59
 #: management/templates/structures/calls.html:56
 msgid "Details"
 msgstr "Dettagli"
 
-#: applications/templates/application_free.html:119
-#: applications/templates/application_required.html:118
+#: applications/templates/application_free.html:121
+#: applications/templates/application_required.html:121
 msgid "Logs"
 msgstr ""
 
-#: applications/templates/application_free.html:141
-#: applications/templates/application_required.html:140
+#: applications/templates/application_free.html:143
+#: applications/templates/application_required.html:143
 msgid "Are you sure you want to delete the review?"
 msgstr "Sei sicuro di voler eliminare la revisione?"
 
-#: applications/templates/application_free.html:177
-#: applications/templates/application_required.html:176
+#: applications/templates/application_free.html:179
+#: applications/templates/application_required.html:179
 msgid "Are you sure you want to delete the request?"
 msgstr "Sei sicuro di voler eliminare la richiesta?"
 
-#: applications/templates/application_free.html:200
-#: applications/templates/application_required.html:200
+#: applications/templates/application_free.html:202
+#: applications/templates/application_required.html:203
 #: applications/templates/applications.html:61
 #: management/templates/commissions/application_required_logs.html:64
 #: management/templates/structures/applications.html:45
 msgid "No items here"
 msgstr "Nessun inserimento"
 
-#: applications/templates/application_free.html:208
-#: applications/templates/application_required.html:207
+#: applications/templates/application_free.html:210
+#: applications/templates/application_required.html:210
 msgid "Add new recognition request"
 msgstr "Aggiungi nuova richiesta di riconoscimento"
 
-#: applications/templates/application_free_form.html:34
+#: applications/templates/application_free_form.html:36
 #: applications/templates/print/application_free_form.html:16
 msgid "Request for recognition of free credits of"
 msgstr "Richiesta di riconoscimento crediti a scelta di"
 
-#: applications/templates/application_free_form.html:40
-#: applications/templates/application_required_form.html:53
+#: applications/templates/application_free_form.html:43
+#: applications/templates/application_required_form.html:54
 #: applications/templates/include/credits_alert.html:13
 #: applications/templates/include/credits_alert.html:24
 #: applications/templates/include/payment_alert.html:7
-#: applications/views.py:113 applications/views.py:199
-#: applications/views.py:264 applications/views.py:448
-#: applications/views.py:523 applications/views.py:635
-#: applications/views.py:711
+#: applications/views.py:113 applications/views.py:208
+#: applications/views.py:273 applications/views.py:465
+#: applications/views.py:540 applications/views.py:653
+#: applications/views.py:729
 #: management/templates/management/credits_alert.html:13
 #: management/views/commissions.py:359 management/views/commissions.py:463
 msgid "Warning"
 msgstr "Attenzione"
 
-#: applications/templates/application_free_form.html:41
+#: applications/templates/application_free_form.html:44
 msgid ""
 "Fill out the form by entering the data of the taken teaching that you want "
 "to use to request recognition"
@@ -771,11 +771,11 @@ msgstr ""
 msgid "Call"
 msgstr "Bando"
 
-#: applications/templates/application_required.html:36
+#: applications/templates/application_required.html:39
 msgid "Credits recognition requests"
 msgstr "Richieste di riconoscimento crediti"
 
-#: applications/templates/application_required.html:81
+#: applications/templates/application_required.html:84
 #: calls/templates/call.html:132
 msgid "Click here"
 msgstr "Clicca qui"
@@ -790,7 +790,7 @@ msgid "Teaching data for which credits recognition is requested"
 msgstr ""
 "Dati insegnamento per cui si sta chiedendo il riconoscimento dei crediti"
 
-#: applications/templates/application_required_form.html:54
+#: applications/templates/application_required_form.html:55
 msgid ""
 "Fill out the form by entering the data of the taken teaching that you want "
 "to use to request credits recognition"
@@ -828,17 +828,17 @@ msgstr "Bozza"
 msgid "Add new"
 msgstr "Aggiungi nuova"
 
-#: applications/templates/include/application_required_teachings.html:8
+#: applications/templates/include/application_required_teachings.html:10
 msgid "Teachings"
 msgstr "Insegnamenti"
 
-#: applications/templates/include/application_required_teachings.html:17
+#: applications/templates/include/application_required_teachings.html:19
 #: management/templates/commissions/application_free_review.html:44
 #: management/templates/commissions/application_required_review.html:49
 msgid "Teaching credits"
 msgstr "Crediti insegnamento"
 
-#: applications/templates/include/application_required_teachings.html:18
+#: applications/templates/include/application_required_teachings.html:20
 #: applications/templates/include/credits_alert.html:18
 #: applications/templates/include/credits_alert.html:29
 #: management/templates/commissions/application_free_review.html:45
@@ -861,7 +861,7 @@ msgid "You are competing for the year"
 msgstr "Stai concorrendo per l'anno"
 
 #: applications/templates/include/credits_alert.html:16
-#: applications/views.py:287
+#: applications/views.py:296
 msgid ""
 "You have not yet reached the minimum number of required credits by the call"
 msgstr ""
@@ -911,10 +911,10 @@ msgstr "Dimensione del file eccessiva: {} bytes. Max {} bytes"
 msgid "Receipt uploaded successfully"
 msgstr "Ricevuta caricata con successo"
 
-#: applications/views.py:113 applications/views.py:199
-#: applications/views.py:264 applications/views.py:448
-#: applications/views.py:523 applications/views.py:635
-#: applications/views.py:711 management/views/commissions.py:359
+#: applications/views.py:113 applications/views.py:208
+#: applications/views.py:273 applications/views.py:465
+#: applications/views.py:540 applications/views.py:653
+#: applications/views.py:729 management/views/commissions.py:359
 #: management/views/commissions.py:463
 msgid "There are errors in the form"
 msgstr "Ci sono errori nel form"
@@ -923,20 +923,24 @@ msgstr "Ci sono errori nel form"
 msgid "Unable to participate in the selected call"
 msgstr "Impossibile partecipare al bando selezionato"
 
-#: applications/views.py:153
+#: applications/views.py:148 calls/views.py:31
+msgid "You are not eligible to participate in this call"
+msgstr "Non sei abilitato a partecipare a questo bando"
+
+#: applications/views.py:162
 msgid "There is already an application against you for this call"
 msgstr "Esiste già una domanda a tuo carico per questo bando"
 
-#: applications/views.py:254 management/views/commissions.py:347
+#: applications/views.py:263 management/views/commissions.py:347
 #: management/views/commissions.py:451
 msgid "Data modified successfully"
 msgstr "Dati modificati con successo"
 
-#: applications/views.py:295
+#: applications/views.py:304
 msgid "It is necessary to upload the payment receipt to submit the application"
 msgstr "E' necessario caricare la ricevuta di pagamento per inviare la domanda"
 
-#: applications/views.py:314
+#: applications/views.py:323
 msgid ""
 "Your application has been successfully uploaded and processed. You will soon "
 "be able to view the associated reference number."
@@ -944,20 +948,24 @@ msgstr ""
 "La tua istanza è stata correttamente caricata e presa in carico. A breve "
 "potrai visualizzare il numero di protocollo ad essa associato."
 
-#: applications/views.py:316
+#: applications/views.py:325
 msgid "Application successfully submitted"
 msgstr "Domanda inviata con successo"
 
-#: applications/views.py:327 generics/templates/base.html:11
+#: applications/views.py:336 generics/templates/base.html:11
 #: generics/templates/base_page.html:13
 msgid "Enrollment in years after the first"
 msgstr "Iscrizione agli anni successivi al primo"
 
-#: applications/views.py:360
+#: applications/views.py:356
+msgid "Unable to delete application"
+msgstr "Impossibile eliminare la domanda"
+
+#: applications/views.py:377
 msgid "Application successfully deleted"
 msgstr "Domanda eliminata con successo"
 
-#: applications/views.py:510
+#: applications/views.py:527
 msgid "Change successful"
 msgstr "Modifica effettuata con successo"
 
@@ -965,53 +973,53 @@ msgstr "Modifica effettuata con successo"
 msgid "View currently loaded file"
 msgstr "Vedi il file attualmente caricato"
 
-#: calls/admin.py:89
+#: calls/admin.py:90
 msgid "Course studyplan (IT) trunked"
 msgstr "Piano di studio (IT) troncato"
 
-#: calls/admin.py:96
+#: calls/admin.py:97
 msgid "Course studyplan (EN) trunked"
 msgstr "Piano di studio (EN) troncato"
 
-#: calls/models.py:67
+#: calls/models.py:70
 msgid "If payment is required you must specify a URL pointing to this"
 msgstr ""
 "Se è richiesto il pagamento è necessario specificare un URL che punti a "
 "questo"
 
-#: calls/models.py:196
+#: calls/models.py:212
 msgid "Nominativo RPA"
 msgstr ""
 
-#: calls/models.py:203
+#: calls/models.py:219
 msgid "Username RPA sul sistema di protocollo"
 msgstr ""
 
-#: calls/models.py:210
+#: calls/models.py:226
 msgid "Matricola RPA sul sistema di protocollo"
 msgstr ""
 
-#: calls/models.py:213
+#: calls/models.py:229
 msgid "Invia e-mail a RPA"
 msgstr ""
 
-#: calls/models.py:222
+#: calls/models.py:238
 msgid "Codice titolario"
 msgstr ""
 
-#: calls/models.py:225
+#: calls/models.py:241
 msgid "Fascicolo numero"
 msgstr ""
 
-#: calls/models.py:228
+#: calls/models.py:244
 msgid "Fascicolo anno"
 msgstr ""
 
-#: calls/models.py:233
+#: calls/models.py:249
 msgid "Configurazione WS Protocollo Categoria"
 msgstr ""
 
-#: calls/models.py:234
+#: calls/models.py:250
 msgid "Configurazioni WS Protocollo Categorie"
 msgstr ""
 
@@ -1064,7 +1072,7 @@ msgstr "Coorte"
 msgid "No active calls here"
 msgstr "Nessun bando attivo"
 
-#: calls/views.py:24
+#: calls/views.py:26
 msgid "Expired call"
 msgstr "Bando scaduto"
 
@@ -1158,7 +1166,7 @@ msgstr "Domande"
 #: management/templates/commissions/application.html:31
 #: management/templates/structures/application.html:31
 msgid "Export"
-msgstr ""
+msgstr "Esporta"
 
 #: management/templates/commissions/application_free_logs.html:36
 #: management/templates/commissions/application_required_logs.html:41
@@ -1393,9 +1401,6 @@ msgstr ""
 
 #~ msgid "Continue"
 #~ msgstr "Continua"
-
-#~ msgid "Unable to delete application"
-#~ msgstr "Impossibile eliminare la domanda"
 
 #~ msgid "The number of credits entered"
 #~ msgstr "Il numero dei crediti immesso"

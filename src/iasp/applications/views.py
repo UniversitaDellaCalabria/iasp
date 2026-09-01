@@ -140,6 +140,15 @@ def application_new(request, call_pk):
         )
         return redirect('calls:calls')
 
+    # check utente abilitato / bando pubblico
+    if not call.user_is_enabled(request.user):
+        messages.add_message(
+            request,
+            messages.ERROR,
+            _('You are not eligible to participate in this call')
+        )
+        return redirect('calls:calls')
+
     # domanda già presente per questo bando
     application = Application.objects.filter(
         user=request.user,
@@ -339,8 +348,16 @@ def application_submit(request, application_pk, application=None):
 @login_required
 @require_POST
 @application_check
-@application_editable
 def application_delete(request, application_pk, application=None):
+    if application.submission_date:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            _('Unable to delete application')
+        )
+
+        return redirect('applications:application', application_pk=application_pk)
+    
     folder_path = f'{settings.MEDIA_ROOT}/allegati/bando-{application.call.pk}/domanda-{application.user.taxpayer_id}'
     if os.path.isdir(folder_path):
         shutil.rmtree(folder_path)
@@ -478,7 +495,7 @@ def application_required_edit(request, application_pk, teaching_id, insertion_pk
     old_attachment = insertion.source_teaching_attachment
 
     if request.method == 'POST':
-        if not application.is_editable():
+        if not application.is_editable(user=request.user):
             messages.add_message(
                 request,
                 messages.ERROR,
@@ -625,9 +642,10 @@ def application_free_new(request, application_pk, year, application=None):
 
             # messaggio di successo
             return redirect(
-                    'applications:application_free',
-                    application_pk=application_pk,
-                    year=year)
+                'applications:application_free',
+                application_pk=application_pk,
+                year=year
+            )
         else:  # pragma: no cover
             messages.add_message(
                 request,
@@ -672,7 +690,7 @@ def application_free_edit(request, application_pk, year, insertion_pk, applicati
 
     if request.method == 'POST':
 
-        if not application.is_editable():
+        if not application.is_editable(user=request.user):
             messages.add_message(
                 request,
                 messages.ERROR,

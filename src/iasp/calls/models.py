@@ -2,7 +2,9 @@ import requests
 import sys
 
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator, ValidationError
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -54,6 +56,7 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
     course_json_en = models.JSONField(blank=True, null=True)
     course_studyplans_json_it = models.JSONField(blank=True, null=True)
     course_studyplans_json_en = models.JSONField(blank=True, null=True)
+    is_public = models.BooleanField(default=True)
     ordering = models.IntegerField(default=10)
 
     class Meta:
@@ -94,12 +97,16 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         super().save(*args, **kwargs)
 
     @classmethod
-    def get_active(cls):
+    def get_active(cls, user):
         return cls.objects.filter(
+            Q(is_public=True) | Q(
+                callparticipant__user=user, 
+                callparticipant__is_active=True
+            ),
             is_active=True,
             start__lte=timezone.localtime(),
             end__gt=timezone.localtime()
-        )
+        ).distinct()
 
     def is_in_progress(self):
         return self.is_active and self.start<=timezone.localtime() and self.end>timezone.localtime()
@@ -141,6 +148,15 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         if not self.commission: return False
         if not self.commission.is_active: return False
         return self.commission.show_results
+
+    def user_is_enabled(self, user):
+        if not user: return False
+        if self.is_public: return True
+        return CallParticipant.objects.filter(
+            call=self, 
+            user=user, 
+            is_active=True
+        ).exists()
 
 
 class CallExcludedActivity(ActivableModel, CreatedModifiedBy, TimeStampedModel):
@@ -243,3 +259,20 @@ class CallTitulusConfiguration(ActivableModel, CreatedModifiedBy, TimeStampedMod
 
     def __str__(self):
         return "{} - {}".format(self.name, self.call)
+
+
+class CallParticipant(models.Model):
+    call = models.ForeignKey(Call, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.call} - {self.user}"
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['call', 'user'],
+                name='unique_call_user'
+            )
+        ]

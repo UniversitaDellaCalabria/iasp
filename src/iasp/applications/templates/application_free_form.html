@@ -2,6 +2,8 @@
 
 {% load i18n %}
 {% load static %}
+
+{% load applications_tags %}
 {% load iasp_tags %}
 
 
@@ -35,7 +37,8 @@
     </p>
 </div>
 
-{% if application.is_editable %}
+{% is_editable application request.user as is_editable %}
+{% if is_editable %}
 <div class="alert alert-warning" role="alert">
     <p class="h5 alert-heading">{% trans "Warning" %}</p>
     {% trans "Fill out the form by entering the data of the taken teaching that you want to use to request recognition" %}

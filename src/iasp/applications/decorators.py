@@ -24,7 +24,7 @@ def application_editable(func_to_decorate):
     def new_func(*original_args, **original_kwargs):
         request = original_args[0]
         application = original_kwargs['application']
-        if not application.is_editable():
+        if not application.is_editable(user=request.user):
             messages.add_message(
                 request,
                 messages.ERROR,

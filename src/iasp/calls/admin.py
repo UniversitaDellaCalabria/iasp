@@ -62,6 +62,7 @@ class CallAdmin(admin.ModelAdmin):
         'course_cod',
         'course_cohort',
         'course_year',
+        'is_public',
         'ordering',
         'is_active',
     )
@@ -94,3 +95,13 @@ class CallAdmin(admin.ModelAdmin):
             return f'{text[:1000]}.....'
         return text
     course_studyplan_json_en_trunked.short_description = _("Course studyplan (EN) trunked")
+
+
+@admin.register(CallParticipant)
+class CallParticipantAdmin(admin.ModelAdmin):
+    list_display = (
+        'call',
+        'user',
+        'is_active',
+    )
+    list_editable = ('is_active',)
