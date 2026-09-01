@@ -1,0 +1,44 @@
+[project]
+name = "iasp"
+version = "0.1.0"
+requires-python = "~=3.12.0"
+dependencies = [
+    "cryptojwt>=1.11.0",
+    "design-django-theme>=2.18.1",
+    "django<6.0",
+    "django-filter>=26.1",
+    "django-tables2>=3.0.1",
+    "openpyxl>=3.1.5",
+    "pdf-compressor>=0.4.0",
+    "phonenumbers>=9.0.38",
+    "pypdf>=6.16.2",
+    "python-magic>=0.4.27",
+    "requests>=2.34.2",
+    "weasyprint>=69.0",
+    "zeep>=4.3.3",
+]
+
+[dependency-groups]
+auth = [
+    "djangosaml2>=1.12.0",
+    "pysaml2>=7.5.4",
+]
+deploy = [
+    "uwsgi>=2.0.31",
+]
+dev = [
+    "autoflake>=2.4.0",
+    "autopep8>=2.3.2",
+    "bandit>=1.9.4",
+    "black>=26.5.1",
+    "flake8>=7.3.0",
+    "isort>=9.0.1",
+]
+unical = [
+    "django-unical-bootstrap-italia",
+    "graypy",
+    "mysqlclient",
+]
+
+[tool.uv.sources]
+django-unical-bootstrap-italia = { git = "https://github.com/UniversitaDellaCalabria/django-unical-bootstrap-italia.git", branch = "v2" }
