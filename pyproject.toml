@@ -40,5 +40,9 @@ unical = [
     "mysqlclient",
 ]
 
+[tool.uv]
+# FORZA uv a compilare cryptography e cffi da sorgente durante ogni `uv sync`
+no-binary-package = ["cryptography", "cffi"]
+
 [tool.uv.sources]
 django-unical-bootstrap-italia = { git = "https://github.com/UniversitaDellaCalabria/django-unical-bootstrap-italia.git", branch = "v2" }
