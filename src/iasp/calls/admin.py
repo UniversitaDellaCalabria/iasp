@@ -105,3 +105,5 @@ class CallParticipantAdmin(admin.ModelAdmin):
         'is_active',
     )
     list_editable = ('is_active',)
+    list_filter = ('call', 'is_active')
+    raw_id_fields = ('call', 'user')
