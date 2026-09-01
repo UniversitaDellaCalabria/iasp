@@ -63,7 +63,7 @@ class Call(ActivableModel, CreatedModifiedBy, TimeStampedModel):
         ordering = ('ordering',)
 
     def __str__(self):
-        return f'{self.title_it}'
+        return f'[{self.course_cohort + self.course_year - 1}] {self.title_it} - [{self.course_year}]'
 
     def save(self, *args, **kwargs):
         if self.payment_required and not self.payment_url:
