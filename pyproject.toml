@@ -3,6 +3,7 @@ name = "iasp"
 version = "0.1.0"
 requires-python = "~=3.12.0"
 dependencies = [
+    "pyOpenSSL>=24.0.0",
     "cryptojwt>=1.11.0",
     "design-django-theme>=2.18.1",
     "django<6.0",
@@ -38,10 +39,6 @@ unical = [
     "graypy",
     "mysqlclient",
 ]
-
-[tool.uv]
-# FORZA uv a compilare cryptography e cffi da sorgente durante ogni `uv sync`
-no-binary-package = ["cryptography", "cffi"]
 
 [tool.uv.sources]
 django-unical-bootstrap-italia = { git = "https://github.com/UniversitaDellaCalabria/django-unical-bootstrap-italia.git", branch = "v2" }
