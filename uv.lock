@@ -331,7 +331,7 @@ wheels = [
 [[package]]
 name = "django-unical-bootstrap-italia"
 version = "2.0.2"
-source = { git = "https://github.com/UniversitaDellaCalabria/django-unical-bootstrap-italia.git#3be83587cc98b9d0dd5995c07dce1a57f18dff6f" }
+source = { git = "https://github.com/UniversitaDellaCalabria/django-unical-bootstrap-italia.git?branch=v2#c2c3878b2000bc1d77dd6cc7cc2a57efe146a256" }
 dependencies = [
     { name = "design-django-theme" },
 ]
@@ -407,6 +407,15 @@ woff = [
 ]
 
 [[package]]
+name = "graypy"
+version = "2.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8c/13/9fd9d88a16d4333b784c0d24daf90cf93bac63c7ab031dc72d9425b7f106/graypy-2.1.0.tar.gz", hash = "sha256:fd8dc4a721de1278576d92db10ac015e99b4e480cf1b18892e79429fd9236e16", size = 24187, upload-time = "2019-09-30T22:39:26.658Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/82/80/d9de7f4747ab54aad84c479d2c3dad9171de5a7f832ce4229bcef1f472ce/graypy-2.1.0-py2.py3-none-any.whl", hash = "sha256:5df0102ed52fdaa24dd579bc1e4904480c2c9bbb98917a0b3241ecf510c94207", size = 29907, upload-time = "2019-09-30T22:39:24.619Z" },
+]
+
+[[package]]
 name = "iasp"
 version = "0.1.0"
 source = { virtual = "." }
@@ -417,7 +426,6 @@ dependencies = [
     { name = "django-filter" },
     { name = "django-tables2" },
     { name = "openpyxl" },
-    { name = "pdf-compressor" },
     { name = "phonenumbers" },
     { name = "pypdf" },
     { name = "python-magic" },
@@ -444,6 +452,8 @@ dev = [
 ]
 unical = [
     { name = "django-unical-bootstrap-italia" },
+    { name = "graypy" },
+    { name = "mysqlclient" },
 ]
 
 [package.metadata]
@@ -454,7 +464,6 @@ requires-dist = [
     { name = "django-filter", specifier = ">=26.1" },
     { name = "django-tables2", specifier = ">=3.0.1" },
     { name = "openpyxl", specifier = ">=3.1.5" },
-    { name = "pdf-compressor", specifier = ">=0.4.0" },
     { name = "phonenumbers", specifier = ">=9.0.38" },
     { name = "pypdf", specifier = ">=6.16.2" },
     { name = "python-magic", specifier = ">=0.4.27" },
@@ -477,7 +486,11 @@ dev = [
     { name = "flake8", specifier = ">=7.3.0" },
     { name = "isort", specifier = ">=9.0.1" },
 ]
-unical = [{ name = "django-unical-bootstrap-italia", git = "https://github.com/UniversitaDellaCalabria/django-unical-bootstrap-italia.git" }]
+unical = [
+    { name = "django-unical-bootstrap-italia", git = "https://github.com/UniversitaDellaCalabria/django-unical-bootstrap-italia.git?branch=v2" },
+    { name = "graypy" },
+    { name = "mysqlclient" },
+]
 
 [[package]]
 name = "idna"
@@ -579,6 +592,15 @@ wheels = [
 ]
 
 [[package]]
+name = "mysqlclient"
+version = "2.2.8"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/eb/b0/9df076488cb2e536d40ce6dbd4273c1f20a386e31ffe6e7cb613902b3c2a/mysqlclient-2.2.8.tar.gz", hash = "sha256:8ed20c5615a915da451bb308c7d0306648a4fd9a2809ba95c992690006306199", size = 92287, upload-time = "2026-02-10T10:58:37.405Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/db/1f/7d6b3fbfc8a317805fdb8bbfbc23af99f2090497090e82513daf491a29ce/mysqlclient-2.2.8-cp312-cp312-win_amd64.whl", hash = "sha256:000c7ec3d11e7c411db832e4cfcd7f05db47464326381f5d5ae991b4bb572f93", size = 207171, upload-time = "2026-02-10T10:58:39.827Z" },
+]
+
+[[package]]
 name = "openpyxl"
 version = "3.1.5"
 source = { registry = "https://pypi.org/simple" }
@@ -606,19 +628,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/5a/82/42f767fc1c1143d6fd36efb827202a2d997a375e160a71eb2888a925aac1/pathspec-1.1.1.tar.gz", hash = "sha256:17db5ecd524104a120e173814c90367a96a98d07c45b2e10c2f3919fff91bf5a", size = 135180, upload-time = "2026-04-27T01:46:08.907Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f1/d9/7fb5aa316bc299258e68c73ba3bddbc499654a07f151cba08f6153988714/pathspec-1.1.1-py3-none-any.whl", hash = "sha256:a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189", size = 57328, upload-time = "2026-04-27T01:46:07.06Z" },
-]
-
-[[package]]
-name = "pdf-compressor"
-version = "0.4.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "requests" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/37/87/1b37b306e42f607a4165b981608bf0f5ad3f61e67a776d2ff514fd488ec1/pdf_compressor-0.4.0.tar.gz", hash = "sha256:7e2f3052762999062d09368a0f8c04bcb230b7eaeee32e55293c9960d5f5562b", size = 296888, upload-time = "2025-07-04T16:49:49.104Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/62/53/209ddc1a7519a02f7c42e9524a7df1f1e560f50b8ffb6e71fdd1c8831dd9/pdf_compressor-0.4.0-py2.py3-none-any.whl", hash = "sha256:3bd0634827242e3f999b969230ba1cd69577028085dd8f909c111d399a951b1b", size = 14703, upload-time = "2025-07-04T16:49:45.653Z" },
-    { url = "https://files.pythonhosted.org/packages/5d/cc/73e2072bbbeb08e1dc76da99d49ee206e9c778eba1a2e56215c79921e26c/pdf_compressor-0.4.0-py3-none-any.whl", hash = "sha256:d5ef98f60ddff23d8d721c981bfed504fa8bd5cc778cd19d3846152a6deeded7", size = 415084, upload-time = "2025-07-04T16:49:47.313Z" },
 ]
 
 [[package]]
