@@ -3,28 +3,32 @@ name = "iasp"
 version = "0.1.0"
 requires-python = "~=3.12.0"
 dependencies = [
-    "pyOpenSSL>=24.0.0",
-    "cryptojwt>=1.11.0",
-    "design-django-theme>=2.18.1",
+    # Framework e componenti UI (bloccati alla minor version con ~=)
     "django<6.0",
-    "django-filter>=26.1",
-    "django-tables2>=3.0.1",
+    "django-filter~=26.1",
+    "django-tables2~=3.0.0",
+    "design-django-theme~=2.18.0",
+    
+    # Generazione e gestione documenti
+    "weasyprint~=69.0",
+    "pypdf~=6.16.0",
     "openpyxl>=3.1.5",
-    "phonenumbers>=9.0.38",
-    "pypdf>=6.16.2",
-    "python-magic>=0.4.27",
+
+    # Utility e librerie esterne
+    "cryptojwt>=1.11.0",
+    "zeep~=4.3.0",
     "requests>=2.34.2",
-    "weasyprint>=69.0",
-    "zeep>=4.3.3",
+    "phonenumbers>=9.0.38",
+    "python-magic>=0.4.27",
 ]
 
 [dependency-groups]
 auth = [
-    "djangosaml2>=1.12.0",
+    "djangosaml2~=1.12",
     "pysaml2>=7.5.4",
 ]
 deploy = [
-    "uwsgi>=2.0.31",
+    "uwsgi~=2.0.0",
 ]
 dev = [
     "autoflake>=2.4.0",
@@ -36,8 +40,15 @@ dev = [
 ]
 unical = [
     "django-unical-bootstrap-italia",
-    "graypy",
-    "mysqlclient",
+    "mysqlclient~=2.2.0",
+    "graypy>=2.1.0",
+]
+
+[tool.uv]
+# Garantisce che pyOpenSSL sia sempre >=24.0.0 a livello globale, 
+# evitando incompatibilità con cryptography indipendentemente dai gruppi installati
+override-dependencies = [
+    "pyOpenSSL>=24.0.0",
 ]
 
 [tool.uv.sources]
